@@ -1,0 +1,2789 @@
+{
+  "meta": {
+    "version": "2.5.0",
+    "created": "2026-02-14",
+    "description": "난임 치료 여정 Knowledge Graph - 순수 지식 구조 (알림/앱 로직 미포함)",
+    "sources": [
+      "건강보험심사평가원",
+      "한국보건사회연구원",
+      "대한산부인과학회 보조생식술위원회",
+      "중앙난임·우울증상담센터",
+      "난임 가이드북(2022년 12월)"
+    ],
+    "structure": {
+      "stages": "난임 치료 여정의 단계별 흐름",
+      "entities": "의학적 지식 엔티티 (질환, 검사, 시술, 약물, 호르몬, 해부/생리)",
+      "relationships": "엔티티 간 관계 (원인→검사→치료 등)",
+      "terms": "의학용어 ↔ 사용자 표현 매핑",
+      "facts": "핵심 수치/기준/가이드라인"
+    },
+    "changes": [
+      "S06 참조를 S06_IUI, S06_IVF로 명확화",
+      "next_stages 정리"
+    ],
+    "last_updated": "2026-03-06",
+    "changelog": [
+      "v2.3: 서술형 트리플 109건을 엔티티 속성으로 이동",
+      "v2.3.1: psychological(1개), policies(4개) 엔티티 등록",
+      "v2.3.2: 오매칭 수정(더블링/배란주사/멘탈) + 누락 추가(레트로졸/고날에프/무정자)",
+      "v2.3.3: 더블링/배란주사/피검 오매칭 제거",
+      "v2.4.0: 2022년 가이드북 반영 — 남성요인 세분화(역행성사정/희소정자증/성선기능저하증/클라인펠터/사정관폐쇄), 남성검사(음낭초음파/정관조영술/정자DNA분절화), 남성치료(TESE/정관복원술/부고환정관문합술/사정관폐쇄수술), 난소조직동결, 배아글루, 테스토스테론, 난소기능저하/자궁내막증식증, key_numbers 추가(난관요인비율/남성치료가능률/정관복원개통률), S01 예방접종·약물상세, S03 남성추가검사, S05 남성수술 확장, 자궁내막증 보강, term_mappings 추가",
+      "v2.5.0: 웹 레퍼런스(obdocmin.com) 기반 새 엔티티 11건 추가 (TX_ivm, TX_imsi, TX_piezo_icsi, T_halo_sperm, T_era, T_emma, T_alice, C_ovarian_torsion, C_vte, M_cabergoline, M_atosiban)"
+    ]
+  },
+  "stages": [
+    {
+      "id": "S01",
+      "name": "임신 준비 (계획 임신)",
+      "description": "임신을 계획하고 건강한 몸을 만드는 단계. 6개월 전부터 시작 권장, 최소 3개월 전부터 필수",
+      "chapter": "건강보험심사평가원, 한국보건사회연구원, 대한산부인과학회 보조생식술위원회, 중앙난임·우울증상담센터",
+      "next_stages": [
+        "S02"
+      ],
+      "typical_duration": "3~6개월",
+      "key_actions": {
+        "여성": [
+          "산전검사 (빈혈, 소변, 간기능, 풍진, 자궁/난소 초음파 등)",
+          "예방접종 (Tdap, MMR, HPV, 수두, A/B형 간염, 인플루엔자, 수막구균-고위험군: 당뇨/심혈관/면역저하/천식)",
+          "엽산 복용 시작 (400μg~1mg/일, 임신 2~3개월 전부터)",
+          "기존 약물 검토 (이소트레티노인, 발프로산 등 위험 약물 중단)",
+          "여성 질환 관리 (자궁근종, 자궁내막증, 갑상샘, 당뇨, 고혈압 등)",
+          "균형 잡힌 식습관, 금연/금주, 적정 체중 유지",
+          "카페인 섭취 제한"
+        ],
+        "남성": [
+          "정액검사/전립선염 검사 (필요시)",
+          "예방접종 (MMR, 수두, Tdap, A/B형 간염, 인플루엔자)",
+          "금연 (정자 성숙 100일 소요, 최소 3개월 전부터)",
+          "금주 (과음은 성기능 감퇴, 3개월 전부터)",
+          "탈모약 장기 복용 주의 (정자 성숙/운동성 악영향)",
+          "스테로이드 성분 단백질 보충제 주의",
+          "적정 체중 유지 (비만 시 여성호르몬 증가 → 성기능/가임력 저하)",
+          "고환 주변 온도 관리 (사우나, 타이트한 속옷, 장시간 자전거 자제)"
+        ],
+        "부부": [
+          "보건소 무료 임신 전 검사 활용",
+          "피임 → 수태 계획 전환 (1개월 전)"
+        ]
+      },
+      "related_tests": [
+        "T_prepregnancy_female",
+        "T_prepregnancy_male"
+      ],
+      "related_conditions": [
+        "C_myoma",
+        "C_endometriosis",
+        "C_thyroid",
+        "C_diabetes",
+        "C_hypertension"
+      ],
+      "related_medications": [
+        "M_folic_acid"
+      ],
+      "vaccination_timing": {
+        "생백신_일반": "임신 전 최소 1개월 전 접종 (MMR, 수두 등)",
+        "참고": "성인 예방접종 권장안에 따라 접종"
+      },
+      "dangerous_medications": {
+        "이소트레티노인(isotretinoin)": {
+          "위험": "국내 처방 약물 중 태아에 가장 심각한 영향. 뇌, 안면, 심장, 흉선 기형(30%), 중추신경계 기능 저하",
+          "용도": "중증 여드름 치료에만 식약처 허가",
+          "주의": "반드시 임신 전 중단 필요"
+        },
+        "발프로산(valproate)": {
+          "위험": "발프로산증후군(안면이상, 요도하열증) 등 선천성 기형 유발",
+          "주의": "임신 전 대체약물로 전환 필요"
+        }
+      },
+      "lifestyle": {
+        "영양": "균형 잡힌 식습관, 탄산음료/패스트푸드 제한, 식사 거르기 금지",
+        "비타민A_주의": "고용량 비타민A 과량 복용은 기형 유발 가능",
+        "카페인": "제한 권장",
+        "체중": "적정 체중 유지 (남녀 모두)"
+      }
+    },
+    {
+      "id": "S02",
+      "name": "난임 의심",
+      "description": "피임 없이 정상 성생활 1년(35세 이상은 6개월) 이상 임신 안 되는 상태",
+      "chapter": "건강보험심사평가원, 한국보건사회연구원, 대한산부인과학회 보조생식술위원회, 중앙난임·우울증상담센터",
+      "next_stages": [
+        "S03"
+      ],
+      "typical_duration": null,
+      "key_facts": [
+        "정상 부부 1년 내 임신 성공률: 85~90%",
+        "난임 원인: 여성 40~55%, 남성 20~30%, 남녀 복합 10~40%, 원인불명 10~20%",
+        "35세 이상 여성: 6개월 만에 난임 검사 권장",
+        "부부 함께 검사 필수 (남성 요인이 상당 비율)"
+      ]
+    },
+    {
+      "id": "S03",
+      "name": "난임 검사",
+      "description": "부부 함께 난임 원인을 찾기 위한 기본/추가 검사. 생리 2~4일째 방문 권장",
+      "chapter": "건강보험심사평가원, 한국보건사회연구원, 대한산부인과학회 보조생식술위원회, 중앙난임·우울증상담센터",
+      "next_stages": [
+        "S04",
+        "S05",
+        "S06_IUI",
+        "S06_IVF"
+      ],
+      "typical_duration": "1~2개월",
+      "sub_stages": {
+        "여성_기본검사": {
+          "tests": [
+            "T_hormone",
+            "T_ovulation_us",
+            "T_hsg"
+          ],
+          "timing": "생리 2~3일째 (호르몬), 생리 직후~배란 전 (HSG), 생리 후 11~12일 (배란 초음파)"
+        },
+        "여성_추가검사": {
+          "tests": [
+            "T_hysteroscopy",
+            "T_laparoscopy",
+            "T_immune"
+          ],
+          "when": "기본검사에서 이상 발견 시"
+        },
+        "남성_기본검사": {
+          "tests": [
+            "T_semen"
+          ],
+          "timing": "2~3일 금욕 후 (생리주기 무관)"
+        },
+        "남성_추가검사": {
+          "tests": [
+            "T_male_hormone",
+            "T_testicular_biopsy",
+            "T_genetic",
+            "T_scrotal_us",
+            "T_vasography",
+            "T_sperm_dna_frag"
+          ],
+          "when": "기본 정액검사 이상 시",
+          "details": {
+            "T_male_hormone": "테스토스테론, FSH, LH, 프로락틴 측정. 수치 저하 시 이른 아침 재검사",
+            "T_scrotal_us": "정계정맥류, 사정관폐쇄, 전립선 낭종 확인",
+            "T_vasography": "폐쇄성 무정자증 의심 시 정관 개통 상태 확인",
+            "T_sperm_dna_frag": "반복착상실패/원인불명 난임 시 정자 DNA 손상도 평가"
+          }
+        }
+      },
+      "decision_tree": {
+        "배란요인": "S04",
+        "난관요인": "S05 또는 S06_IVF",
+        "자궁요인": "S05 (수술) → S04 또는 S06",
+        "남성요인_경증": "S04 또는 S06_IUI",
+        "남성요인_중증": "S06_IVF/ICSI",
+        "원인불명": "S04 → S06_IUI → S06_IVF",
+        "골반요인": "S05 → S06"
+      },
+      "판단기준": [
+        "수술적 치료 또는 체외수정 (IVF-ET)",
+        "수술적 치료 (수술) → 배란기 성관계 / 약물 치료 또는 보조생식술",
+        "배란기 성관계 / 약물 치료 또는 인공수정 (IUI)",
+        "체외수정/미세수정 (IVF/ICSI)",
+        "배란기 성관계 / 약물 치료 → 인공수정 (IUI) → 체외수정 (IVF-ET)",
+        "수술적 치료 → 보조생식술 (인공수정/체외수정)"
+      ]
+    },
+    {
+      "id": "S04",
+      "name": "배란기 성관계 / 약물 치료",
+      "description": "특별한 원인 미발견 시 배란기 예측 후 성관계, 또는 배란장애 시 약물로 배란 유도",
+      "chapter": "건강보험심사평가원, 한국보건사회연구원, 대한산부인과학회 보조생식술위원회, 중앙난임·우울증상담센터",
+      "next_stages": [
+        "S06_IUI"
+      ],
+      "treatments": [
+        "TX_timed_intercourse",
+        "TX_clomiphene",
+        "TX_letrozole",
+        "TX_dopamine_agonist"
+      ],
+      "key_facts": [
+        "배란기 예측법: 기초체온, 자궁경부점액, 초음파, 소변LH키트",
+        "가임기(fertile window): 배란일 5일 전 ~ 배란일",
+        "클로미펜: 생리 3~5일째부터 5일간 복용, 6~10일 후 배란",
+        "정확한 시간에 규칙적 복용이 효과적"
+      ]
+    },
+    {
+      "id": "S05",
+      "name": "수술적 치료",
+      "description": "난관, 자궁, 골반 이상 또는 남성 요인에 대한 수술적 치료",
+      "chapter": "건강보험심사평가원, 한국보건사회연구원, 대한산부인과학회 보조생식술위원회, 중앙난임·우울증상담센터",
+      "next_stages": [
+        "S04",
+        "S06_IUI",
+        "S06_IVF"
+      ],
+      "treatments": {
+        "여성": [
+          "난관수술 (복강경/개복, 3~7일 입원)",
+          "자궁근종 제거 (내시경/복강경/개복)",
+          "자궁내막유착 박리 (자궁내시경)",
+          "다낭난소증후군 - 복강경 난소천공술",
+          "뇌하수체 종양 - 신경외과 수술"
+        ],
+        "남성": [
+          "정계정맥류 수술",
+          "정관복원술 (개통률 80~90%, 임신율 50~60%)",
+          "부고환정관문합술 (미세수술)",
+          "사정관폐쇄 - 경요도 내시경 절제술",
+          "고환정자채취술 (TESE) - 무정자증 시",
+          "호르몬 이상 - 호르몬 치료"
+        ]
+      },
+      "수술적_치료": [
+        "자궁근종 제거 (내시경/복강경/개복)",
+        "자궁내막유착 박리 (자궁내시경)",
+        "다낭난소증후군 - 복강경 난소천공술",
+        "뇌하수체 종양 - 신경외과 수술",
+        "사정관폐쇄 - 경요도 내시경 절제술",
+        "호르몬 이상 - 호르몬 치료"
+      ]
+    },
+    {
+      "id": "S06_IUI",
+      "name": "인공수정 (IUI)",
+      "description": "최소 한쪽 난관 정상인 여성의 자궁내에 배란기에 맞춰 처리된 정자 주입. 자연임신의 일종",
+      "chapter": "건강보험심사평가원, 한국보건사회연구원, 대한산부인과학회 보조생식술위원회, 중앙난임·우울증상담센터",
+      "next_stages": [
+        "S06_IVF"
+      ],
+      "typical_duration": "1 주기 약 2~3주",
+      "indication": [
+        "정자 이상이 심하지 않은 경우",
+        "남성 성기능 장애",
+        "배란기 성관계 시도 실패",
+        "자궁경관 점액 이상",
+        "원인불명 난임"
+      ],
+      "process": [
+        "경구 배란유도제 복용 (생리 2~3일째~)",
+        "배란 초음파 (생리 7~8일, 11~12일)",
+        "정액 채취 및 처리 (시술 당일, 금욕 2~3일)",
+        "자궁내 정자 주입 (마취 없이, 약 15분 안정 후 귀가)"
+      ],
+      "key_facts": [
+        "통증 거의 없음, 시술 당일 일상생활 가능",
+        "3회 이상 실패 시 체외수정 고려",
+        "급여: 5회까지 (본인부담 30% 또는 50%)",
+        "비용이 체외수정보다 저렴"
+      ],
+      "related_medications": [
+        "M_clomiphene",
+        "M_letrozole",
+        "M_progesterone"
+      ],
+      "적응증": [
+        "정자 이상이 심하지 않은 경우",
+        "남성 성기능 장애",
+        "배란기 성관계 시도 실패",
+        "자궁경관 점액 이상"
+      ]
+    },
+    {
+      "id": "S06_IVF",
+      "name": "체외수정 (IVF-ET)",
+      "description": "난자와 정자를 체외에서 수정 후 배아를 자궁에 이식. 시험관아기 시술",
+      "chapter": "건강보험심사평가원, 한국보건사회연구원, 대한산부인과학회 보조생식술위원회, 중앙난임·우울증상담센터",
+      "next_stages": [
+        "S07_confirm",
+        "S06_FET",
+        "S08_retry"
+      ],
+      "typical_duration": "1 주기 약 4~6주",
+      "indication": [
+        "양측 난관 폐쇄/절제",
+        "난관성형수술 후 실패",
+        "면역성 난임",
+        "심한 남성요인 (정자 수/운동성 부족)",
+        "원인불명 난임",
+        "인공수정 3회 이상 실패"
+      ],
+      "process": [
+        {
+          "step": "과배란 유도",
+          "timing": "생리 2~3일째~",
+          "detail": "주사제로 여러 난포 성숙, 방법: 장기요법/단기요법/저자극요법"
+        },
+        {
+          "step": "모니터링",
+          "timing": "생리 7~8일째~",
+          "detail": "초음파로 난포 수/크기 확인, 조기배란 억제 주사 추가"
+        },
+        {
+          "step": "배란 주사(트리거)",
+          "timing": "난포 18mm 이상 3~4개",
+          "detail": "hCG 주사, 36시간 후 난자 채취"
+        },
+        {
+          "step": "난자 채취",
+          "timing": "생리 13~16일째",
+          "detail": "수면마취, 질 초음파 가이드, 20~30분"
+        },
+        {
+          "step": "정자 채취",
+          "timing": "난자 채취 당일",
+          "detail": "금욕 2~3일 후 수음법"
+        },
+        {
+          "step": "수정 및 배양",
+          "timing": "채취 후 2~5일",
+          "detail": "일반 수정 또는 ICSI/PICSI. 배양 3일 vs 5일(배반포)"
+        },
+        {
+          "step": "배아 이식",
+          "timing": "채취 후 3~5일",
+          "detail": "마취 없이, 이식 후 3~6시간 안정. 개수는 가이드라인 따름"
+        },
+        {
+          "step": "임신 확인",
+          "timing": "난자 채취 후 약 12일",
+          "detail": "혈액검사(hCG). 1~2주 후 초음파로 임신낭 확인"
+        }
+      ],
+      "protocols": {
+        "장기요법(Long)": "생리 7~10일 전부터 조기배란억제, 생리 2~3일째부터 과배란유도 병행. 안정성 높음, 주사 기간 김",
+        "단기요법(Short)": "생리 2~3일째부터 GnRH agonist, 난포 커지면 조기배란억제 추가",
+        "저자극요법(Mild)": "경구 배란유도제 + 소량 주사. 부담 적음"
+      },
+      "key_facts": [
+        "급여: 신선배아 9회, 동결배아 7회 (본인부담 30%/50%)",
+        "공난포 발생 시 급여 횟수 미차감",
+        "과배란유도제가 난소기능 저하시키지는 않음",
+        "배란유도제 사용이 여성암 발생 증가시킨다는 근거 부족",
+        "3일 배양 vs 5일 배양(배반포): 5일 배양은 이식당 성공률 높으나 배아 손실 위험 있음. 고령/채취 난자 적은 경우 특히 주의",
+        "장기 건강: 경계성 난소암·유방상피내암은 난임치료로 약간 증가 가능성(확정 아님). 심혈관 위험도 일부 연구 제기(미확정)"
+      ],
+      "related_medications": [
+        "M_FSH",
+        "M_LH",
+        "M_hMG",
+        "M_GnRH_antagonist",
+        "M_GnRH_agonist",
+        "M_hCG",
+        "M_progesterone"
+      ],
+      "적응증": [
+        "양측 난관 폐쇄/절제",
+        "난관성형수술 후 실패",
+        "면역성 난임",
+        "심한 남성요인 (정자 수/운동성 부족)",
+        "인공수정 3회 이상 실패"
+      ]
+    },
+    {
+      "id": "S06_FET",
+      "name": "동결배아이식 (FET)",
+      "description": "동결보존된 배아를 해동하여 자궁에 이식. 최근 기술 발전으로 신선배아와 유사한 성적",
+      "chapter": "건강보험심사평가원, 한국보건사회연구원, 대한산부인과학회 보조생식술위원회, 중앙난임·우울증상담센터",
+      "next_stages": [
+        "S07_confirm",
+        "S08_retry"
+      ],
+      "key_facts": [
+        "배아 보존 기간: 5년 (생명윤리법, 항암환자 등 예외 가능)",
+        "동결배아이식 ≒ 신선배아이식 성적 (기술 발전으로 거의 동등)",
+        "OHSS 발생 시 전체 동결 후 추후 FET가 유리 (고에스트로겐 환경이 착상 방해)",
+        "급여: 7회",
+        "'전체동결(freeze-all)' 전략: 일상적 케이스에서 신선이식 대비 우월성 미입증. OHSS 등 특수상황에서 유리"
+      ]
+    },
+    {
+      "id": "S06_PGT",
+      "name": "착상 전 유전자 검사 (PGT)",
+      "description": "수정된 배아의 유전질환/염색체 이상 검사. 건강한 배아 선별 이식",
+      "chapter": "건강보험심사평가원, 한국보건사회연구원, 대한산부인과학회 보조생식술위원회, 중앙난임·우울증상담센터",
+      "when": "염색체 이상/유전질환 위험 가계, 반복유산, 반복착상실패, 고령"
+    },
+    {
+      "id": "S07_confirm",
+      "name": "임신 확인 및 유지",
+      "description": "착상 확인 → 임신낭 확인 → 태아 심박동 확인",
+      "chapter": "건강보험심사평가원, 한국보건사회연구원, 대한산부인과학회 보조생식술위원회, 중앙난임·우울증상담센터",
+      "next_stages": [
+        "S07_prenatal"
+      ],
+      "process": [
+        "착상: 수정 6~7일 후 자궁내막에 시작",
+        "hCG 혈액/소변 검사로 임신 확인",
+        "임신 4~5주: 질식초음파로 임신낭(아기집) 확인",
+        "임신 약 5.5주: 난황낭(Yolk Sac) 확인 — 임신낭 내 평균직경(MSD) ≥8mm 시 관찰되어야 정상",
+        "임신 6주: 태아 심박동 확인 → 임신 확진",
+        "임신 8주: 배아 크기로 정확한 임신주수/출산예정일 파악"
+      ],
+      "착상후_증상": [
+        "착상혈 (15~25%, 분홍색→갈색, 1~2일 소실)",
+        "피곤함, 유방 동통, 하복부 불편감, 두통",
+        "입덧 (개인차 큼)"
+      ],
+      "황체보충": "황체호르몬제 투여 (질정/주사/경구), 임신 8~10주까지"
+    },
+    {
+      "id": "S07_prenatal",
+      "name": "임신 중 관리",
+      "description": "난임 시술 후 임신 시 특별 관리사항",
+      "chapter": "건강보험심사평가원, 한국보건사회연구원, 대한산부인과학회 보조생식술위원회, 중앙난임·우울증상담센터",
+      "key_actions": [
+        "다태아 가능성 모니터링 (배아 2개 이상 이식 시)",
+        "임신초기 질 출혈/하복부 통증 시 즉시 병원 방문 (자연유산/자궁외임신 감별)",
+        "금연 필수, 음주/과도한 카페인 금지",
+        "엽산 최소 400μg 지속 복용",
+        "균형 잡힌 식사, 적절한 체중 관리",
+        "주기적 산전 검사"
+      ]
+    },
+    {
+      "id": "S08_retry",
+      "name": "다음 시술 준비",
+      "description": "시술 실패 후 다음 시도를 위한 휴식 및 준비",
+      "chapter": "건강보험심사평가원, 한국보건사회연구원, 대한산부인과학회 보조생식술위원회, 중앙난임·우울증상담센터",
+      "next_stages": [
+        "S06_IUI",
+        "S06_IVF",
+        "S06_FET",
+        "S09_end"
+      ],
+      "key_facts": [
+        "최소 1개월 휴식기 (난소 회복)",
+        "과배란 직후 생리주기 변화는 정상 (배란 불량, 조기/지연 배란 흔함)",
+        "휴식기는 난소기능/주치의 소견에 따라 결정",
+        "유산 후 다음 임신까지 약 3개월 간격 권장"
+      ]
+    },
+    {
+      "id": "S09_end",
+      "name": "치료 종결 결정",
+      "description": "치료 지속/종결에 대한 배우자간 충분한 논의 필요",
+      "chapter": "건강보험심사평가원, 한국보건사회연구원, 대한산부인과학회 보조생식술위원회, 중앙난임·우울증상담센터",
+      "key_facts": [
+        "치료종결은 부부 공동 결정 (외부 압력이 아닌)",
+        "심리상담 전문가 도움 권장",
+        "입양, 자녀 없는 삶 등 이후 계획도 논의",
+        "치료 종결한 사람들과의 대화도 도움"
+      ]
+    }
+  ],
+  "entities": {
+    "conditions": [
+      {
+        "id": "C_infertility",
+        "name": "난임",
+        "en": "Infertility",
+        "description": "피임 없이 정상 성생활 1년(35세 이상은 6개월) 이상 임신이 안 되는 상태. 과거 '불임'이라 불렀으나 현재는 '난임'으로 표기",
+        "user_terms": [
+          "불임",
+          "난임"
+        ]
+      },
+      {
+        "id": "C_ovulatory",
+        "name": "배란요인",
+        "en": "Ovulatory Factor",
+        "description": "호르몬 이상으로 난포에서 난자가 배란되지 않는 경우. 여성 난임 원인 중 가장 큰 비중",
+        "diagnosed_by": [
+          "T_hormone",
+          "T_ovulation_us",
+          "T_bbt",
+          "T_urine_lh"
+        ],
+        "treated_by": [
+          "TX_clomiphene",
+          "TX_COH",
+          "TX_dopamine_agonist"
+        ],
+        "sub_conditions": [
+          "C_pcos",
+          "C_poi",
+          "C_hyperprolactinemia",
+          "C_anovulation"
+        ]
+      },
+      {
+        "id": "C_tubal",
+        "name": "난관요인",
+        "en": "Tubal Factor",
+        "description": "난관 손상/폐쇄로 정자-난자 수정 불가. 여성 난임 두 번째 흔한 원인. 일측 난관절제 후 반대쪽 정상이면 자연임신 가능",
+        "causes": [
+          "골반염",
+          "자궁내막증",
+          "자궁외임신",
+          "난관유착",
+          "난관수종"
+        ],
+        "diagnosed_by": [
+          "T_hsg",
+          "T_laparoscopy"
+        ],
+        "treated_by": [
+          "TX_tubal_surgery",
+          "TX_IVF"
+        ],
+        "원인": [
+          "골반염",
+          "난관유착"
+        ]
+      },
+      {
+        "id": "C_uterine",
+        "name": "자궁요인",
+        "en": "Uterine Factor",
+        "description": "자궁 이상으로 수정란 착상 방해",
+        "causes": [
+          "자궁경부 점액 이상",
+          "선천적 자궁기형",
+          "자궁근종",
+          "자궁내 폴립",
+          "자궁유착",
+          "자궁내막증"
+        ],
+        "diagnosed_by": [
+          "T_ovulation_us",
+          "T_hsg",
+          "T_hysteroscopy"
+        ],
+        "treated_by": [
+          "TX_hysteroscopic_surgery",
+          "TX_myomectomy"
+        ],
+        "원인": [
+          "자궁경부 점액 이상",
+          "선천적 자궁기형",
+          "자궁내 폴립",
+          "자궁유착"
+        ]
+      },
+      {
+        "id": "C_pelvic",
+        "name": "골반요인",
+        "en": "Pelvic Factor",
+        "description": "난관 주변/골반내 장기 유착. 자궁내막증(난임 여성 25~50%), 골반유착이 주요 원인",
+        "diagnosed_by": [
+          "T_laparoscopy"
+        ],
+        "treated_by": [
+          "TX_laparoscopic_surgery",
+          "TX_IVF"
+        ]
+      },
+      {
+        "id": "C_male",
+        "name": "남성요인",
+        "en": "Male Factor",
+        "description": "정자 수/운동성/형태 이상, 무정자증, 정계정맥류, 성기능 장애, 정관폐쇄 등. 남성 난임으로 병원을 찾은 환자의 약 48.4%에서 원인 치료 가능",
+        "diagnosed_by": [
+          "T_semen",
+          "T_male_hormone",
+          "T_testicular_biopsy",
+          "T_genetic"
+        ],
+        "treated_by": [
+          "TX_varicocele_surgery",
+          "TX_IUI",
+          "TX_IVF_ICSI"
+        ],
+        "risk_factors": [
+          "흡연",
+          "과음",
+          "비만",
+          "탈모약 장기복용",
+          "스테로이드 보충제",
+          "고환 온도 상승"
+        ],
+        "위험_요인": [
+          "흡연",
+          "과음",
+          "비만",
+          "탈모약 장기복용",
+          "스테로이드 보충제",
+          "고환 온도 상승"
+        ],
+        "sub_conditions": [
+          "C_varicocele",
+          "C_azoospermia",
+          "C_oligozoospermia",
+          "C_retrograde_ejaculation",
+          "C_hypogonadism",
+          "C_klinefelter",
+          "C_ejaculatory_obstruction"
+        ]
+      },
+      {
+        "id": "C_unexplained",
+        "name": "원인불명 난임",
+        "en": "Unexplained Infertility",
+        "description": "난임 환자의 10~20%. 검사에서 특이 이상 발견 못함",
+        "treated_by": [
+          "TX_timed_intercourse",
+          "TX_IUI",
+          "TX_IVF"
+        ]
+      },
+      {
+        "id": "C_pcos",
+        "name": "다낭난소증후군",
+        "en": "PCOS (Polycystic Ovary Syndrome)",
+        "description": "난소에 미성숙 난자 다수 + 무배란/남성호르몬 과다. 인슐린 과다/내성이 기본 기전. 대사성 질환",
+        "complications": [
+          "심혈관 질환",
+          "당뇨",
+          "자궁내막증식증",
+          "자궁내막암"
+        ],
+        "treated_by": [
+          "TX_clomiphene",
+          "TX_letrozole",
+          "TX_laparoscopic_drilling",
+          "체중 감량"
+        ],
+        "user_terms": [
+          "다낭성",
+          "PCOS"
+        ],
+        "치료방법": "체중 감량",
+        "합병증": [
+          "심혈관 질환",
+          "자궁내막증식증",
+          "자궁내막암"
+        ],
+        "related_conditions": [
+          "C_endometrial_hyperplasia"
+        ]
+      },
+      {
+        "id": "C_poi",
+        "name": "조기난소부전 (조기폐경)",
+        "en": "POI (Premature Ovarian Insufficiency)",
+        "description": "40세 이전 난소기능 소실. 전체 여성의 1%. 5~10% 자연 임신 가능",
+        "treated_by": [
+          "여성호르몬 치료 필수",
+          "난자 공여",
+          "TX_IVF"
+        ],
+        "additional_checks": [
+          "염색체검사",
+          "유전자검사",
+          "자가면역 검사"
+        ],
+        "user_terms": [
+          "조기폐경"
+        ],
+        "치료방법": "여성호르몬 치료 필수",
+        "추가_검사": [
+          "염색체검사",
+          "유전자검사",
+          "자가면역 검사"
+        ]
+      },
+      {
+        "id": "C_endometriosis",
+        "name": "자궁내막증",
+        "en": "Endometriosis",
+        "description": "자궁내막 조직이 자궁 외 부위에 증식. 난임 여성 25~50%. 골반통 동반",
+        "diagnosed_by": [
+          "T_laparoscopy"
+        ],
+        "treated_by": [
+          "TX_laparoscopic_surgery",
+          "TX_IVF"
+        ],
+        "key_facts": [
+          "가임여성 약 7% 유병",
+          "수술 후 자연임신율 52~68%",
+          "35세 이상/난소기능저하 시 수술 없이 바로 IVF 권장",
+          "수술 후 1년 자연임신 실패 + 재발 시 재수술 비추천 → IVF"
+        ],
+        "treatment_notes": [
+          "수술 후 자연임신율 52~68% (수술만으로 해결 가능한 경우 다수)",
+          "자궁내막종(초콜릿낭종): 수술 시 정상 난소 손실 크고 재발 흔함",
+          "체외수정 시술 전 자궁내막종 제거/알코올경화술이 성적 향상에 도움되지 않는다는 보고",
+          "단, 난자채취에 심하게 방해 시 크기 줄이는 시도 가능",
+          "수술 전후 호르몬치료는 임신율 향상 근거 부족"
+        ]
+      },
+      {
+        "id": "C_endometrioma",
+        "name": "자궁내막종 (초콜릿낭종)",
+        "en": "Endometrioma (Chocolate Cyst)",
+        "description": "난소에 발생하는 자궁내막증. 수술 시 정상 난소 손실 크고 재발 흔함",
+        "user_terms": [
+          "초콜릿낭종"
+        ]
+      },
+      {
+        "id": "C_adenomyosis",
+        "name": "자궁선근증",
+        "en": "Adenomyosis",
+        "description": "자궁근육에 내막조직 침투. 월경통/월경과다 + 난임 원인. 비정상 연동운동으로 정자이동/착상 방해"
+      },
+      {
+        "id": "C_myoma",
+        "name": "자궁근종",
+        "en": "Uterine Fibroid (Myoma)",
+        "description": "자궁근육 조직 혹. 모두가 난임 원인이 되지는 않음. 위치/크기에 따라 다름",
+        "key_facts": [
+          "장막성 근종: 수정에 큰 영향 없음",
+          "근육내 근종: 크더라도 수정 영향 적음",
+          "자궁내막/자궁강 내: 난임/유산 관련 가능",
+          "10cm 이하면 임신에 큰 영향 적은 경우가 대부분",
+          "제거 후 임신시도 시기는 의사와 상의"
+        ],
+        "user_terms": [
+          "근종"
+        ]
+      },
+      {
+        "id": "C_polyp",
+        "name": "자궁내 폴립 (용종)",
+        "en": "Endometrial Polyp",
+        "description": "자궁강 내 양성 종양. 착상 방해 가능. 절제 후 임신 시도 권장",
+        "user_terms": [
+          "폴립",
+          "용종"
+        ]
+      },
+      {
+        "id": "C_hydrosalpinx",
+        "name": "난관수종",
+        "en": "Hydrosalpinx",
+        "description": "난관에 물이 차는 상태. 배아 착상에 악영향. 시술 전 해결 필요",
+        "treatment_options": [
+          "난관 개통",
+          "난관-자궁 연결 차단",
+          "난관 절제 (단, 난소 혈류 감소 위험)"
+        ]
+      },
+      {
+        "id": "C_ohss",
+        "name": "난소과자극증후군",
+        "en": "OHSS (Ovarian Hyperstimulation Syndrome)",
+        "description": "과배란유도 주사에 대한 난소 과도 반응. 시술여성 5%, 중증 약 1%",
+        "symptoms": [
+          "복부팽만",
+          "복통",
+          "구토",
+          "호흡곤란",
+          "피로감",
+          "두통"
+        ],
+        "severe": [
+          "혈전",
+          "신부전 - 입원 치료 필요"
+        ],
+        "management": "대부분 수일 후 호전. 중증 시 병원 방문",
+        "user_terms": [
+          "배가 빵빵",
+          "OHSS"
+        ]
+      },
+      {
+        "id": "C_rpl",
+        "name": "반복유산 (습관성 유산)",
+        "en": "RPL (Recurrent Pregnancy Loss)",
+        "description": "임신 20주 이전 3회 이상 반복 자연유산. 전체 임신의 0.3%",
+        "causes": {
+          "염색체 이상": "50~60%",
+          "해부학적": true,
+          "면역학적": true,
+          "내분비적": true,
+          "감염": true
+        },
+        "diagnosed_by": [
+          "T_genetic",
+          "T_immune",
+          "T_hysteroscopy"
+        ],
+        "treated_by": [
+          "TX_PGT",
+          "약물요법",
+          "면역요법"
+        ],
+        "key_facts": [
+          "3회 유산 후 다음 유산 확률 30%",
+          "적극적 노력 시 성공 가능"
+        ],
+        "user_terms": [
+          "습관성유산"
+        ],
+        "치료방법": [
+          "약물요법",
+          "면역요법"
+        ],
+        "원인": [
+          "염색체 이상",
+          "해부학적",
+          "면역학적",
+          "내분비적",
+          "감염"
+        ]
+      },
+      {
+        "id": "C_rif",
+        "name": "반복착상 실패",
+        "en": "RIF (Recurrent Implantation Failure)",
+        "description": "40세 이하 여성이 3번 이상 시술에서 4개 이상 양질의 배아 이식 후에도 착상 실패",
+        "checks": [
+          "난소기능검사",
+          "부부 염색체검사",
+          "자궁경검사",
+          "골반초음파",
+          "HSG",
+          "면역학적검사",
+          "혈전성향검사"
+        ],
+        "experimental_treatments": [
+          "포배기 배아 이식",
+          "PGT-A",
+          "자궁내막 스크래치",
+          "아스피린",
+          "헤파린",
+          "면역글로불린",
+          "배아글루"
+        ],
+        "lifestyle": [
+          "금연/금주",
+          "과체중(BMI≥29) 시 감량",
+          "저체중(BMI≤19) 시 증량"
+        ]
+      },
+      {
+        "id": "C_varicocele",
+        "name": "정계정맥류",
+        "en": "Varicocele",
+        "description": "고환 주변 정맥혈관 비정상 확장. 수술로 가임력 개선 가능"
+      },
+      {
+        "id": "C_azoospermia",
+        "name": "무정자증",
+        "en": "Azoospermia",
+        "description": "정액에서 정자 미관찰. 고환에서 직접 정자 추출(TESE) 또는 보조생식술로 임신 시도",
+        "key_facts": [
+          "정관복원수술 후 3개월째 정자 미관찰 시 → TESE 또는 동결보존 고환조직으로 보조생식술",
+          "microsurgical TESE: 고환 손상 위험 줄이며 높은 정자 채취 성공률",
+          "비폐쇄성 무정자증에서도 미세수정(ICSI)으로 임신 가능"
+        ],
+        "user_terms": [
+          "무정자"
+        ],
+        "types": {
+          "폐쇄성": "정자생성은 정상이나 정로(정관 등) 폐쇄로 정액에 정자 없음",
+          "비폐쇄성": "고환에서 정자생성 장애. 일부에서 정상 정자생성 부위 존재 → microsurgical TESE로 정자 채취 가능"
+        },
+        "treated_by": [
+          "TX_TESE",
+          "TX_vasovasostomy",
+          "TX_IVF_ICSI"
+        ]
+      },
+      {
+        "id": "C_empty_follicle",
+        "name": "공난포",
+        "en": "Empty Follicle",
+        "description": "과배란 유도 시 난포 안에 난자 없는 현상. 난소기능 저하에서 흔함"
+      },
+      {
+        "id": "C_ectopic",
+        "name": "자궁외임신",
+        "en": "Ectopic Pregnancy",
+        "description": "자궁 외(90% 나팔관) 착상. 한 번 경험 시 다음 10배 높음. 2번 이상 시 25%+",
+        "symptoms": "질 출혈, 복통 → 즉시 진료"
+      },
+      {
+        "id": "C_multiple",
+        "name": "다태임신",
+        "en": "Multiple Pregnancy",
+        "description": "2개 이상 배아 이식 시 가능성 증가. 조기진통/조산 위험. 세쌍둥이 이상은 선택적 감수술 고려 필요",
+        "user_terms": [
+          "쌍둥이 임신"
+        ]
+      },
+      {
+        "id": "C_chemical_pregnancy",
+        "name": "화학적 임신",
+        "en": "Chemical Pregnancy",
+        "description": "검사로는 임신 반응이 나오지만 임신낭 보이기 전에 유산",
+        "user_terms": [
+          "화유",
+          "화학적 유산"
+        ]
+      },
+      {
+        "id": "C_missed_abortion",
+        "name": "계류유산",
+        "en": "Missed Abortion",
+        "description": "아기집은 보이나 태아 없거나 초기 사망 후 자궁내 잔류",
+        "user_terms": [
+          "고사난자",
+          "계류"
+        ]
+      },
+      {
+        "id": "C_hyperprolactinemia",
+        "name": "고프로락틴혈증",
+        "en": "Hyperprolactinemia",
+        "description": "프로락틴 수치 상승 → 유즙분비, 배란장애, 무월경",
+        "treated_by": [
+          "TX_dopamine_agonist"
+        ]
+      },
+      {
+        "id": "C_anovulation",
+        "name": "무배란",
+        "en": "Anovulation",
+        "description": "배란 미발생. 무월경 동반 가능하나 불규칙 생리하며 무배란인 경우도 있음"
+      },
+      {
+        "id": "C_lupus",
+        "name": "전신성 홍반성 낭창 (루푸스)",
+        "en": "SLE",
+        "description": "면역계 침범 류마티스 질환. 가임기 여성에 흔함. 반복유산과 연관",
+        "user_terms": [
+          "루푸스"
+        ]
+      },
+      {
+        "id": "C_oligomenorrhea",
+        "name": "희발 월경",
+        "en": "Oligomenorrhea",
+        "description": "월경주기 35일보다 길어지는 경우"
+      },
+      {
+        "id": "C_amenorrhea",
+        "name": "무월경",
+        "en": "Amenorrhea",
+        "description": "6개월 이상 또는 정상 주기의 3배 이상 기간 동안 월경 없음"
+      },
+      {
+        "id": "C_ovarian_cyst",
+        "name": "난소낭종 (난소물혹)",
+        "en": "Ovarian Cyst",
+        "description": "기능성 낭종은 자연 소실 가능하나 난소기능 저하 시사할 수 있음. 난임 여성은 수술적 제거 신중히",
+        "user_terms": [
+          "물혹"
+        ]
+      },
+      {
+        "id": "C_thyroid",
+        "name": "갑상샘 질환",
+        "en": "Thyroid Disorder",
+        "description": "갑상샘 기능 항진/저하 모두 배란장애, 유산, 조산 위험 증가. 임신 전 TSH 정상화 필수. 임신 1분기 TSH 2.5 이하 유지 권장",
+        "user_terms": [
+          "갑상선"
+        ]
+      },
+      {
+        "id": "C_diabetes",
+        "name": "당뇨",
+        "en": "Diabetes Mellitus",
+        "description": "혈당 조절 불량 시 태아 기형, 유산 위험 증가. 임신 전 혈당 관리 필수. 경구혈당강하제 → 인슐린 전환 필요할 수 있음"
+      },
+      {
+        "id": "C_hypertension",
+        "name": "고혈압",
+        "en": "Hypertension",
+        "description": "임신 전 혈압 조절 필수. 일부 고혈압 약물은 임신 중 금기. 주치의와 상의하여 안전한 약물로 교체"
+      },
+      {
+        "id": "C_retrograde_ejaculation",
+        "name": "역행성사정",
+        "en": "Retrograde Ejaculation",
+        "description": "사정 시 정액이 방광으로 역류하는 상태. 사정 후 소변검사로 소변 내 정자 확인하여 진단. 후복막 임파선 절제술, 정관수술 등이 원인이 될 수 있음",
+        "diagnosed_by": [
+          "T_semen"
+        ],
+        "user_terms": [
+          "역행사정"
+        ]
+      },
+      {
+        "id": "C_oligozoospermia",
+        "name": "희소정자증 (정자감소증)",
+        "en": "Oligozoospermia",
+        "description": "정액 내 정자 수가 정상 이하인 상태. 원인 불명인 경우도 있으며 고환생검 정상이면 정관폐색 의심",
+        "diagnosed_by": [
+          "T_semen",
+          "T_testicular_biopsy"
+        ],
+        "treated_by": [
+          "TX_IUI",
+          "TX_IVF_ICSI"
+        ],
+        "user_terms": [
+          "희소정자",
+          "정자감소"
+        ]
+      },
+      {
+        "id": "C_hypogonadism",
+        "name": "성선기능저하증",
+        "en": "Hypogonadism",
+        "description": "뇌하수체호르몬 결핍으로 성선 기능이 저하된 상태. 다른 뇌하수체호르몬 결핍 동반 가능. 성선자극호르몬 단독 결핍도 있음",
+        "diagnosed_by": [
+          "T_male_hormone"
+        ],
+        "user_terms": [
+          "성선기능저하"
+        ]
+      },
+      {
+        "id": "C_klinefelter",
+        "name": "클라인펠터증후군",
+        "en": "Klinefelter Syndrome (47, XXY)",
+        "description": "남성 성염색체 이상(47, XXY). 남성 난임의 유전적 원인 중 하나",
+        "diagnosed_by": [
+          "T_genetic"
+        ],
+        "user_terms": [
+          "클라인펠터"
+        ]
+      },
+      {
+        "id": "C_ejaculatory_obstruction",
+        "name": "사정관폐쇄",
+        "en": "Ejaculatory Duct Obstruction",
+        "description": "사정관이 막혀 정액 배출 장애. 방광내시경을 이용한 경요도 절제술로 치료. 전립선 낭종 동반 가능",
+        "diagnosed_by": [
+          "T_scrotal_us"
+        ],
+        "treated_by": [
+          "TX_ejaculatory_duct_resection"
+        ],
+        "user_terms": [
+          "사정관폐쇄"
+        ]
+      },
+      {
+        "id": "C_dor",
+        "name": "난소기능저하",
+        "en": "DOR (Diminished Ovarian Reserve)",
+        "description": "난소 예비력이 낮아진 상태. AMH 수치 저하, AFC(동난포수) 감소로 진단. 조기난소부전(POI)과는 구별되나 연속 스펙트럼",
+        "diagnosed_by": [
+          "T_hormone",
+          "T_ovulation_us"
+        ],
+        "user_terms": [
+          "난소기능저하",
+          "난소예비력저하"
+        ]
+      },
+      {
+        "id": "C_endometrial_hyperplasia",
+        "name": "자궁내막증식증",
+        "en": "Endometrial Hyperplasia",
+        "description": "자궁내막의 비정상적 증식. 다낭난소증후군의 합병증으로 발생 가능. 자궁내막암 전단계가 될 수 있음",
+        "user_terms": [
+          "내막증식"
+        ]
+      },
+      {
+        "id": "C_ovarian_torsion",
+        "name": "난소 비틀림 (Ovarian Torsion)",
+        "en": "Ovarian Torsion",
+        "description": "배란유도로 비대해진 난소가 비틀리는 응급 합병증. 과배란 유도 시 과도한 운동, 요가 등을 피해야 함",
+        "related_stages": [
+          "S06_IVF"
+        ],
+        "source": "obdocmin.com (code=270)",
+        "term_mappings": [
+          "난소비틀림",
+          "난소꼬임",
+          "ovarian torsion"
+        ]
+      },
+      {
+        "id": "C_vte",
+        "name": "정맥 혈전색전증 (VTE)",
+        "en": "VTE (Venous Thromboembolism)",
+        "description": "배란유도로 정맥 혈전 위험이 증가하는 합병증. 탈수 방지와 적절한 운동이 필요. D-dimer 검사로 확인",
+        "related_stages": [
+          "S06_IVF"
+        ],
+        "source": "obdocmin.com (code=270)",
+        "term_mappings": [
+          "혈전",
+          "정맥혈전",
+          "VTE",
+          "혈전색전증"
+        ]
+      }
+    ],
+    "tests": [
+      {
+        "id": "T_hormone",
+        "name": "호르몬 검사 (혈액검사)",
+        "en": "Hormone Panel",
+        "items": [
+          "FSH",
+          "LH",
+          "E2(에스트라디올)",
+          "TSH",
+          "PRL(프로락틴)",
+          "AMH"
+        ],
+        "timing": "생리 2~3일째 (AMH는 주기 무관)",
+        "purpose": "난소예비력, 배란/생리주기 호르몬 이상 확인",
+        "target": "여성",
+        "user_terms": [
+          "피검사",
+          "호르몬 검사"
+        ],
+        "대상": "여성",
+        "검사_항목": [
+          "FSH",
+          "LH",
+          "E2(에스트라디올)",
+          "TSH",
+          "PRL(프로락틴)",
+          "AMH"
+        ]
+      },
+      {
+        "id": "T_ovulation_us",
+        "name": "배란 초음파 (질 초음파)",
+        "en": "Transvaginal Ultrasound",
+        "timing": "생리 후 11~12일 ~ 배란 전",
+        "purpose": "난포 성장/개수/배란 유무 확인",
+        "target": "여성",
+        "user_terms": [
+          "초음파",
+          "배란 모니터링"
+        ],
+        "대상": "여성"
+      },
+      {
+        "id": "T_hsg",
+        "name": "자궁난관조영술",
+        "en": "HSG (Hysterosalpingography)",
+        "timing": "월경 끝난 후 2일 ~ 배란 3~4일 전",
+        "purpose": "자궁강 및 난관 개통 상태 확인 (X-ray + 조영제)",
+        "note": "약간의 통증 가능, 진통제 사전 복용 가능",
+        "target": "여성",
+        "user_terms": [
+          "나팔관검사",
+          "조영술"
+        ],
+        "대상": "여성"
+      },
+      {
+        "id": "T_semen",
+        "name": "정액검사",
+        "en": "Semen Analysis",
+        "timing": "2~3일 금욕 후 (생리주기 무관)",
+        "items": [
+          "정액의 양",
+          "정자 수",
+          "운동성",
+          "모양"
+        ],
+        "purpose": "남성 난임 원인 1차 검사. 이상 시 2주 후 재검",
+        "note": "정자 생성주기 약 90일 → 치료 후 3개월 뒤 재검 권장",
+        "target": "남성",
+        "user_terms": [
+          "정자검사"
+        ],
+        "대상": "남성",
+        "검사_항목": [
+          "정액의 양",
+          "정자 수",
+          "운동성",
+          "모양"
+        ]
+      },
+      {
+        "id": "T_hysteroscopy",
+        "name": "자궁경 검사",
+        "en": "Hysteroscopy",
+        "purpose": "자궁강 관찰. 유착/점막하 근종/용종/기형 진단 + 동시 치료 가능",
+        "note": "국소/전신마취",
+        "target": "여성",
+        "user_terms": [
+          "자궁경",
+          "자궁내시경"
+        ],
+        "대상": "여성"
+      },
+      {
+        "id": "T_laparoscopy",
+        "name": "복강경 검사",
+        "en": "Laparoscopy",
+        "purpose": "자궁/난소/난관/복막 육안 확인. 진단 + 치료 가능",
+        "when": "HSG 이상, 원인불명 난임, 자궁내막증 의심",
+        "target": "여성",
+        "user_terms": [
+          "복강경",
+          "내시경"
+        ],
+        "대상": "여성"
+      },
+      {
+        "id": "T_male_hormone",
+        "name": "남성 호르몬 검사",
+        "en": "Male Hormone Panel",
+        "items": [
+          "남성호르몬",
+          "뇌하수체 호르몬"
+        ],
+        "when": "정액검사 이상 시",
+        "target": "남성",
+        "대상": "남성",
+        "검사_항목": [
+          "남성호르몬",
+          "뇌하수체 호르몬"
+        ]
+      },
+      {
+        "id": "T_testicular_biopsy",
+        "name": "고환조직 검사",
+        "en": "Testicular Biopsy",
+        "purpose": "고환 내 정자생성상태 확인",
+        "target": "남성",
+        "대상": "남성"
+      },
+      {
+        "id": "T_genetic",
+        "name": "유전자 및 염색체 검사",
+        "en": "Genetic/Karyotype Test",
+        "purpose": "남성 난임 유전적 원인, 반복유산 시 부부 염색체 검사",
+        "user_terms": [
+          "염색체검사"
+        ]
+      },
+      {
+        "id": "T_bbt",
+        "name": "기초체온 검사",
+        "en": "BBT (Basal Body Temperature)",
+        "method": "매일 아침 같은 시간, 눈 뜨자마자 구강내 체온 3분 측정",
+        "purpose": "배란 여부, 황체 기능 확인. 배란 후 체온 상승",
+        "user_terms": [
+          "기초체온표"
+        ]
+      },
+      {
+        "id": "T_urine_lh",
+        "name": "소변 LH 측정 (배란시약)",
+        "en": "Urine LH Kit (OPK)",
+        "method": "오후 소변 측정 권장. 양성 후 14~26시간 내 배란",
+        "user_terms": [
+          "배란테스트기",
+          "배란시약"
+        ]
+      },
+      {
+        "id": "T_cervical_mucus",
+        "name": "자궁경부 점액 관찰법",
+        "en": "Cervical Mucus Method",
+        "method": "배란 직전 점액 많아지고 미끈하며 잘 늘어남 (생계란 흰자 유사)",
+        "user_terms": [
+          "점액관찰"
+        ]
+      },
+      {
+        "id": "T_immune",
+        "name": "면역학적 검사",
+        "en": "Immunological Testing",
+        "items": [
+          "항인지질항체",
+          "항갑상샘항체",
+          "Protein C/S",
+          "NK cell 활성도"
+        ],
+        "when": "반복착상실패, 습관성 유산, 원인불명 난임",
+        "user_terms": [
+          "면역검사"
+        ],
+        "검사_항목": [
+          "항인지질항체",
+          "항갑상샘항체",
+          "Protein C/S",
+          "NK cell 활성도"
+        ]
+      },
+      {
+        "id": "T_prepregnancy_female",
+        "name": "여성 산전(임신 전) 검사",
+        "en": "Female Pre-pregnancy Checkup",
+        "items": [
+          "빈혈",
+          "소변검사",
+          "간기능",
+          "풍진항체",
+          "자궁/난소 초음파",
+          "자궁경부암 검진",
+          "매독/AIDS",
+          "B형간염",
+          "톡소플라스마 (고양이 키우거나 날고기 다루는 사람)",
+          "거대세포바이러스/CMV (NICU·보육원·투석실 근무자)"
+        ],
+        "timing": "임신 계획 3~6개월 전",
+        "purpose": "임신 전 여성 건강상태 확인 및 위험요소 사전 관리",
+        "target": "여성",
+        "note": "보건소 무료 검사 가능",
+        "대상": "여성",
+        "검사_항목": [
+          "빈혈",
+          "소변검사",
+          "간기능",
+          "풍진항체",
+          "자궁/난소 초음파",
+          "자궁경부암 검진",
+          "매독/AIDS",
+          "B형간염",
+          "톡소플라스마 (고양이 키우거나 날고기 다루는 사람)",
+          "거대세포바이러스/CMV (NICU·보육원·투석실 근무자)"
+        ]
+      },
+      {
+        "id": "T_prepregnancy_male",
+        "name": "남성 산전(임신 전) 검사",
+        "en": "Male Pre-pregnancy Checkup",
+        "items": [
+          "정액검사",
+          "전립선염 검사"
+        ],
+        "timing": "임신 계획 3개월 전 (정자 성숙 100일)",
+        "purpose": "남성 가임력 사전 확인",
+        "target": "남성",
+        "note": "필요 시 시행",
+        "대상": "남성",
+        "검사_항목": "전립선염 검사"
+      },
+      {
+        "id": "T_pct",
+        "name": "성교 후 검사",
+        "en": "PCT (Post-Coital Test)",
+        "purpose": "성교 후 자궁경부 점액 내 정자 운동성/수 검사"
+      },
+      {
+        "id": "T_phq9",
+        "name": "PHQ-9 (우울증선별도구)",
+        "en": "Patient Health Questionnaire-9",
+        "purpose": "9문항 자가보고식 우울증 심각도 평가",
+        "scoring": {
+          "0-4": "정상",
+          "5-9": "가벼운 우울증",
+          "10-19": "중간 우울증",
+          "20-27": "심한 우울증"
+        },
+        "recommendation": "10점 이상 시 전문가 상담 권장"
+      },
+      {
+        "id": "T_scrotal_us",
+        "name": "음낭초음파 검사",
+        "en": "Scrotal Ultrasound",
+        "purpose": "고환, 부고환, 정삭 구조 확인. 정계정맥류, 사정관폐쇄, 전립선 낭종 진단",
+        "target": "남성",
+        "대상": "남성",
+        "when": "정액검사 이상 시 추가검사"
+      },
+      {
+        "id": "T_vasography",
+        "name": "정관조영술",
+        "en": "Vasography",
+        "purpose": "정관의 개통 상태 확인. 개방적 접근 또는 경피적 접근으로 시행",
+        "target": "남성",
+        "대상": "남성",
+        "when": "폐쇄성 무정자증 의심 시"
+      },
+      {
+        "id": "T_sperm_dna_frag",
+        "name": "정자 DNA 분절화 검사",
+        "en": "Sperm DNA Fragmentation Test",
+        "purpose": "정자의 DNA 손상도 평가. 반복착상실패 또는 원인불명 난임 시 고려",
+        "target": "남성",
+        "대상": "남성"
+      },
+      {
+        "id": "T_halo_sperm",
+        "name": "헤일로 정자테스트 (Halo Sperm Test)",
+        "en": "Halo Sperm Test",
+        "description": "정자 DNA 조각화를 확인하는 검사. 정자를 염색하여 Halo를 바탕으로 DNA 단편화를 시각적으로 판단. SDF 30% 미만이 정상",
+        "related_stages": [
+          "S03"
+        ],
+        "target": "남성",
+        "대상": "남성",
+        "source": "obdocmin.com (code=16)",
+        "term_mappings": [
+          "헤일로테스트",
+          "Halo test",
+          "정자DNA단편화검사",
+          "SDF검사"
+        ]
+      },
+      {
+        "id": "T_era",
+        "name": "자궁내막 착상능 검사 (ERA)",
+        "en": "ERA (Endometrial Receptivity Analysis)",
+        "description": "자궁내막의 착상 시기(Window of Implantation)를 분자 수준에서 분석하여 최적의 배아 이식 시기를 결정하는 검사",
+        "related_stages": [
+          "S06_FET",
+          "S06_IVF"
+        ],
+        "when": "반복착상실패, 반복유산 시",
+        "target": "여성",
+        "대상": "여성",
+        "source": "obdocmin.com (code=15)",
+        "term_mappings": [
+          "ERA검사",
+          "착상능검사",
+          "자궁내막수용성검사",
+          "Endometrial Receptivity Analysis"
+        ]
+      },
+      {
+        "id": "T_emma",
+        "name": "자궁 마이크로바이옴 검사 (EMMA)",
+        "en": "EMMA (Endometrial Microbiome Metagenomic Analysis)",
+        "description": "자궁 내 미생물 환경을 분석하여 착상에 유리한 균총 상태인지 확인하는 검사",
+        "related_stages": [
+          "S06_FET",
+          "S06_IVF"
+        ],
+        "when": "반복착상실패, 반복유산 시",
+        "target": "여성",
+        "대상": "여성",
+        "source": "obdocmin.com (code=15)",
+        "term_mappings": [
+          "EMMA검사",
+          "자궁마이크로바이옴",
+          "Endometrial Microbiome Metagenomic Analysis"
+        ]
+      },
+      {
+        "id": "T_alice",
+        "name": "자궁내막 만성염증 검사 (ALICE)",
+        "en": "ALICE (Analysis of Infectious Chronic Endometritis)",
+        "description": "자궁내막의 만성 자궁내막염 관련 세균을 검출하는 검사",
+        "related_stages": [
+          "S06_FET",
+          "S06_IVF"
+        ],
+        "when": "반복착상실패, 반복유산 시",
+        "target": "여성",
+        "대상": "여성",
+        "source": "obdocmin.com (code=15)",
+        "term_mappings": [
+          "ALICE검사",
+          "만성자궁내막염검사",
+          "Analysis of Infectious Chronic Endometritis"
+        ]
+      }
+    ],
+    "treatments": [
+      {
+        "id": "TX_ART",
+        "name": "보조생식술",
+        "en": "ART (Assisted Reproductive Technology)",
+        "description": "인공수정, 체외수정 등 임신을 돕기 위한 의학적 시술의 총칭",
+        "includes": [
+          "TX_IUI",
+          "TX_IVF",
+          "TX_IVF_ICSI"
+        ],
+        "user_terms": [
+          "난임시술"
+        ]
+      },
+      {
+        "id": "TX_timed_intercourse",
+        "name": "배란기 성관계",
+        "en": "TI (Timed Intercourse)",
+        "user_terms": [
+          "자연임신 시도",
+          "배란일 맞추기"
+        ]
+      },
+      {
+        "id": "TX_IUI",
+        "name": "인공수정",
+        "en": "IUI",
+        "user_terms": [
+          "인공수정",
+          "IUI"
+        ]
+      },
+      {
+        "id": "TX_IVF",
+        "name": "체외수정",
+        "en": "IVF-ET",
+        "user_terms": [
+          "시험관",
+          "시험관아기",
+          "IVF"
+        ]
+      },
+      {
+        "id": "TX_IVF_ICSI",
+        "name": "세포질내정자주입술",
+        "en": "ICSI",
+        "user_terms": [
+          "미세수정",
+          "ICSI"
+        ]
+      },
+      {
+        "id": "TX_PICSI",
+        "name": "성숙정자선별미세조작시술법",
+        "en": "PICSI"
+      },
+      {
+        "id": "TX_long_protocol",
+        "name": "장기요법",
+        "en": "Long Protocol",
+        "description": "생리 7~10일 전부터 조기배란억제, 생리 2~3일째부터 과배란유도 병행. 안정성 높음, 주사 기간 김",
+        "parent": "S06_IVF",
+        "user_terms": [
+          "롱프로토콜"
+        ]
+      },
+      {
+        "id": "TX_short_protocol",
+        "name": "단기요법",
+        "en": "Short Protocol",
+        "description": "생리 2~3일째부터 GnRH agonist, 난포 커지면 조기배란억제 추가",
+        "parent": "S06_IVF",
+        "user_terms": [
+          "숏프로토콜"
+        ]
+      },
+      {
+        "id": "TX_mild_ivf",
+        "name": "저자극 요법",
+        "en": "Mild IVF",
+        "description": "경구 배란유도제 + 소량 주사. 부담 적음",
+        "parent": "S06_IVF",
+        "user_terms": [
+          "미니 IVF",
+          "저자극"
+        ]
+      },
+      {
+        "id": "TX_antagonist_protocol",
+        "name": "길항제 프로토콜",
+        "en": "GnRH Antagonist Protocol",
+        "description": "생리 3일째부터 FSH/hMG 주사 시작, 난포 14mm 도달 시 GnRH 길항제 투여하여 조기배란 억제. 주로 난소 기능 저하 또는 고령 여성(37세+)에 사용",
+        "parent": "S06_IVF",
+        "user_terms": [
+          "길항제",
+          "안타고니스트",
+          "antagonist"
+        ]
+      },
+      {
+        "id": "TX_COH",
+        "name": "과배란 유도",
+        "en": "COH",
+        "user_terms": [
+          "주사 맞고 난자 키우기",
+          "과배란"
+        ]
+      },
+      {
+        "id": "TX_ET",
+        "name": "배아 이식",
+        "en": "ET",
+        "user_terms": [
+          "이식",
+          "배아이식"
+        ]
+      },
+      {
+        "id": "TX_FET",
+        "name": "동결배아이식",
+        "en": "FET",
+        "user_terms": [
+          "냉동배아이식",
+          "FET"
+        ]
+      },
+      {
+        "id": "TX_PGT",
+        "name": "착상 전 유전자 검사",
+        "en": "PGT",
+        "user_terms": [
+          "착상전검사",
+          "PGT"
+        ]
+      },
+      {
+        "id": "TX_AH",
+        "name": "보조 부화술",
+        "en": "AH (Assisted Hatching)",
+        "user_terms": [
+          "해칭"
+        ]
+      },
+      {
+        "id": "TX_endometrial_scratch",
+        "name": "자궁내막 자극",
+        "en": "Endometrial Scratch",
+        "user_terms": [
+          "스크래치"
+        ]
+      },
+      {
+        "id": "TX_cryopreservation",
+        "name": "동결보존법",
+        "en": "Cryopreservation",
+        "user_terms": [
+          "냉동배아",
+          "동결"
+        ]
+      },
+      {
+        "id": "TX_clomiphene",
+        "name": "클로미펜 투여",
+        "en": "Clomiphene",
+        "user_terms": [
+          "클로미드"
+        ]
+      },
+      {
+        "id": "TX_letrozole",
+        "name": "페마라(레트로졸) 투여",
+        "en": "Letrozole",
+        "user_terms": [
+          "페마라"
+        ]
+      },
+      {
+        "id": "TX_dopamine_agonist",
+        "name": "프로락틴 분비 억제제",
+        "en": "Dopamine Agonist"
+      },
+      {
+        "id": "TX_varicocele_surgery",
+        "name": "정계정맥류 수술",
+        "en": "Varicocelectomy"
+      },
+      {
+        "id": "TX_tubal_surgery",
+        "name": "난관수술",
+        "en": "Tubal Surgery"
+      },
+      {
+        "id": "TX_hysteroscopic_surgery",
+        "name": "자궁경 수술",
+        "en": "Hysteroscopic Surgery"
+      },
+      {
+        "id": "TX_myomectomy",
+        "name": "자궁근종 제거술",
+        "en": "Myomectomy"
+      },
+      {
+        "id": "TX_laparoscopic_surgery",
+        "name": "복강경 수술",
+        "en": "Laparoscopic Surgery"
+      },
+      {
+        "id": "TX_laparoscopic_drilling",
+        "name": "복강경 난소천공술",
+        "en": "Laparoscopic Ovarian Drilling"
+      },
+      {
+        "id": "TX_oocyte_donation",
+        "name": "난자공여",
+        "en": "Oocyte Donation",
+        "user_terms": [
+          "난자 기증"
+        ]
+      },
+      {
+        "id": "TX_sperm_donation",
+        "name": "정자공여",
+        "en": "Sperm Donation",
+        "legal": "생명윤리법에 의거 엄격 관리. 정자은행을 통해서만 이용 가능. 혈액형 매칭 필요. 모든 의료기관에서 가능하지 않음",
+        "user_terms": [
+          "정자 기증"
+        ]
+      },
+      {
+        "id": "TX_TESE",
+        "name": "고환정자채취술",
+        "en": "TESE (Testicular Sperm Extraction)",
+        "description": "고환에서 직접 정자를 채취하는 수술. microsurgical TESE는 수술현미경으로 고환 손상을 최소화하며 정자 채취 성공률 향상",
+        "indication": [
+          "무정자증 (폐쇄성/비폐쇄성)",
+          "정관복원술 실패"
+        ],
+        "user_terms": [
+          "TESE",
+          "고환정자추출"
+        ]
+      },
+      {
+        "id": "TX_vasovasostomy",
+        "name": "정관복원술",
+        "en": "Vasovasostomy",
+        "description": "절단된 정관을 미세수술로 재연결. 개통률 80~90%, 임신율 50~60%. 정관절제술로부터 복원술까지 소요 시간이 개통률에 가장 큰 영향",
+        "user_terms": [
+          "정관복원"
+        ]
+      },
+      {
+        "id": "TX_vasoepididymostomy",
+        "name": "부고환정관문합술",
+        "en": "Vasoepididymostomy",
+        "description": "부고환과 정관을 직접 연결하는 고도의 미세수술. 미세단일관 부고환정관문합술로 개통률 향상"
+      },
+      {
+        "id": "TX_ejaculatory_duct_resection",
+        "name": "사정관폐쇄 절제술",
+        "en": "Transurethral Resection of Ejaculatory Duct",
+        "description": "방광내시경으로 방광경부와 정구 사이 부위를 절제하여 사정관폐쇄 치료"
+      },
+      {
+        "id": "TX_embryo_glue",
+        "name": "배아글루",
+        "en": "Embryo Glue",
+        "description": "배아 이식 시 착상 보조를 위해 사용하는 특수 배양액. 반복착상실패 시 경험적 사용",
+        "user_terms": [
+          "배아글루"
+        ]
+      },
+      {
+        "id": "TX_ivm",
+        "name": "미성숙난자 체외성숙 (IVM)",
+        "en": "IVM (In Vitro Maturation)",
+        "description": "배란유도 약물 없이 난소에서 미성숙 난자를 채취하여 배양배지에서 24-48시간 성숙시킨 후 체외수정을 시행하는 방법",
+        "related_stages": [
+          "S06_IVF"
+        ],
+        "indications": [
+          "다낭성난소 환자",
+          "OHSS 위험 회피",
+          "항암치료 전 가임력 보존",
+          "16개 이상 난포가 있는 젊은 여성(35세 이하)"
+        ],
+        "success_rate": "임신율 30-35%, 표준 IVF보다 유산율 높음",
+        "source": "obdocmin.com (code=270)",
+        "term_mappings": [
+          "IVM",
+          "체외성숙",
+          "미성숙난자배양"
+        ]
+      },
+      {
+        "id": "TX_imsi",
+        "name": "고배율 현미수정 (IMSI)",
+        "en": "IMSI (Intracytoplasmic Morphologically Selected Sperm Injection)",
+        "description": "6000배 이상 고배율 현미경으로 정자 형태를 선별하여 건강한 정자를 ICSI하는 방법. 유산율 감소, 기형정자증에 유용",
+        "related_stages": [
+          "S06_IVF"
+        ],
+        "source": "obdocmin.com (code=16)",
+        "term_mappings": [
+          "IMSI",
+          "고배율현미수정",
+          "정자형태선별ICSI"
+        ]
+      },
+      {
+        "id": "TX_piezo_icsi",
+        "name": "압전 ICSI (Piezo ICSI)",
+        "en": "Piezo ICSI",
+        "description": "미세한 진동을 이용하여 세포 구조를 변경하지 않고 투명대에 구멍을 만들어, 세포막 흡인 없이 정자를 난자 세포질에 주입하는 방법",
+        "related_stages": [
+          "S06_IVF"
+        ],
+        "source": "obdocmin.com (code=270)",
+        "term_mappings": [
+          "피에조ICSI",
+          "압전ICSI",
+          "Piezo ICSI"
+        ]
+      }
+    ],
+    "medications": [
+      {
+        "id": "M_folic_acid",
+        "name": "엽산",
+        "en": "Folic Acid",
+        "dose": "400μg~1mg/일",
+        "high_risk_dose": "고위험군(신경관결손 이력, 당뇨, 항경련제 복용)은 의사 판단에 따라 고용량 필요",
+        "timing": "임신 2~3개월 전부터 분만 후 1개월까지 (최소 임신 전 1개월~임신 후 3개월)",
+        "note": "보건소 무료 제공(임신 확인 시부터 3개월분)"
+      },
+      {
+        "id": "M_clomiphene",
+        "name": "클로미펜",
+        "en": "Clomiphene (Clomid)",
+        "type": "경구 배란유도제",
+        "dosing": "생리 3~5일째부터 5일간, 6~10일 후 배란",
+        "user_terms": [
+          "클로미드"
+        ],
+        "유형": "경구 배란유도제"
+      },
+      {
+        "id": "M_letrozole",
+        "name": "페마라 (레트로졸)",
+        "en": "Letrozole (Femara)",
+        "type": "경구 배란유도제",
+        "user_terms": [
+          "페마라",
+          "레트로졸"
+        ],
+        "유형": "경구 배란유도제"
+      },
+      {
+        "id": "M_FSH",
+        "name": "FSH 주사제",
+        "en": "Follitropin",
+        "products": "고날에프, 포스티몬, 퓨레곤, 레코벨 등",
+        "purpose": "난포자극/난자 성숙",
+        "목적": "난포자극/난자 성숙",
+        "user_terms": [
+          "고날에프"
+        ]
+      },
+      {
+        "id": "M_LH",
+        "name": "LH 주사제",
+        "en": "Lutropin",
+        "products": "루베리스",
+        "purpose": "난포 성숙 보조",
+        "목적": "난포 성숙 보조"
+      },
+      {
+        "id": "M_hMG",
+        "name": "FSH+LH 메노트로핀",
+        "en": "Menotropin (hMG)",
+        "products": "메노곤, 메리오날, 퍼고베리스 등"
+      },
+      {
+        "id": "M_GnRH_antagonist",
+        "name": "GnRH 길항제",
+        "en": "GnRH Antagonist",
+        "products": "세트로타이드, 오가루트란, 유레릭스, 가나레버",
+        "purpose": "조기배란 억제",
+        "목적": "조기배란 억제"
+      },
+      {
+        "id": "M_GnRH_agonist",
+        "name": "GnRH 효능제",
+        "en": "GnRH Agonist",
+        "products": "데카펩틸, 로렐린",
+        "purpose": "조기배란 억제 또는 배란 유도",
+        "목적": "조기배란 억제 또는 배란 유도"
+      },
+      {
+        "id": "M_hCG",
+        "name": "hCG 주사제",
+        "en": "hCG Injection",
+        "products": "오비드렐, 코리오몬, 아이브이에프씨",
+        "purpose": "최종 배란 유도 (난자채취 36시간 전)",
+        "user_terms": [
+          "트리거"
+        ],
+        "목적": "최종 배란 유도 (난자채취 36시간 전)"
+      },
+      {
+        "id": "M_progesterone",
+        "name": "프로게스테론 제제",
+        "en": "Progesterone Supplement",
+        "products": "슈게스트, 프롤루텍스 등",
+        "forms": "근육주사, 질정, 경구",
+        "purpose": "배아이식 후 착상 보조, 임신 8~10주까지",
+        "user_terms": [
+          "황체보충제"
+        ],
+        "목적": "배아이식 후 착상 보조, 임신 8~10주까지"
+      },
+      {
+        "id": "M_aspirin",
+        "name": "아스피린",
+        "en": "Aspirin",
+        "purpose": "자궁 혈류 개선. 반복착상실패 시 경험적 사용",
+        "목적": "자궁 혈류 개선. 반복착상실패 시 경험적 사용"
+      },
+      {
+        "id": "M_heparin",
+        "name": "헤파린",
+        "en": "Heparin",
+        "purpose": "혈전 예방/면역 조절. 반복유산/착상실패 시",
+        "목적": "혈전 예방/면역 조절. 반복유산/착상실패 시"
+      },
+      {
+        "id": "M_ivig",
+        "name": "면역글로불린",
+        "en": "IVIG",
+        "purpose": "면역기능 조절. 반복유산/착상실패 시 경험적 사용",
+        "목적": "면역기능 조절. 반복유산/착상실패 시 경험적 사용"
+      },
+      {
+        "id": "M_cabergoline",
+        "name": "카베르골린 (카바살)",
+        "en": "Cabergoline",
+        "description": "VEGF 억제로 OHSS 완화 및 예방. 배란 후 난소 비대 및 복수 형성을 방지하는 약물",
+        "related_stages": [
+          "S06_IVF"
+        ],
+        "related_conditions": [
+          "C_ohss"
+        ],
+        "source": "obdocmin.com (code=270)",
+        "term_mappings": [
+          "카베르골린",
+          "카바살",
+          "cabergoline",
+          "도스티넥스"
+        ]
+      },
+      {
+        "id": "M_atosiban",
+        "name": "아토시반 (Atosiban)",
+        "en": "Atosiban",
+        "description": "배아 이식 약 10분 전 투여하는 자궁 수축 억제제. 자궁 수축을 억제하여 배아 이식의 성공률을 높이는 목적",
+        "related_stages": [
+          "S06_IVF",
+          "S06_FET"
+        ],
+        "source": "obdocmin.com (code=270)",
+        "term_mappings": [
+          "아토시반",
+          "atosiban",
+          "자궁수축억제제"
+        ]
+      }
+    ],
+    "hormones": [
+      {
+        "id": "H_FSH",
+        "name": "난포자극호르몬",
+        "en": "FSH",
+        "role": "난포 자극 → 난자 성숙. 생리 2~3일째 측정. 난소기능 평가 지표",
+        "역할": "난포 자극 → 난자 성숙. 생리 2~3일째 측정. 난소기능 평가 지표"
+      },
+      {
+        "id": "H_LH",
+        "name": "황체형성호르몬",
+        "en": "LH",
+        "role": "배란 유도 + 황체 형성. LH 급증 후 14~26시간 내 배란",
+        "역할": "배란 유도 + 황체 형성. LH 급증 후 14~26시간 내 배란"
+      },
+      {
+        "id": "H_E2",
+        "name": "에스트라디올",
+        "en": "E2 (Estradiol)",
+        "role": "난소 분비 여성호르몬. 난포 성숙도 평가",
+        "user_terms": [
+          "에스트로겐"
+        ],
+        "역할": "난소 분비 여성호르몬. 난포 성숙도 평가"
+      },
+      {
+        "id": "H_AMH",
+        "name": "항뮬러관 호르몬",
+        "en": "AMH",
+        "role": "난소 예비력 지표. 생리주기 무관 측정 가능",
+        "역할": "난소 예비력 지표. 생리주기 무관 측정 가능"
+      },
+      {
+        "id": "H_TSH",
+        "name": "갑상샘자극호르몬",
+        "en": "TSH",
+        "role": "갑상샘 기능 평가. 임신 1분기까지 2.5 이하 유지 권장",
+        "user_terms": [
+          "갑상선호르몬"
+        ],
+        "역할": "갑상샘 기능 평가. 임신 1분기까지 2.5 이하 유지 권장"
+      },
+      {
+        "id": "H_PRL",
+        "name": "프로락틴",
+        "en": "PRL (Prolactin)",
+        "role": "유즙 분비 호르몬. 상승 시 배란 장애/무월경",
+        "역할": "유즙 분비 호르몬. 상승 시 배란 장애/무월경"
+      },
+      {
+        "id": "H_hCG",
+        "name": "인간융모생식선자극호르몬",
+        "en": "hCG",
+        "role": "태반 분비. 착상 후 혈액/소변 검출. 임신 확인 + 배란유도 주사에 사용",
+        "user_terms": [
+          "임테기 호르몬"
+        ],
+        "역할": "태반 분비. 착상 후 혈액/소변 검출. 임신 확인 + 배란유도 주사에 사용"
+      },
+      {
+        "id": "H_P4",
+        "name": "프로게스테론",
+        "en": "P4 (Progesterone)",
+        "role": "황체 분비. 착상 + 초기 임신 유지. 체외수정 후 8~10주 보충",
+        "user_terms": [
+          "황체호르몬"
+        ],
+        "역할": "황체 분비. 착상 + 초기 임신 유지. 체외수정 후 8~10주 보충"
+      },
+      {
+        "id": "H_corpus_luteum",
+        "name": "황체",
+        "en": "Corpus Luteum",
+        "role": "배란 후 난포가 변화해 형성. 황체호르몬 분비",
+        "역할": "배란 후 난포가 변화해 형성. 황체호르몬 분비"
+      },
+      {
+        "id": "H_testosterone",
+        "name": "테스토스테론",
+        "en": "Testosterone",
+        "role": "남성호르몬. 정자 생성 및 남성 생식기능에 필수. 수치 저하 시 이른 아침 재검사로 확인",
+        "역할": "남성호르몬. 정자 생성 및 남성 생식기능에 필수. 수치 저하 시 이른 아침 재검사로 확인",
+        "user_terms": [
+          "남성호르몬"
+        ]
+      }
+    ],
+    "anatomy": [
+      {
+        "id": "A_implantation",
+        "name": "착상",
+        "en": "Implantation",
+        "description": "수정 6~7일 후 포배기 배아가 자궁내막에 부착",
+        "timeline_after_transfer": {
+          "3일_배아_이식": "이식 후 2일째 배반포, 3~4일째 부화, 4~5일째 내막 부착, 7일째 착상 완료 → 태반/양막 형성 시작",
+          "5일_배아_이식": "이식 후 1일째 부화, 2~3일째 내막 부착, 5일째 착상 완료"
+        }
+      },
+      {
+        "id": "A_ovulation",
+        "name": "배란",
+        "en": "Ovulation",
+        "description": "성숙난포가 터지면서 난자가 난관내로 배출"
+      },
+      {
+        "id": "A_fertile_window",
+        "name": "가임기",
+        "en": "Fertile Window",
+        "description": "배란일 5일 전 ~ 배란일. 이 시기 성관계 시 임신 가능"
+      },
+      {
+        "id": "A_follicular_phase",
+        "name": "난포기",
+        "en": "Follicular Phase",
+        "description": "생리주기 전반기. 난포 성장. 기간 개인차"
+      },
+      {
+        "id": "A_luteal_phase",
+        "name": "황체기",
+        "en": "Luteal Phase",
+        "description": "생리주기 후반기. 비교적 일정하게 14일"
+      },
+      {
+        "id": "A_embryo",
+        "name": "배아",
+        "en": "Embryo",
+        "description": "수정 후 세포분열: 2세포→4세포→8세포→포배기"
+      },
+      {
+        "id": "A_fertilization",
+        "name": "수정",
+        "en": "Fertilization",
+        "description": "정자+난자 핵 융합"
+      },
+      {
+        "id": "A_fallopian_tube",
+        "name": "난관 (나팔관)",
+        "en": "Fallopian Tube",
+        "user_terms": [
+          "나팔관"
+        ]
+      },
+      {
+        "id": "A_cervix",
+        "name": "자궁경부",
+        "en": "Cervix"
+      },
+      {
+        "id": "A_endometrium",
+        "name": "자궁내막",
+        "en": "Endometrium",
+        "key_fact": "두께 8~10mm일 때 착상에 유리. 최저 5.8mm에서 임신 가능. 14mm 초과 시 유산율 증가",
+        "thin_endometrium_treatments": [
+          "자궁경검사로 유착/폴립/근종 제거",
+          "아스피린",
+          "질 실데나필(비아그라)",
+          "고용량 에스트로겐"
+        ],
+        "user_terms": [
+          "내막"
+        ]
+      },
+      {
+        "id": "A_gestational_sac",
+        "name": "임신낭 (아기집)",
+        "en": "Gestational Sac",
+        "description": "임신 4~5주 질식초음파로 확인",
+        "user_terms": [
+          "아기집"
+        ]
+      },
+      {
+        "id": "A_yolk_sac",
+        "name": "난황낭",
+        "en": "Yolk Sac",
+        "description": "임신 약 5.5주(MSD ≥8mm)에 임신낭 내부에서 관찰되는 원형 구조. 태반 형성 전까지 배아에 영양 공급. 비정상 크기(>6mm)·부재 시 초기 임신 실패(유산) 가능성 증가",
+        "source": "NCBI StatPearls(NBK551624), PMC(PMC7065984), ACOG Practice Bulletin(2018)",
+        "user_terms": [
+          "난황"
+        ]
+      },
+      {
+        "id": "A_implantation_bleeding",
+        "name": "착상혈",
+        "en": "Implantation Bleeding",
+        "description": "15~25% 발생. 분홍→갈색, 1~2일 소실"
+      },
+      {
+        "id": "A_follicle",
+        "name": "난포",
+        "en": "Follicle",
+        "description": "난자를 감싸는 구조. 하루 약 2mm 성장. 배란 직전 18mm 이상"
+      },
+      {
+        "id": "A_zona_pellucida",
+        "name": "투명대",
+        "en": "Zona Pellucida",
+        "description": "배아 보호 껍질. 착상을 위해 부화(탈출) 필요"
+      },
+      {
+        "id": "A_ovary",
+        "name": "난소",
+        "en": "Ovary",
+        "description": "난자를 생산하고 여성호르몬을 분비하는 기관"
+      },
+      {
+        "id": "A_uterus",
+        "name": "자궁",
+        "en": "Uterus",
+        "description": "배아가 착상하여 태아가 성장하는 기관"
+      },
+      {
+        "id": "A_oocyte",
+        "name": "난자",
+        "en": "Oocyte",
+        "description": "여성의 생식세포. 난소에서 생성"
+      },
+      {
+        "id": "A_sperm",
+        "name": "정자",
+        "en": "Sperm",
+        "description": "남성의 생식세포"
+      }
+    ],
+    "fertility_preservation": [
+      {
+        "id": "FP_embryo",
+        "name": "배아 동결",
+        "en": "Embryo Freezing",
+        "eligibility": "기혼 여성",
+        "method": "과배란유도 → 난자채취 → 수정 → 배아 동결",
+        "storage": "5년 (생명윤리법, 항암환자 등 예외 가능)",
+        "note": "가장 높은 임신율",
+        "대상": "기혼 여성",
+        "방법": "과배란유도 → 난자채취 → 수정 → 배아 동결"
+      },
+      {
+        "id": "FP_oocyte",
+        "name": "난자 동결",
+        "en": "Oocyte Freezing",
+        "eligibility": "미혼/기혼 여성 모두 가능",
+        "method": "과배란유도 → 난자채취 → 동결",
+        "storage": "기한 별도 없음",
+        "note": "젊은 나이에 할수록 유리",
+        "user_terms": [
+          "난자은행",
+          "난자냉동"
+        ],
+        "대상": "미혼/기혼 여성 모두 가능",
+        "방법": "과배란유도 → 난자채취 → 동결"
+      },
+      {
+        "id": "FP_sperm",
+        "name": "정자 동결",
+        "en": "Sperm Freezing",
+        "indications": [
+          "항암/방사선 치료 예정",
+          "직업적 위험",
+          "사정장애"
+        ],
+        "storage": "기한 별도 없음",
+        "user_terms": [
+          "정자냉동"
+        ]
+      },
+      {
+        "id": "FP_ovarian_tissue",
+        "name": "난소조직 동결",
+        "en": "Ovarian Tissue Cryopreservation",
+        "eligibility": "사춘기 이전/초경 미경험 여성 암 환자, 소아암 환자에서도 적용 가능",
+        "method": "난소 조직을 채취한 다음 조직 자체를 냉동",
+        "note": "미국·유럽에서 가임력 보존의 확립된 방법으로 인정, 국내 도입 중",
+        "대상": "사춘기 이전 여성 포함",
+        "방법": "난소 조직 채취 후 조직 동결",
+        "user_terms": [
+          "난소조직동결",
+          "난소조직냉동"
+        ]
+      }
+    ],
+    "psychological": [
+      {
+        "id": "PSY_counseling",
+        "name": "난임 심리상담",
+        "en": "Infertility Counseling",
+        "description": "난임 치료 과정에서 겪는 심리적 어려움에 대한 전문 상담 및 지원",
+        "common_difficulties": [
+          "충격, 슬픔, 우울증, 분노, 좌절, 자존감/자신감 상실",
+          "배우자 관계 어려움 (의사소통, 성관계가 숙제화)",
+          "원가족 관계 갈등 (출산 압박, 난임 원인 비난 우려)",
+          "사회적 고립 (자녀 있는 친구 회피, 사회적 낙인 민감)"
+        ],
+        "coping_strategies": [
+          "정보 획득: 난임과 치료법 학습, 주치의에게 질문",
+          "공감 형성: 감정을 배우자/친구와 나누기",
+          "힘든 상황 예감: 출산/임신 관련 상황 회피 허용",
+          "제한 설정: 치료 방법/중단 시점 미리 결정",
+          "유산 후 대처: 전문상담 고려 (주요우울장애 위험)"
+        ],
+        "treatment": [
+          "심리상담 (인지행동치료, 개인/부부/집단)",
+          "요가, 명상, 침술, 이완방법",
+          "PHQ-9 자가진단 (10점 이상 시 전문가 상담)"
+        ],
+        "support_centers": {
+          "난임·우울증 상담센터": {
+            "운영": "중앙 + 5개 권역 (서울, 경기, 인천, 대구, 전남, 경북)",
+            "서비스": "개인/부부/집단상담, 자조모임, 대면/비대면",
+            "비용": "무료, 예약제",
+            "중앙": "국립중앙의료원 (02-2276-2276)"
+          },
+          "한국난임가족연합회": "http://www.agaya.org/",
+          "마더세이프": "1588-7309 (약물/감염/환경 안전정보 상담)"
+        },
+        "user_terms": [
+          "심리상담",
+          "난임상담",
+          "우울증",
+          "스트레스",
+          "정신건강",
+          "심리치료"
+        ],
+        "couple_dynamics": [
+          "부부간 의사소통 어려움 (감정 표현 차이)",
+          "성관계가 의무/숙제화되는 문제",
+          "치료 방향에 대한 의견 차이",
+          "경제적 부담으로 인한 갈등"
+        ],
+        "family_pressure": [
+          "출산 압박 (원가족으로부터)",
+          "난임 원인에 대한 비난 우려",
+          "명절/가족모임 스트레스"
+        ],
+        "social_isolation": [
+          "자녀 있는 친구/동료 회피",
+          "사회적 낙인에 대한 민감함",
+          "임신/출산 소식에 대한 복합적 감정"
+        ],
+        "guidebook_note": "난임 치료 과정에서 정서적 지원이 치료 성적에도 긍정적 영향. 부부 함께 상담 권장"
+      }
+    ],
+    "policies": [
+      {
+        "id": "POL_insurance",
+        "name": "난임 건강보험 급여",
+        "en": "Infertility Insurance Coverage",
+        "description": "난임 시술에 대한 건강보험 급여 적용 제도",
+        "user_terms": [
+          "보험",
+          "급여",
+          "건강보험",
+          "보험적용",
+          "보험 적용",
+          "급여 적용"
+        ],
+        "대상": "혼인상태 난임부부 (법률혼/사실혼), 연령 제한 없음",
+        "적용범위": {
+          "체외수정_신선배아": {
+            "항목": "정자채취~배아이식",
+            "횟수": 9,
+            "비고": "공난포 시 횟수 미차감"
+          },
+          "체외수정_동결배아": {
+            "항목": "해동~배아이식",
+            "횟수": 7
+          },
+          "인공수정": {
+            "항목": "정자채취/처리 + 자궁내 주입",
+            "횟수": 5
+          }
+        },
+        "본인부담률": {
+          "만45세 미만": "30%",
+          "만45세 이상": "50%"
+        },
+        "비급여": "의료기관 자체 금액. 심평원 홈페이지에서 확인 가능"
+      },
+      {
+        "id": "POL_subsidy",
+        "name": "난임 시술비 지원사업",
+        "en": "Infertility Treatment Subsidy",
+        "description": "정부/지자체의 난임 시술비 지원 사업",
+        "user_terms": [
+          "지원금",
+          "시술비 지원",
+          "보건소",
+          "지원사업",
+          "난임지원"
+        ],
+        "note": "2022년부터 지방이양사업. 지자체별 차이 있음",
+        "문의": "거주지 관할 보건소",
+        "이전기준_2021": {
+          "대상": "기준중위소득 180% 이하",
+          "체외수정_신선_1~4회": "최대 110만원(44세 이하)/90만원(45세 이상)",
+          "체외수정_신선_5~7회": "최대 90만원(44세 이하)/90만원(45세 이상)",
+          "체외수정_동결_1~3회": "최대 50만원(44세 이하)/40만원(45세 이상)",
+          "체외수정_동결_4~5회": "최대 40만원(44세 이하)/40만원(45세 이상)",
+          "인공수정_1~3회": "최대 30만원(44세 이하)/20만원(45세 이상)",
+          "인공수정_4~5회": "최대 20만원(44세 이하)/20만원(45세 이상)"
+        },
+        "navigation": {
+          "2022년_이후": "지방이양사업으로 전환. 지자체별 지원 기준/금액 상이",
+          "확인방법": "거주지 관할 보건소 문의 또는 정부24 확인",
+          "참고": "2021년 기준 정보 참고 가능하나, 최신 기준은 반드시 관할 보건소 확인 필요"
+        }
+      },
+      {
+        "id": "POL_tax",
+        "name": "난임 세액공제",
+        "en": "Infertility Tax Deduction",
+        "description": "난임시술비 30% 세액공제 (한도 없음). 일반 의료비(15%)보다 높음. 영수증 별도 제출 필요",
+        "user_terms": [
+          "세액공제",
+          "세금",
+          "연말정산",
+          "소득공제"
+        ]
+      },
+      {
+        "id": "POL_free_checkup",
+        "name": "보건소 무료검사",
+        "en": "Public Health Center Free Checkup",
+        "description": "빈혈, 혈액검사, 소변, AIDS, 매독, 풍진, 공복혈당, B형간염 등. 일부 보건소: 난소기능(여성), 갑상샘(여성), 정액(남성)",
+        "user_terms": [
+          "무료검사",
+          "보건소 검사",
+          "보건소검사"
+        ],
+        "items_detail": {
+          "공통": [
+            "빈혈",
+            "혈액검사",
+            "소변검사",
+            "AIDS",
+            "매독",
+            "풍진항체",
+            "공복혈당",
+            "B형간염"
+          ],
+          "일부_보건소_추가": {
+            "여성": [
+              "난소기능검사",
+              "갑상샘검사"
+            ],
+            "남성": [
+              "정액검사"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "key_numbers": {
+    "난임_정의": "피임 없이 1년(35세 이상 6개월) 정상 성생활 후 임신 안 됨",
+    "자연임신률_1년": "85~90%",
+    "난임_원인_비율": {
+      "여성": "40~55%",
+      "남성": "20~30%",
+      "복합": "10~40%",
+      "원인불명": "10~20%"
+    },
+    "정자_성숙_기간": "약 100일 (90일)",
+    "엽산_권장량": "400μg~1mg/일, 임신 2~3개월 전부터",
+    "배란주기": "평균 28일 (21~35일 정상), 배란은 월경 14일 전",
+    "황체기": "비교적 일정 14일",
+    "난포_배란_크기": "18mm 이상",
+    "난포_성장속도": "하루 약 2mm",
+    "자궁내막_착상유리": "8~10mm (최저 5.8mm)",
+    "LH_surge_to_ovulation": "14~26시간",
+    "hCG_to_retrieval": "36시간",
+    "IUI_실패_후_IVF": "3회 이상 실패 시 고려",
+    "RIF_정의": "40세 이하, 3번 이상 시술, 4개 이상 양질 배아, 착상 실패",
+    "RPL_정의": "임신 20주 이전 3회 이상 반복 유산",
+    "OHSS_발생률": "5% (중증 1%)",
+    "조기폐경_자연임신": "5~10%",
+    "자궁내막증_유병률": "난임여성 25~50%, 가임여성 7%",
+    "고령임신": "만 35세 이상",
+    "남성_40세_정자": "성숙 정자 포함 확률 90%(20~30대) → 50%(40세+)",
+    "배아_보존기간": "5년 (생명윤리법)",
+    "보충제_주의": "난소기능 개선 약물은 없음. 정자 운동성/형태 개선이 검증된 방법도 없음. 엽산은 권장하며 일반 산전 비타민은 무방",
+    "난자_형태이상": "대부분 과배란 프로토콜 변경으로 개선 가능. 지속적 난자 이상은 드물고 치료 어려움",
+    "난관요인_비율": "약 25~35% (보건복지부, 인구보건복지협회, 2017)",
+    "남성요인_치료가능률": "약 48.4% (남성 난임으로 병원 방문 환자 중 원인 치료 가능 비율)",
+    "정관복원_개통률": "80~90%",
+    "정관복원_임신률": "50~60%",
+    "생백신_접종시기": "임신 전 최소 1개월 전 접종"
+  },
+  "term_mappings": [
+    {
+      "user_term": "시험관",
+      "medical_term": "체외수정 (IVF-ET)"
+    },
+    {
+      "user_term": "시험관아기",
+      "medical_term": "체외수정 (IVF-ET)"
+    },
+    {
+      "user_term": "인공수정",
+      "medical_term": "자궁내 정자 주입술 (IUI)"
+    },
+    {
+      "user_term": "미세수정",
+      "medical_term": "세포질내정자주입술 (ICSI)"
+    },
+    {
+      "user_term": "나팔관검사",
+      "medical_term": "자궁난관조영술 (HSG)"
+    },
+    {
+      "user_term": "조영술",
+      "medical_term": "자궁난관조영술 (HSG)"
+    },
+    {
+      "user_term": "나팔관",
+      "medical_term": "난관 (Fallopian Tube)"
+    },
+    {
+      "user_term": "피검",
+      "medical_term": "호르몬 검사 (Hormone Panel)"
+    },
+    {
+      "user_term": "피검사",
+      "medical_term": "호르몬 검사 (Hormone Panel)"
+    },
+    {
+      "user_term": "정자검사",
+      "medical_term": "정액검사 (Semen Analysis)"
+    },
+    {
+      "user_term": "초음파",
+      "medical_term": "배란 초음파 / 질 초음파"
+    },
+    {
+      "user_term": "내시경",
+      "medical_term": "복강경 검사 (Laparoscopy)"
+    },
+    {
+      "user_term": "자궁경",
+      "medical_term": "자궁경 검사 (Hysteroscopy)"
+    },
+    {
+      "user_term": "자궁내시경",
+      "medical_term": "자궁경 검사 (Hysteroscopy)"
+    },
+    {
+      "user_term": "배란테스트기",
+      "medical_term": "소변 LH 측정 (OPK)"
+    },
+    {
+      "user_term": "배란시약",
+      "medical_term": "소변 LH 측정 (OPK)"
+    },
+    {
+      "user_term": "기초체온표",
+      "medical_term": "기초체온 검사 (BBT)"
+    },
+    {
+      "user_term": "점액관찰",
+      "medical_term": "자궁경부 점액 관찰법"
+    },
+    {
+      "user_term": "면역검사",
+      "medical_term": "면역학적 검사"
+    },
+    {
+      "user_term": "염색체검사",
+      "medical_term": "유전자 및 염색체 검사"
+    },
+    {
+      "user_term": "난자은행",
+      "medical_term": "난자 동결 (Oocyte Freezing)"
+    },
+    {
+      "user_term": "난자냉동",
+      "medical_term": "난자 동결 (Oocyte Freezing)"
+    },
+    {
+      "user_term": "정자냉동",
+      "medical_term": "정자 동결 (Sperm Freezing)"
+    },
+    {
+      "user_term": "냉동배아",
+      "medical_term": "동결보존법 (Cryopreservation)"
+    },
+    {
+      "user_term": "냉동배아이식",
+      "medical_term": "동결배아이식 (FET)"
+    },
+    {
+      "user_term": "해칭",
+      "medical_term": "보조 부화술 (Assisted Hatching)"
+    },
+    {
+      "user_term": "착상전검사",
+      "medical_term": "착상 전 유전자 검사 (PGT)"
+    },
+    {
+      "user_term": "스크래치",
+      "medical_term": "자궁내막 자극 (Endometrial Scratch)"
+    },
+    {
+      "user_term": "클로미드",
+      "medical_term": "클로미펜 (Clomiphene)"
+    },
+    {
+      "user_term": "페마라",
+      "medical_term": "레트로졸 (Letrozole)"
+    },
+    {
+      "user_term": "배란주사",
+      "medical_term": "hCG 주사제"
+    },
+    {
+      "user_term": "트리거",
+      "medical_term": "hCG 주사제 (배란유도)"
+    },
+    {
+      "user_term": "황체보충제",
+      "medical_term": "프로게스테론 제제"
+    },
+    {
+      "user_term": "에스트로겐",
+      "medical_term": "에스트라디올 (E2)"
+    },
+    {
+      "user_term": "갑상선호르몬",
+      "medical_term": "갑상샘자극호르몬 (TSH)"
+    },
+    {
+      "user_term": "황체호르몬",
+      "medical_term": "프로게스테론 (P4)"
+    },
+    {
+      "user_term": "임테기 호르몬",
+      "medical_term": "hCG (인간융모생식선자극호르몬)"
+    },
+    {
+      "user_term": "더블링",
+      "medical_term": "hCG (인간융모생식선자극호르몬)"
+    },
+    {
+      "user_term": "다낭성",
+      "medical_term": "다낭난소증후군 (PCOS)"
+    },
+    {
+      "user_term": "조기폐경",
+      "medical_term": "조기난소부전 (POI)"
+    },
+    {
+      "user_term": "루푸스",
+      "medical_term": "전신성 홍반성 낭창 (SLE)"
+    },
+    {
+      "user_term": "초콜릿낭종",
+      "medical_term": "자궁내막종 (Endometrioma)"
+    },
+    {
+      "user_term": "근종",
+      "medical_term": "자궁근종 (Myoma)"
+    },
+    {
+      "user_term": "폴립",
+      "medical_term": "자궁내 폴립 (Endometrial Polyp)"
+    },
+    {
+      "user_term": "용종",
+      "medical_term": "자궁내 폴립 (Endometrial Polyp)"
+    },
+    {
+      "user_term": "물혹",
+      "medical_term": "난소낭종 (Ovarian Cyst)"
+    },
+    {
+      "user_term": "배가 빵빵",
+      "medical_term": "난소과자극증후군 (OHSS)"
+    },
+    {
+      "user_term": "습관성유산",
+      "medical_term": "반복유산 (RPL)"
+    },
+    {
+      "user_term": "아기집",
+      "medical_term": "임신낭 (Gestational Sac)"
+    },
+    {
+      "user_term": "내막",
+      "medical_term": "자궁내막 (Endometrium)"
+    },
+    {
+      "user_term": "화유",
+      "medical_term": "화학적 임신 (Chemical Pregnancy)"
+    },
+    {
+      "user_term": "고사난자",
+      "medical_term": "계류유산 (Missed Abortion)"
+    },
+    {
+      "user_term": "쌍둥이 임신",
+      "medical_term": "다태임신 (Multiple Pregnancy)"
+    },
+    {
+      "user_term": "난자 기증",
+      "medical_term": "난자공여 (Oocyte Donation)"
+    },
+    {
+      "user_term": "정자 기증",
+      "medical_term": "정자공여 (Sperm Donation)"
+    },
+    {
+      "user_term": "난임시술",
+      "medical_term": "보조생식술 (ART)"
+    },
+    {
+      "user_term": "불임",
+      "medical_term": "난임 (Infertility) - 과거 표현"
+    },
+    {
+      "user_term": "롱프로토콜",
+      "medical_term": "장기요법 (Long Protocol)"
+    },
+    {
+      "user_term": "숏프로토콜",
+      "medical_term": "단기요법 (Short Protocol)"
+    },
+    {
+      "user_term": "미니 IVF",
+      "medical_term": "저자극 요법 (Mild IVF)"
+    },
+    {
+      "user_term": "저자극",
+      "medical_term": "저자극 요법 (Mild IVF)"
+    },
+    {
+      "user_term": "FSH 주사",
+      "medical_term": "난포자극호르몬 주사제 (Follitropin)"
+    },
+    {
+      "user_term": "자연임신 시도",
+      "medical_term": "배란기 성관계 (Timed Intercourse)"
+    },
+    {
+      "user_term": "배란일 맞추기",
+      "medical_term": "배란기 성관계 (Timed Intercourse)"
+    },
+    {
+      "user_term": "이식",
+      "medical_term": "배아 이식 (ET)"
+    },
+    {
+      "user_term": "배아이식",
+      "medical_term": "배아 이식 (ET)"
+    },
+    {
+      "user_term": "가임기",
+      "medical_term": "가임기 / 임신가능시기 (Fertile Window)"
+    },
+    {
+      "user_term": "난황",
+      "medical_term": "난황낭 (Yolk Sac)"
+    },
+    {
+      "user_term": "역행사정",
+      "medical_term": "역행성사정 (Retrograde Ejaculation)"
+    },
+    {
+      "user_term": "희소정자",
+      "medical_term": "희소정자증 (Oligozoospermia)"
+    },
+    {
+      "user_term": "정자감소",
+      "medical_term": "희소정자증 (Oligozoospermia)"
+    },
+    {
+      "user_term": "성선기능저하",
+      "medical_term": "성선기능저하증 (Hypogonadism)"
+    },
+    {
+      "user_term": "클라인펠터",
+      "medical_term": "클라인펠터증후군 (Klinefelter Syndrome)"
+    },
+    {
+      "user_term": "사정관폐쇄",
+      "medical_term": "사정관폐쇄 (Ejaculatory Duct Obstruction)"
+    },
+    {
+      "user_term": "TESE",
+      "medical_term": "고환정자채취술 (Testicular Sperm Extraction)"
+    },
+    {
+      "user_term": "고환정자추출",
+      "medical_term": "고환정자채취술 (TESE)"
+    },
+    {
+      "user_term": "정관복원",
+      "medical_term": "정관복원술 (Vasovasostomy)"
+    },
+    {
+      "user_term": "배아글루",
+      "medical_term": "배아글루 (Embryo Glue)"
+    },
+    {
+      "user_term": "남성호르몬",
+      "medical_term": "테스토스테론 (Testosterone)"
+    },
+    {
+      "user_term": "난소기능저하",
+      "medical_term": "난소기능저하 (DOR)"
+    },
+    {
+      "user_term": "난소예비력저하",
+      "medical_term": "난소기능저하 (DOR)"
+    },
+    {
+      "user_term": "내막증식",
+      "medical_term": "자궁내막증식증 (Endometrial Hyperplasia)"
+    },
+    {
+      "user_term": "난소조직동결",
+      "medical_term": "난소조직 동결 (Ovarian Tissue Cryopreservation)"
+    },
+    {
+      "user_term": "난소조직냉동",
+      "medical_term": "난소조직 동결 (Ovarian Tissue Cryopreservation)"
+    },
+    {
+      "user_term": "음낭초음파",
+      "medical_term": "음낭초음파 검사 (Scrotal Ultrasound)"
+    },
+    {
+      "user_term": "정관조영",
+      "medical_term": "정관조영술 (Vasography)"
+    }
+  ]
+}

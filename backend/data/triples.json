@@ -1,0 +1,1846 @@
+{
+  "meta": {
+    "description": "난임 치료 Knowledge Graph - 트리플 (수정본)",
+    "created": "2026-02-15",
+    "source": "knowledge_graph.json에서 자동 추출 + 품질 개선",
+    "total_triples": 366,
+    "changes": [
+      "관계 유형 표준화 (괄호 → context 속성)",
+      "Stage ID를 이름으로 해석",
+      "동의어에 subject_id 부여",
+      "object_id null 감소",
+      "판단기준 object의 Stage ID 모두 이름으로 변환",
+      "누락 동의어 7건 object_id 연결 (S06_IUI, TX_ART, C_infertility, TX_long/short_protocol, TX_mild_ivf)",
+      "새 엔티티 관계 트리플 7건 추가 (C_infertility→TX_ART, TX_ART→포함, S06_IVF→방법)",
+      "v2.4.0: 새 엔티티 관계 트리플 48건 추가 (남성요인 세분화, 새 검사/시술, 난소조직동결, 배아글루 등)",
+      "v2.5.0: 웹 레퍼런스(obdocmin.com) 기반 새 관계 트리플 20건 추가 (IVM, IMSI, Piezo ICSI, Halo test, ERA/EMMA/ALICE, 난소비틀림, VTE, 카베르골린, 아토시반)"
+    ],
+    "total": 254,
+    "note": "서술형 트리플(object_id=null) 109건은 KG 엔티티 속성으로 이동됨"
+  },
+  "triples": [
+    {
+      "subject": "임신 준비 (계획 임신)",
+      "subject_id": "S01",
+      "relation": "다음_단계",
+      "object": "난임 의심",
+      "object_id": "S02"
+    },
+    {
+      "subject": "임신 준비 (계획 임신)",
+      "subject_id": "S01",
+      "relation": "관련_검사",
+      "object": "여성 산전(임신 전) 검사",
+      "object_id": "T_prepregnancy_female"
+    },
+    {
+      "subject": "임신 준비 (계획 임신)",
+      "subject_id": "S01",
+      "relation": "관련_검사",
+      "object": "남성 산전(임신 전) 검사",
+      "object_id": "T_prepregnancy_male"
+    },
+    {
+      "subject": "임신 준비 (계획 임신)",
+      "subject_id": "S01",
+      "relation": "관련_질환",
+      "object": "자궁근종",
+      "object_id": "C_myoma"
+    },
+    {
+      "subject": "임신 준비 (계획 임신)",
+      "subject_id": "S01",
+      "relation": "관련_질환",
+      "object": "자궁내막증",
+      "object_id": "C_endometriosis"
+    },
+    {
+      "subject": "임신 준비 (계획 임신)",
+      "subject_id": "S01",
+      "relation": "관련_질환",
+      "object": "갑상샘 질환",
+      "object_id": "C_thyroid"
+    },
+    {
+      "subject": "임신 준비 (계획 임신)",
+      "subject_id": "S01",
+      "relation": "관련_질환",
+      "object": "당뇨",
+      "object_id": "C_diabetes"
+    },
+    {
+      "subject": "임신 준비 (계획 임신)",
+      "subject_id": "S01",
+      "relation": "관련_질환",
+      "object": "고혈압",
+      "object_id": "C_hypertension"
+    },
+    {
+      "subject": "임신 준비 (계획 임신)",
+      "subject_id": "S01",
+      "relation": "관련_약물",
+      "object": "엽산",
+      "object_id": "M_folic_acid"
+    },
+    {
+      "subject": "난임 의심",
+      "subject_id": "S02",
+      "relation": "다음_단계",
+      "object": "난임 검사",
+      "object_id": "S03"
+    },
+    {
+      "subject": "난임 검사",
+      "subject_id": "S03",
+      "relation": "다음_단계",
+      "object": "배란기 성관계 / 약물 치료",
+      "object_id": "S04"
+    },
+    {
+      "subject": "난임 검사",
+      "subject_id": "S03",
+      "relation": "다음_단계",
+      "object": "수술적 치료",
+      "object_id": "S05"
+    },
+    {
+      "subject": "난임 검사",
+      "subject_id": "S03",
+      "relation": "다음_단계",
+      "object": "인공수정 (IUI)",
+      "object_id": "S06_IUI"
+    },
+    {
+      "subject": "난임 검사",
+      "subject_id": "S03",
+      "relation": "다음_단계",
+      "object": "체외수정 (IVF-ET)",
+      "object_id": "S06_IVF"
+    },
+    {
+      "subject": "난임 검사",
+      "subject_id": "S03",
+      "relation": "검사_항목",
+      "object": "호르몬 검사 (혈액검사)",
+      "object_id": "T_hormone",
+      "context": {
+        "category": "여성_기본검사"
+      }
+    },
+    {
+      "subject": "난임 검사",
+      "subject_id": "S03",
+      "relation": "검사_항목",
+      "object": "배란 초음파 (질 초음파)",
+      "object_id": "T_ovulation_us",
+      "context": {
+        "category": "여성_기본검사"
+      }
+    },
+    {
+      "subject": "난임 검사",
+      "subject_id": "S03",
+      "relation": "검사_항목",
+      "object": "자궁난관조영술",
+      "object_id": "T_hsg",
+      "context": {
+        "category": "여성_기본검사"
+      }
+    },
+    {
+      "subject": "난임 검사",
+      "subject_id": "S03",
+      "relation": "검사_항목",
+      "object": "자궁경 검사",
+      "object_id": "T_hysteroscopy",
+      "context": {
+        "category": "여성_추가검사"
+      }
+    },
+    {
+      "subject": "난임 검사",
+      "subject_id": "S03",
+      "relation": "검사_항목",
+      "object": "복강경 검사",
+      "object_id": "T_laparoscopy",
+      "context": {
+        "category": "여성_추가검사"
+      }
+    },
+    {
+      "subject": "난임 검사",
+      "subject_id": "S03",
+      "relation": "검사_항목",
+      "object": "면역학적 검사",
+      "object_id": "T_immune",
+      "context": {
+        "category": "여성_추가검사"
+      }
+    },
+    {
+      "subject": "난임 검사",
+      "subject_id": "S03",
+      "relation": "검사_항목",
+      "object": "정액검사",
+      "object_id": "T_semen",
+      "context": {
+        "category": "남성_기본검사"
+      }
+    },
+    {
+      "subject": "난임 검사",
+      "subject_id": "S03",
+      "relation": "검사_항목",
+      "object": "남성 호르몬 검사",
+      "object_id": "T_male_hormone",
+      "context": {
+        "category": "남성_추가검사"
+      }
+    },
+    {
+      "subject": "난임 검사",
+      "subject_id": "S03",
+      "relation": "검사_항목",
+      "object": "고환조직 검사",
+      "object_id": "T_testicular_biopsy",
+      "context": {
+        "category": "남성_추가검사"
+      }
+    },
+    {
+      "subject": "난임 검사",
+      "subject_id": "S03",
+      "relation": "검사_항목",
+      "object": "유전자 및 염색체 검사",
+      "object_id": "T_genetic",
+      "context": {
+        "category": "남성_추가검사"
+      }
+    },
+    {
+      "subject": "난임 검사",
+      "subject_id": "S03",
+      "relation": "판단기준",
+      "object": "배란기 성관계 / 약물 치료",
+      "context": {
+        "condition": "배란요인"
+      },
+      "object_id": "S04"
+    },
+    {
+      "subject": "배란기 성관계 / 약물 치료",
+      "subject_id": "S04",
+      "relation": "다음_단계",
+      "object": "인공수정 (IUI)",
+      "object_id": "S06_IUI"
+    },
+    {
+      "subject": "배란기 성관계 / 약물 치료",
+      "subject_id": "S04",
+      "relation": "사용_시술",
+      "object": "배란기 성관계",
+      "object_id": "TX_timed_intercourse"
+    },
+    {
+      "subject": "배란기 성관계 / 약물 치료",
+      "subject_id": "S04",
+      "relation": "사용_시술",
+      "object": "클로미펜 투여",
+      "object_id": "TX_clomiphene"
+    },
+    {
+      "subject": "배란기 성관계 / 약물 치료",
+      "subject_id": "S04",
+      "relation": "사용_시술",
+      "object": "페마라(레트로졸) 투여",
+      "object_id": "TX_letrozole"
+    },
+    {
+      "subject": "배란기 성관계 / 약물 치료",
+      "subject_id": "S04",
+      "relation": "사용_시술",
+      "object": "프로락틴 분비 억제제",
+      "object_id": "TX_dopamine_agonist"
+    },
+    {
+      "subject": "수술적 치료",
+      "subject_id": "S05",
+      "relation": "다음_단계",
+      "object": "배란기 성관계 / 약물 치료",
+      "object_id": "S04"
+    },
+    {
+      "subject": "수술적 치료",
+      "subject_id": "S05",
+      "relation": "다음_단계",
+      "object": "인공수정 (IUI)",
+      "object_id": "S06_IUI"
+    },
+    {
+      "subject": "수술적 치료",
+      "subject_id": "S05",
+      "relation": "다음_단계",
+      "object": "체외수정 (IVF-ET)",
+      "object_id": "S06_IVF"
+    },
+    {
+      "subject": "수술적 치료",
+      "subject_id": "S05",
+      "relation": "수술적_치료",
+      "object": "난관수술 (복강경/개복, 3~7일 입원)",
+      "context": {
+        "gender": "여성"
+      },
+      "object_id": "TX_tubal_surgery"
+    },
+    {
+      "subject": "수술적 치료",
+      "subject_id": "S05",
+      "relation": "수술적_치료",
+      "object": "정계정맥류 수술",
+      "context": {
+        "gender": "남성"
+      },
+      "object_id": "TX_varicocele_surgery"
+    },
+    {
+      "subject": "인공수정 (IUI)",
+      "subject_id": "S06_IUI",
+      "relation": "다음_단계",
+      "object": "체외수정 (IVF-ET)",
+      "object_id": "S06_IVF"
+    },
+    {
+      "subject": "인공수정 (IUI)",
+      "subject_id": "S06_IUI",
+      "relation": "관련_약물",
+      "object": "클로미펜",
+      "object_id": "M_clomiphene"
+    },
+    {
+      "subject": "인공수정 (IUI)",
+      "subject_id": "S06_IUI",
+      "relation": "관련_약물",
+      "object": "페마라 (레트로졸)",
+      "object_id": "M_letrozole"
+    },
+    {
+      "subject": "인공수정 (IUI)",
+      "subject_id": "S06_IUI",
+      "relation": "관련_약물",
+      "object": "프로게스테론 제제",
+      "object_id": "M_progesterone"
+    },
+    {
+      "subject": "인공수정 (IUI)",
+      "subject_id": "S06_IUI",
+      "relation": "적응증",
+      "object": "원인불명 난임",
+      "object_id": "C_unexplained"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "다음_단계",
+      "object": "임신 확인 및 유지",
+      "object_id": "S07_confirm"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "다음_단계",
+      "object": "동결배아이식 (FET)",
+      "object_id": "S06_FET"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "다음_단계",
+      "object": "다음 시술 준비",
+      "object_id": "S08_retry"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "관련_약물",
+      "object": "FSH 주사제",
+      "object_id": "M_FSH"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "관련_약물",
+      "object": "LH 주사제",
+      "object_id": "M_LH"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "관련_약물",
+      "object": "FSH+LH 메노트로핀",
+      "object_id": "M_hMG"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "관련_약물",
+      "object": "GnRH 길항제",
+      "object_id": "M_GnRH_antagonist"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "관련_약물",
+      "object": "GnRH 효능제",
+      "object_id": "M_GnRH_agonist"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "관련_약물",
+      "object": "hCG 주사제",
+      "object_id": "M_hCG"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "관련_약물",
+      "object": "프로게스테론 제제",
+      "object_id": "M_progesterone"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "적응증",
+      "object": "원인불명 난임",
+      "object_id": "C_unexplained"
+    },
+    {
+      "subject": "동결배아이식 (FET)",
+      "subject_id": "S06_FET",
+      "relation": "다음_단계",
+      "object": "임신 확인 및 유지",
+      "object_id": "S07_confirm"
+    },
+    {
+      "subject": "동결배아이식 (FET)",
+      "subject_id": "S06_FET",
+      "relation": "다음_단계",
+      "object": "다음 시술 준비",
+      "object_id": "S08_retry"
+    },
+    {
+      "subject": "임신 확인 및 유지",
+      "subject_id": "S07_confirm",
+      "relation": "다음_단계",
+      "object": "임신 중 관리",
+      "object_id": "S07_prenatal"
+    },
+    {
+      "subject": "다음 시술 준비",
+      "subject_id": "S08_retry",
+      "relation": "다음_단계",
+      "object": "인공수정 (IUI)",
+      "object_id": "S06_IUI"
+    },
+    {
+      "subject": "다음 시술 준비",
+      "subject_id": "S08_retry",
+      "relation": "다음_단계",
+      "object": "체외수정 (IVF-ET)",
+      "object_id": "S06_IVF"
+    },
+    {
+      "subject": "다음 시술 준비",
+      "subject_id": "S08_retry",
+      "relation": "다음_단계",
+      "object": "동결배아이식 (FET)",
+      "object_id": "S06_FET"
+    },
+    {
+      "subject": "다음 시술 준비",
+      "subject_id": "S08_retry",
+      "relation": "다음_단계",
+      "object": "치료 종결 결정",
+      "object_id": "S09_end"
+    },
+    {
+      "subject": "배란요인",
+      "subject_id": "C_ovulatory",
+      "relation": "진단방법",
+      "object": "호르몬 검사 (혈액검사)",
+      "object_id": "T_hormone"
+    },
+    {
+      "subject": "배란요인",
+      "subject_id": "C_ovulatory",
+      "relation": "진단방법",
+      "object": "배란 초음파 (질 초음파)",
+      "object_id": "T_ovulation_us"
+    },
+    {
+      "subject": "배란요인",
+      "subject_id": "C_ovulatory",
+      "relation": "진단방법",
+      "object": "기초체온 검사",
+      "object_id": "T_bbt"
+    },
+    {
+      "subject": "배란요인",
+      "subject_id": "C_ovulatory",
+      "relation": "진단방법",
+      "object": "소변 LH 측정 (배란시약)",
+      "object_id": "T_urine_lh"
+    },
+    {
+      "subject": "배란요인",
+      "subject_id": "C_ovulatory",
+      "relation": "치료방법",
+      "object": "클로미펜 투여",
+      "object_id": "TX_clomiphene"
+    },
+    {
+      "subject": "배란요인",
+      "subject_id": "C_ovulatory",
+      "relation": "치료방법",
+      "object": "과배란 유도",
+      "object_id": "TX_COH"
+    },
+    {
+      "subject": "배란요인",
+      "subject_id": "C_ovulatory",
+      "relation": "치료방법",
+      "object": "프로락틴 분비 억제제",
+      "object_id": "TX_dopamine_agonist"
+    },
+    {
+      "subject": "배란요인",
+      "subject_id": "C_ovulatory",
+      "relation": "하위_질환",
+      "object": "다낭난소증후군",
+      "object_id": "C_pcos"
+    },
+    {
+      "subject": "배란요인",
+      "subject_id": "C_ovulatory",
+      "relation": "하위_질환",
+      "object": "조기난소부전 (조기폐경)",
+      "object_id": "C_poi"
+    },
+    {
+      "subject": "배란요인",
+      "subject_id": "C_ovulatory",
+      "relation": "하위_질환",
+      "object": "고프로락틴혈증",
+      "object_id": "C_hyperprolactinemia"
+    },
+    {
+      "subject": "배란요인",
+      "subject_id": "C_ovulatory",
+      "relation": "하위_질환",
+      "object": "무배란",
+      "object_id": "C_anovulation"
+    },
+    {
+      "subject": "난관요인",
+      "subject_id": "C_tubal",
+      "relation": "진단방법",
+      "object": "자궁난관조영술",
+      "object_id": "T_hsg"
+    },
+    {
+      "subject": "난관요인",
+      "subject_id": "C_tubal",
+      "relation": "진단방법",
+      "object": "복강경 검사",
+      "object_id": "T_laparoscopy"
+    },
+    {
+      "subject": "난관요인",
+      "subject_id": "C_tubal",
+      "relation": "치료방법",
+      "object": "난관수술",
+      "object_id": "TX_tubal_surgery"
+    },
+    {
+      "subject": "난관요인",
+      "subject_id": "C_tubal",
+      "relation": "치료방법",
+      "object": "체외수정",
+      "object_id": "TX_IVF"
+    },
+    {
+      "subject": "난관요인",
+      "subject_id": "C_tubal",
+      "relation": "원인",
+      "object": "자궁내막증",
+      "object_id": "C_endometriosis"
+    },
+    {
+      "subject": "난관요인",
+      "subject_id": "C_tubal",
+      "relation": "원인",
+      "object": "자궁외임신",
+      "object_id": "C_ectopic"
+    },
+    {
+      "subject": "난관요인",
+      "subject_id": "C_tubal",
+      "relation": "원인",
+      "object": "난관수종",
+      "object_id": "C_hydrosalpinx"
+    },
+    {
+      "subject": "자궁요인",
+      "subject_id": "C_uterine",
+      "relation": "진단방법",
+      "object": "배란 초음파 (질 초음파)",
+      "object_id": "T_ovulation_us"
+    },
+    {
+      "subject": "자궁요인",
+      "subject_id": "C_uterine",
+      "relation": "진단방법",
+      "object": "자궁난관조영술",
+      "object_id": "T_hsg"
+    },
+    {
+      "subject": "자궁요인",
+      "subject_id": "C_uterine",
+      "relation": "진단방법",
+      "object": "자궁경 검사",
+      "object_id": "T_hysteroscopy"
+    },
+    {
+      "subject": "자궁요인",
+      "subject_id": "C_uterine",
+      "relation": "치료방법",
+      "object": "자궁경 수술",
+      "object_id": "TX_hysteroscopic_surgery"
+    },
+    {
+      "subject": "자궁요인",
+      "subject_id": "C_uterine",
+      "relation": "치료방법",
+      "object": "자궁근종 제거술",
+      "object_id": "TX_myomectomy"
+    },
+    {
+      "subject": "자궁요인",
+      "subject_id": "C_uterine",
+      "relation": "원인",
+      "object": "자궁근종",
+      "object_id": "C_myoma"
+    },
+    {
+      "subject": "자궁요인",
+      "subject_id": "C_uterine",
+      "relation": "원인",
+      "object": "자궁내막증",
+      "object_id": "C_endometriosis"
+    },
+    {
+      "subject": "골반요인",
+      "subject_id": "C_pelvic",
+      "relation": "진단방법",
+      "object": "복강경 검사",
+      "object_id": "T_laparoscopy"
+    },
+    {
+      "subject": "골반요인",
+      "subject_id": "C_pelvic",
+      "relation": "치료방법",
+      "object": "복강경 수술",
+      "object_id": "TX_laparoscopic_surgery"
+    },
+    {
+      "subject": "골반요인",
+      "subject_id": "C_pelvic",
+      "relation": "치료방법",
+      "object": "체외수정",
+      "object_id": "TX_IVF"
+    },
+    {
+      "subject": "남성요인",
+      "subject_id": "C_male",
+      "relation": "진단방법",
+      "object": "정액검사",
+      "object_id": "T_semen"
+    },
+    {
+      "subject": "남성요인",
+      "subject_id": "C_male",
+      "relation": "진단방법",
+      "object": "남성 호르몬 검사",
+      "object_id": "T_male_hormone"
+    },
+    {
+      "subject": "남성요인",
+      "subject_id": "C_male",
+      "relation": "진단방법",
+      "object": "고환조직 검사",
+      "object_id": "T_testicular_biopsy"
+    },
+    {
+      "subject": "남성요인",
+      "subject_id": "C_male",
+      "relation": "진단방법",
+      "object": "유전자 및 염색체 검사",
+      "object_id": "T_genetic"
+    },
+    {
+      "subject": "남성요인",
+      "subject_id": "C_male",
+      "relation": "치료방법",
+      "object": "정계정맥류 수술",
+      "object_id": "TX_varicocele_surgery"
+    },
+    {
+      "subject": "남성요인",
+      "subject_id": "C_male",
+      "relation": "치료방법",
+      "object": "인공수정",
+      "object_id": "TX_IUI"
+    },
+    {
+      "subject": "남성요인",
+      "subject_id": "C_male",
+      "relation": "치료방법",
+      "object": "세포질내정자주입술",
+      "object_id": "TX_IVF_ICSI"
+    },
+    {
+      "subject": "원인불명 난임",
+      "subject_id": "C_unexplained",
+      "relation": "치료방법",
+      "object": "배란기 성관계",
+      "object_id": "TX_timed_intercourse"
+    },
+    {
+      "subject": "원인불명 난임",
+      "subject_id": "C_unexplained",
+      "relation": "치료방법",
+      "object": "인공수정",
+      "object_id": "TX_IUI"
+    },
+    {
+      "subject": "원인불명 난임",
+      "subject_id": "C_unexplained",
+      "relation": "치료방법",
+      "object": "체외수정",
+      "object_id": "TX_IVF"
+    },
+    {
+      "subject": "다낭난소증후군",
+      "subject_id": "C_pcos",
+      "relation": "치료방법",
+      "object": "클로미펜 투여",
+      "object_id": "TX_clomiphene"
+    },
+    {
+      "subject": "다낭난소증후군",
+      "subject_id": "C_pcos",
+      "relation": "치료방법",
+      "object": "페마라(레트로졸) 투여",
+      "object_id": "TX_letrozole"
+    },
+    {
+      "subject": "다낭난소증후군",
+      "subject_id": "C_pcos",
+      "relation": "치료방법",
+      "object": "복강경 난소천공술",
+      "object_id": "TX_laparoscopic_drilling"
+    },
+    {
+      "subject": "다낭난소증후군",
+      "subject_id": "C_pcos",
+      "relation": "합병증",
+      "object": "당뇨",
+      "object_id": "C_diabetes"
+    },
+    {
+      "subject": "조기난소부전 (조기폐경)",
+      "subject_id": "C_poi",
+      "relation": "치료방법",
+      "object": "난자공여",
+      "object_id": "TX_oocyte_donation"
+    },
+    {
+      "subject": "조기난소부전 (조기폐경)",
+      "subject_id": "C_poi",
+      "relation": "치료방법",
+      "object": "체외수정",
+      "object_id": "TX_IVF"
+    },
+    {
+      "subject": "자궁내막증",
+      "subject_id": "C_endometriosis",
+      "relation": "진단방법",
+      "object": "복강경 검사",
+      "object_id": "T_laparoscopy"
+    },
+    {
+      "subject": "자궁내막증",
+      "subject_id": "C_endometriosis",
+      "relation": "치료방법",
+      "object": "복강경 수술",
+      "object_id": "TX_laparoscopic_surgery"
+    },
+    {
+      "subject": "자궁내막증",
+      "subject_id": "C_endometriosis",
+      "relation": "치료방법",
+      "object": "체외수정",
+      "object_id": "TX_IVF"
+    },
+    {
+      "subject": "반복유산 (습관성 유산)",
+      "subject_id": "C_rpl",
+      "relation": "진단방법",
+      "object": "유전자 및 염색체 검사",
+      "object_id": "T_genetic"
+    },
+    {
+      "subject": "반복유산 (습관성 유산)",
+      "subject_id": "C_rpl",
+      "relation": "진단방법",
+      "object": "면역학적 검사",
+      "object_id": "T_immune"
+    },
+    {
+      "subject": "반복유산 (습관성 유산)",
+      "subject_id": "C_rpl",
+      "relation": "진단방법",
+      "object": "자궁경 검사",
+      "object_id": "T_hysteroscopy"
+    },
+    {
+      "subject": "반복유산 (습관성 유산)",
+      "subject_id": "C_rpl",
+      "relation": "치료방법",
+      "object": "착상 전 유전자 검사",
+      "object_id": "TX_PGT"
+    },
+    {
+      "subject": "고프로락틴혈증",
+      "subject_id": "C_hyperprolactinemia",
+      "relation": "치료방법",
+      "object": "프로락틴 분비 억제제",
+      "object_id": "TX_dopamine_agonist"
+    },
+    {
+      "subject": "남성 산전(임신 전) 검사",
+      "subject_id": "T_prepregnancy_male",
+      "relation": "검사_항목",
+      "object": "정액검사",
+      "object_id": "T_semen"
+    },
+    {
+      "subject": "시험관",
+      "subject_id": "ALIAS_84370",
+      "relation": "동의어",
+      "object": "체외수정 (IVF-ET)",
+      "object_id": "S06_IVF"
+    },
+    {
+      "subject": "시험관아기",
+      "subject_id": "ALIAS_35410",
+      "relation": "동의어",
+      "object": "체외수정 (IVF-ET)",
+      "object_id": "S06_IVF"
+    },
+    {
+      "subject": "인공수정",
+      "subject_id": "ALIAS_97384",
+      "relation": "동의어",
+      "object": "자궁내 정자 주입술 (IUI)",
+      "object_id": "S06_IUI"
+    },
+    {
+      "subject": "미세수정",
+      "subject_id": "ALIAS_43776",
+      "relation": "동의어",
+      "object": "세포질내정자주입술 (ICSI)",
+      "object_id": "TX_IVF_ICSI"
+    },
+    {
+      "subject": "나팔관검사",
+      "subject_id": "ALIAS_96820",
+      "relation": "동의어",
+      "object": "자궁난관조영술 (HSG)",
+      "object_id": "T_hsg"
+    },
+    {
+      "subject": "조영술",
+      "subject_id": "ALIAS_66875",
+      "relation": "동의어",
+      "object": "자궁난관조영술 (HSG)",
+      "object_id": "T_hsg"
+    },
+    {
+      "subject": "나팔관",
+      "subject_id": "ALIAS_40067",
+      "relation": "동의어",
+      "object": "난관 (Fallopian Tube)",
+      "object_id": "A_fallopian_tube"
+    },
+    {
+      "subject": "피검사",
+      "subject_id": "ALIAS_68411",
+      "relation": "동의어",
+      "object": "호르몬 검사 (Hormone Panel)",
+      "object_id": "T_hormone"
+    },
+    {
+      "subject": "정자검사",
+      "subject_id": "ALIAS_40500",
+      "relation": "동의어",
+      "object": "정액검사 (Semen Analysis)",
+      "object_id": "T_semen"
+    },
+    {
+      "subject": "초음파",
+      "subject_id": "ALIAS_56320",
+      "relation": "동의어",
+      "object": "배란 초음파 / 질 초음파",
+      "object_id": "T_ovulation_us"
+    },
+    {
+      "subject": "내시경",
+      "subject_id": "ALIAS_54829",
+      "relation": "동의어",
+      "object": "복강경 검사 (Laparoscopy)",
+      "object_id": "T_laparoscopy"
+    },
+    {
+      "subject": "자궁경",
+      "subject_id": "ALIAS_75042",
+      "relation": "동의어",
+      "object": "자궁경 검사 (Hysteroscopy)",
+      "object_id": "T_hysteroscopy"
+    },
+    {
+      "subject": "자궁내시경",
+      "subject_id": "ALIAS_65795",
+      "relation": "동의어",
+      "object": "자궁경 검사 (Hysteroscopy)",
+      "object_id": "T_hysteroscopy"
+    },
+    {
+      "subject": "배란테스트기",
+      "subject_id": "ALIAS_27136",
+      "relation": "동의어",
+      "object": "소변 LH 측정 (OPK)",
+      "object_id": "T_urine_lh"
+    },
+    {
+      "subject": "배란시약",
+      "subject_id": "ALIAS_91398",
+      "relation": "동의어",
+      "object": "소변 LH 측정 (OPK)",
+      "object_id": "T_urine_lh"
+    },
+    {
+      "subject": "기초체온표",
+      "subject_id": "ALIAS_32074",
+      "relation": "동의어",
+      "object": "기초체온 검사 (BBT)",
+      "object_id": "T_bbt"
+    },
+    {
+      "subject": "점액관찰",
+      "subject_id": "ALIAS_33016",
+      "relation": "동의어",
+      "object": "자궁경부 점액 관찰법",
+      "object_id": "T_cervical_mucus"
+    },
+    {
+      "subject": "면역검사",
+      "subject_id": "ALIAS_74837",
+      "relation": "동의어",
+      "object": "면역학적 검사",
+      "object_id": "T_immune"
+    },
+    {
+      "subject": "염색체검사",
+      "subject_id": "ALIAS_53155",
+      "relation": "동의어",
+      "object": "유전자 및 염색체 검사",
+      "object_id": "T_genetic"
+    },
+    {
+      "subject": "난자은행",
+      "subject_id": "ALIAS_74836",
+      "relation": "동의어",
+      "object": "난자 동결 (Oocyte Freezing)",
+      "object_id": "FP_oocyte"
+    },
+    {
+      "subject": "난자냉동",
+      "subject_id": "ALIAS_52629",
+      "relation": "동의어",
+      "object": "난자 동결 (Oocyte Freezing)",
+      "object_id": "FP_oocyte"
+    },
+    {
+      "subject": "정자냉동",
+      "subject_id": "ALIAS_94866",
+      "relation": "동의어",
+      "object": "정자 동결 (Sperm Freezing)",
+      "object_id": "FP_sperm"
+    },
+    {
+      "subject": "냉동배아",
+      "subject_id": "ALIAS_83051",
+      "relation": "동의어",
+      "object": "동결보존법 (Cryopreservation)",
+      "object_id": "TX_cryopreservation"
+    },
+    {
+      "subject": "냉동배아이식",
+      "subject_id": "ALIAS_01297",
+      "relation": "동의어",
+      "object": "동결배아이식 (FET)",
+      "object_id": "S06_FET"
+    },
+    {
+      "subject": "해칭",
+      "subject_id": "ALIAS_82707",
+      "relation": "동의어",
+      "object": "보조 부화술 (Assisted Hatching)",
+      "object_id": "TX_AH"
+    },
+    {
+      "subject": "착상전검사",
+      "subject_id": "ALIAS_56366",
+      "relation": "동의어",
+      "object": "착상 전 유전자 검사 (PGT)",
+      "object_id": "S06_PGT"
+    },
+    {
+      "subject": "스크래치",
+      "subject_id": "ALIAS_01838",
+      "relation": "동의어",
+      "object": "자궁내막 자극 (Endometrial Scratch)",
+      "object_id": "TX_endometrial_scratch"
+    },
+    {
+      "subject": "클로미드",
+      "subject_id": "ALIAS_47375",
+      "relation": "동의어",
+      "object": "클로미펜 (Clomiphene)",
+      "object_id": "M_clomiphene"
+    },
+    {
+      "subject": "페마라",
+      "subject_id": "ALIAS_98534",
+      "relation": "동의어",
+      "object": "레트로졸 (Letrozole)",
+      "object_id": "TX_letrozole"
+    },
+    {
+      "subject": "트리거",
+      "subject_id": "ALIAS_28345",
+      "relation": "동의어",
+      "object": "hCG 주사제 (배란유도)",
+      "object_id": "M_hCG"
+    },
+    {
+      "subject": "황체보충제",
+      "subject_id": "ALIAS_75810",
+      "relation": "동의어",
+      "object": "프로게스테론 제제",
+      "object_id": "M_progesterone"
+    },
+    {
+      "subject": "에스트로겐",
+      "subject_id": "ALIAS_44614",
+      "relation": "동의어",
+      "object": "에스트라디올 (E2)",
+      "object_id": "H_E2"
+    },
+    {
+      "subject": "갑상선호르몬",
+      "subject_id": "ALIAS_35530",
+      "relation": "동의어",
+      "object": "갑상샘자극호르몬 (TSH)",
+      "object_id": "H_TSH"
+    },
+    {
+      "subject": "황체호르몬",
+      "subject_id": "ALIAS_98482",
+      "relation": "동의어",
+      "object": "프로게스테론 (P4)",
+      "object_id": "H_P4"
+    },
+    {
+      "subject": "임테기 호르몬",
+      "subject_id": "ALIAS_02911",
+      "relation": "동의어",
+      "object": "hCG (인간융모생식선자극호르몬)",
+      "object_id": "M_hCG"
+    },
+    {
+      "subject": "다낭성",
+      "subject_id": "ALIAS_06821",
+      "relation": "동의어",
+      "object": "다낭난소증후군 (PCOS)",
+      "object_id": "C_pcos"
+    },
+    {
+      "subject": "조기폐경",
+      "subject_id": "ALIAS_15111",
+      "relation": "동의어",
+      "object": "조기난소부전 (POI)",
+      "object_id": "C_poi"
+    },
+    {
+      "subject": "루푸스",
+      "subject_id": "ALIAS_72314",
+      "relation": "동의어",
+      "object": "전신성 홍반성 낭창 (SLE)",
+      "object_id": "C_lupus"
+    },
+    {
+      "subject": "초콜릿낭종",
+      "subject_id": "ALIAS_08312",
+      "relation": "동의어",
+      "object": "자궁내막종 (Endometrioma)",
+      "object_id": "C_endometrioma"
+    },
+    {
+      "subject": "근종",
+      "subject_id": "ALIAS_96338",
+      "relation": "동의어",
+      "object": "자궁근종 (Myoma)",
+      "object_id": "C_myoma"
+    },
+    {
+      "subject": "폴립",
+      "subject_id": "ALIAS_52319",
+      "relation": "동의어",
+      "object": "자궁내 폴립 (Endometrial Polyp)",
+      "object_id": "C_polyp"
+    },
+    {
+      "subject": "용종",
+      "subject_id": "ALIAS_58997",
+      "relation": "동의어",
+      "object": "자궁내 폴립 (Endometrial Polyp)",
+      "object_id": "C_polyp"
+    },
+    {
+      "subject": "물혹",
+      "subject_id": "ALIAS_87479",
+      "relation": "동의어",
+      "object": "난소낭종 (Ovarian Cyst)",
+      "object_id": "C_ovarian_cyst"
+    },
+    {
+      "subject": "배가 빵빵",
+      "subject_id": "ALIAS_45712",
+      "relation": "동의어",
+      "object": "난소과자극증후군 (OHSS)",
+      "object_id": "C_ohss"
+    },
+    {
+      "subject": "습관성유산",
+      "subject_id": "ALIAS_38541",
+      "relation": "동의어",
+      "object": "반복유산 (RPL)",
+      "object_id": "C_rpl"
+    },
+    {
+      "subject": "아기집",
+      "subject_id": "ALIAS_53470",
+      "relation": "동의어",
+      "object": "임신낭 (Gestational Sac)",
+      "object_id": "A_gestational_sac"
+    },
+    {
+      "subject": "내막",
+      "subject_id": "ALIAS_08823",
+      "relation": "동의어",
+      "object": "자궁내막 (Endometrium)",
+      "object_id": "A_endometrium"
+    },
+    {
+      "subject": "화유",
+      "subject_id": "ALIAS_97507",
+      "relation": "동의어",
+      "object": "화학적 임신 (Chemical Pregnancy)",
+      "object_id": "C_chemical_pregnancy"
+    },
+    {
+      "subject": "고사난자",
+      "subject_id": "ALIAS_96650",
+      "relation": "동의어",
+      "object": "계류유산 (Missed Abortion)",
+      "object_id": "C_missed_abortion"
+    },
+    {
+      "subject": "쌍둥이 임신",
+      "subject_id": "ALIAS_01972",
+      "relation": "동의어",
+      "object": "다태임신 (Multiple Pregnancy)",
+      "object_id": "C_multiple"
+    },
+    {
+      "subject": "난자 기증",
+      "subject_id": "ALIAS_44853",
+      "relation": "동의어",
+      "object": "난자공여 (Oocyte Donation)",
+      "object_id": "TX_oocyte_donation"
+    },
+    {
+      "subject": "정자 기증",
+      "subject_id": "ALIAS_05969",
+      "relation": "동의어",
+      "object": "정자공여 (Sperm Donation)",
+      "object_id": "TX_sperm_donation"
+    },
+    {
+      "subject": "난임시술",
+      "subject_id": "ALIAS_47232",
+      "relation": "동의어",
+      "object": "보조생식술 (ART)",
+      "object_id": "TX_ART"
+    },
+    {
+      "subject": "불임",
+      "subject_id": "ALIAS_51215",
+      "relation": "동의어",
+      "object": "난임 (Infertility) - 과거 표현",
+      "object_id": "C_infertility"
+    },
+    {
+      "subject": "롱프로토콜",
+      "subject_id": "ALIAS_75061",
+      "relation": "동의어",
+      "object": "장기요법 (Long Protocol)",
+      "object_id": "TX_long_protocol"
+    },
+    {
+      "subject": "숏프로토콜",
+      "subject_id": "ALIAS_46861",
+      "relation": "동의어",
+      "object": "단기요법 (Short Protocol)",
+      "object_id": "TX_short_protocol"
+    },
+    {
+      "subject": "미니 IVF",
+      "subject_id": "ALIAS_15749",
+      "relation": "동의어",
+      "object": "저자극 요법 (Mild IVF)",
+      "object_id": "TX_mild_ivf"
+    },
+    {
+      "subject": "저자극",
+      "subject_id": "ALIAS_76907",
+      "relation": "동의어",
+      "object": "저자극 요법 (Mild IVF)",
+      "object_id": "TX_mild_ivf"
+    },
+    {
+      "subject": "FSH 주사",
+      "subject_id": "ALIAS_27965",
+      "relation": "동의어",
+      "object": "난포자극호르몬 주사제 (Follitropin)",
+      "object_id": "M_FSH"
+    },
+    {
+      "subject": "자연임신 시도",
+      "subject_id": "ALIAS_88527",
+      "relation": "동의어",
+      "object": "배란기 성관계 (Timed Intercourse)",
+      "object_id": "TX_timed_intercourse"
+    },
+    {
+      "subject": "배란일 맞추기",
+      "subject_id": "ALIAS_46797",
+      "relation": "동의어",
+      "object": "배란기 성관계 (Timed Intercourse)",
+      "object_id": "TX_timed_intercourse"
+    },
+    {
+      "subject": "이식",
+      "subject_id": "ALIAS_79787",
+      "relation": "동의어",
+      "object": "배아 이식 (ET)",
+      "object_id": "TX_ET"
+    },
+    {
+      "subject": "배아이식",
+      "subject_id": "ALIAS_28078",
+      "relation": "동의어",
+      "object": "배아 이식 (ET)",
+      "object_id": "TX_ET"
+    },
+    {
+      "subject": "가임기",
+      "subject_id": "ALIAS_12535",
+      "relation": "동의어",
+      "object": "가임기 / 임신가능시기 (Fertile Window)",
+      "object_id": "A_fertile_window"
+    },
+    {
+      "subject": "난임",
+      "subject_id": "C_infertility",
+      "relation": "치료방법",
+      "object": "보조생식술 (ART)",
+      "object_id": "TX_ART"
+    },
+    {
+      "subject": "보조생식술 (ART)",
+      "subject_id": "TX_ART",
+      "relation": "포함",
+      "object": "인공수정 (IUI)",
+      "object_id": "S06_IUI"
+    },
+    {
+      "subject": "보조생식술 (ART)",
+      "subject_id": "TX_ART",
+      "relation": "포함",
+      "object": "체외수정 (IVF-ET)",
+      "object_id": "S06_IVF"
+    },
+    {
+      "subject": "보조생식술 (ART)",
+      "subject_id": "TX_ART",
+      "relation": "포함",
+      "object": "세포질내정자주입술 (ICSI)",
+      "object_id": "TX_IVF_ICSI"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "방법",
+      "object": "장기요법 (Long Protocol)",
+      "object_id": "TX_long_protocol"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "방법",
+      "object": "단기요법 (Short Protocol)",
+      "object_id": "TX_short_protocol"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "방법",
+      "object": "저자극 요법 (Mild IVF)",
+      "object_id": "TX_mild_ivf"
+    },
+    {
+      "subject": "난황낭 (Yolk Sac)",
+      "subject_id": "A_yolk_sac",
+      "relation": "위치",
+      "object": "임신낭 (Gestational Sac)",
+      "object_id": "A_gestational_sac"
+    },
+    {
+      "subject": "난황낭 (Yolk Sac)",
+      "subject_id": "A_yolk_sac",
+      "relation": "확인시기",
+      "object": "임신 확인 및 유지",
+      "object_id": "S07_confirm"
+    },
+    {
+      "subject": "난황낭 (Yolk Sac)",
+      "subject_id": "A_yolk_sac",
+      "relation": "기능",
+      "object": "배아 (Embryo)",
+      "object_id": "A_embryo"
+    },
+    {
+      "subject": "난황",
+      "subject_id": "ALIAS_yolk_sac",
+      "relation": "동의어",
+      "object": "난황낭 (Yolk Sac)",
+      "object_id": "A_yolk_sac"
+    },
+    {
+      "subject": "남성요인",
+      "subject_id": "C_male",
+      "relation": "하위_질환",
+      "object": "정계정맥류",
+      "object_id": "C_varicocele"
+    },
+    {
+      "subject": "남성요인",
+      "subject_id": "C_male",
+      "relation": "하위_질환",
+      "object": "무정자증",
+      "object_id": "C_azoospermia"
+    },
+    {
+      "subject": "남성요인",
+      "subject_id": "C_male",
+      "relation": "하위_질환",
+      "object": "희소정자증",
+      "object_id": "C_oligozoospermia"
+    },
+    {
+      "subject": "남성요인",
+      "subject_id": "C_male",
+      "relation": "하위_질환",
+      "object": "역행성사정",
+      "object_id": "C_retrograde_ejaculation"
+    },
+    {
+      "subject": "남성요인",
+      "subject_id": "C_male",
+      "relation": "하위_질환",
+      "object": "성선기능저하증",
+      "object_id": "C_hypogonadism"
+    },
+    {
+      "subject": "남성요인",
+      "subject_id": "C_male",
+      "relation": "하위_질환",
+      "object": "클라인펠터증후군",
+      "object_id": "C_klinefelter"
+    },
+    {
+      "subject": "남성요인",
+      "subject_id": "C_male",
+      "relation": "하위_질환",
+      "object": "사정관폐쇄",
+      "object_id": "C_ejaculatory_obstruction"
+    },
+    {
+      "subject": "역행성사정",
+      "subject_id": "C_retrograde_ejaculation",
+      "relation": "진단방법",
+      "object": "정액검사",
+      "object_id": "T_semen"
+    },
+    {
+      "subject": "역행사정",
+      "subject_id": "역행사정",
+      "relation": "동의어",
+      "object": "역행성사정 (Retrograde Ejaculation)",
+      "object_id": "C_retrograde_ejaculation"
+    },
+    {
+      "subject": "희소정자증",
+      "subject_id": "C_oligozoospermia",
+      "relation": "진단방법",
+      "object": "정액검사",
+      "object_id": "T_semen"
+    },
+    {
+      "subject": "희소정자증",
+      "subject_id": "C_oligozoospermia",
+      "relation": "진단방법",
+      "object": "고환조직 검사",
+      "object_id": "T_testicular_biopsy"
+    },
+    {
+      "subject": "희소정자증",
+      "subject_id": "C_oligozoospermia",
+      "relation": "치료방법",
+      "object": "인공수정 (IUI)",
+      "object_id": "TX_IUI"
+    },
+    {
+      "subject": "희소정자증",
+      "subject_id": "C_oligozoospermia",
+      "relation": "치료방법",
+      "object": "세포질내정자주입술 (ICSI)",
+      "object_id": "TX_IVF_ICSI"
+    },
+    {
+      "subject": "희소정자",
+      "subject_id": "희소정자",
+      "relation": "동의어",
+      "object": "희소정자증 (Oligozoospermia)",
+      "object_id": "C_oligozoospermia"
+    },
+    {
+      "subject": "정자감소",
+      "subject_id": "정자감소",
+      "relation": "동의어",
+      "object": "희소정자증 (Oligozoospermia)",
+      "object_id": "C_oligozoospermia"
+    },
+    {
+      "subject": "성선기능저하증",
+      "subject_id": "C_hypogonadism",
+      "relation": "진단방법",
+      "object": "남성 호르몬 검사",
+      "object_id": "T_male_hormone"
+    },
+    {
+      "subject": "성선기능저하",
+      "subject_id": "성선기능저하",
+      "relation": "동의어",
+      "object": "성선기능저하증 (Hypogonadism)",
+      "object_id": "C_hypogonadism"
+    },
+    {
+      "subject": "클라인펠터증후군",
+      "subject_id": "C_klinefelter",
+      "relation": "진단방법",
+      "object": "유전자 및 염색체 검사",
+      "object_id": "T_genetic"
+    },
+    {
+      "subject": "클라인펠터",
+      "subject_id": "클라인펠터",
+      "relation": "동의어",
+      "object": "클라인펠터증후군 (Klinefelter Syndrome)",
+      "object_id": "C_klinefelter"
+    },
+    {
+      "subject": "사정관폐쇄",
+      "subject_id": "C_ejaculatory_obstruction",
+      "relation": "진단방법",
+      "object": "음낭초음파 검사",
+      "object_id": "T_scrotal_us"
+    },
+    {
+      "subject": "사정관폐쇄",
+      "subject_id": "C_ejaculatory_obstruction",
+      "relation": "치료방법",
+      "object": "사정관폐쇄 절제술",
+      "object_id": "TX_ejaculatory_duct_resection"
+    },
+    {
+      "subject": "난소기능저하",
+      "subject_id": "C_dor",
+      "relation": "진단방법",
+      "object": "호르몬 검사 (혈액검사)",
+      "object_id": "T_hormone"
+    },
+    {
+      "subject": "난소기능저하",
+      "subject_id": "난소기능저하",
+      "relation": "동의어",
+      "object": "난소기능저하 (DOR)",
+      "object_id": "C_dor"
+    },
+    {
+      "subject": "난소예비력저하",
+      "subject_id": "난소예비력저하",
+      "relation": "동의어",
+      "object": "난소기능저하 (DOR)",
+      "object_id": "C_dor"
+    },
+    {
+      "subject": "자궁내막증식증",
+      "subject_id": "C_endometrial_hyperplasia",
+      "relation": "합병증",
+      "object": "다낭난소증후군",
+      "object_id": "C_pcos"
+    },
+    {
+      "subject": "내막증식",
+      "subject_id": "내막증식",
+      "relation": "동의어",
+      "object": "자궁내막증식증 (Endometrial Hyperplasia)",
+      "object_id": "C_endometrial_hyperplasia"
+    },
+    {
+      "subject": "무정자증",
+      "subject_id": "C_azoospermia",
+      "relation": "치료방법",
+      "object": "고환정자채취술 (TESE)",
+      "object_id": "TX_TESE"
+    },
+    {
+      "subject": "무정자증",
+      "subject_id": "C_azoospermia",
+      "relation": "치료방법",
+      "object": "정관복원술",
+      "object_id": "TX_vasovasostomy"
+    },
+    {
+      "subject": "무정자증",
+      "subject_id": "C_azoospermia",
+      "relation": "치료방법",
+      "object": "세포질내정자주입술 (ICSI)",
+      "object_id": "TX_IVF_ICSI"
+    },
+    {
+      "subject": "음낭초음파 검사",
+      "subject_id": "T_scrotal_us",
+      "relation": "관련_검사",
+      "object": "난임 검사",
+      "object_id": "S03"
+    },
+    {
+      "subject": "정관조영술",
+      "subject_id": "T_vasography",
+      "relation": "관련_검사",
+      "object": "난임 검사",
+      "object_id": "S03"
+    },
+    {
+      "subject": "정자 DNA 분절화 검사",
+      "subject_id": "T_sperm_dna_frag",
+      "relation": "관련_검사",
+      "object": "난임 검사",
+      "object_id": "S03"
+    },
+    {
+      "subject": "음낭초음파",
+      "subject_id": "음낭초음파",
+      "relation": "동의어",
+      "object": "음낭초음파 검사 (Scrotal Ultrasound)",
+      "object_id": "T_scrotal_us"
+    },
+    {
+      "subject": "정관조영",
+      "subject_id": "정관조영",
+      "relation": "동의어",
+      "object": "정관조영술 (Vasography)",
+      "object_id": "T_vasography"
+    },
+    {
+      "subject": "고환정자채취술",
+      "subject_id": "TX_TESE",
+      "relation": "사용_시술",
+      "object": "체외수정 (IVF-ET)",
+      "object_id": "S06_IVF"
+    },
+    {
+      "subject": "정관복원술",
+      "subject_id": "TX_vasovasostomy",
+      "relation": "사용_시술",
+      "object": "수술적 치료",
+      "object_id": "S05"
+    },
+    {
+      "subject": "부고환정관문합술",
+      "subject_id": "TX_vasoepididymostomy",
+      "relation": "사용_시술",
+      "object": "수술적 치료",
+      "object_id": "S05"
+    },
+    {
+      "subject": "사정관폐쇄 절제술",
+      "subject_id": "TX_ejaculatory_duct_resection",
+      "relation": "사용_시술",
+      "object": "수술적 치료",
+      "object_id": "S05"
+    },
+    {
+      "subject": "TESE",
+      "subject_id": "TESE",
+      "relation": "동의어",
+      "object": "고환정자채취술 (TESE)",
+      "object_id": "TX_TESE"
+    },
+    {
+      "subject": "고환정자추출",
+      "subject_id": "고환정자추출",
+      "relation": "동의어",
+      "object": "고환정자채취술 (TESE)",
+      "object_id": "TX_TESE"
+    },
+    {
+      "subject": "정관복원",
+      "subject_id": "정관복원",
+      "relation": "동의어",
+      "object": "정관복원술 (Vasovasostomy)",
+      "object_id": "TX_vasovasostomy"
+    },
+    {
+      "subject": "배아글루",
+      "subject_id": "TX_embryo_glue",
+      "relation": "사용_시술",
+      "object": "체외수정 (IVF-ET)",
+      "object_id": "S06_IVF"
+    },
+    {
+      "subject": "배아글루",
+      "subject_id": "배아글루",
+      "relation": "동의어",
+      "object": "배아글루 (Embryo Glue)",
+      "object_id": "TX_embryo_glue"
+    },
+    {
+      "subject": "테스토스테론",
+      "subject_id": "H_testosterone",
+      "relation": "검사_항목",
+      "object": "남성 호르몬 검사",
+      "object_id": "T_male_hormone"
+    },
+    {
+      "subject": "남성호르몬",
+      "subject_id": "남성호르몬",
+      "relation": "동의어",
+      "object": "테스토스테론 (Testosterone)",
+      "object_id": "H_testosterone"
+    },
+    {
+      "subject": "난소조직 동결",
+      "subject_id": "FP_ovarian_tissue",
+      "relation": "방법",
+      "object": "가임력 보존"
+    },
+    {
+      "subject": "난소조직동결",
+      "subject_id": "난소조직동결",
+      "relation": "동의어",
+      "object": "난소조직 동결 (Ovarian Tissue Cryopreservation)",
+      "object_id": "FP_ovarian_tissue"
+    },
+    {
+      "subject": "난소조직냉동",
+      "subject_id": "난소조직냉동",
+      "relation": "동의어",
+      "object": "난소조직 동결 (Ovarian Tissue Cryopreservation)",
+      "object_id": "FP_ovarian_tissue"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "관련_시술",
+      "object": "미성숙난자 체외성숙 (IVM)",
+      "object_id": "TX_ivm"
+    },
+    {
+      "subject": "미성숙난자 체외성숙 (IVM)",
+      "subject_id": "TX_ivm",
+      "relation": "적응증",
+      "object": "다낭성 난소 증후군",
+      "object_id": "C_pcos"
+    },
+    {
+      "subject": "미성숙난자 체외성숙 (IVM)",
+      "subject_id": "TX_ivm",
+      "relation": "예방_방법",
+      "object": "난소과자극증후군 (OHSS)",
+      "object_id": "C_ohss"
+    },
+    {
+      "subject": "고배율 현미수정 (IMSI)",
+      "subject_id": "TX_imsi",
+      "relation": "하위_유형",
+      "object": "체외수정-미세수정 (IVF-ICSI)",
+      "object_id": "TX_IVF_ICSI"
+    },
+    {
+      "subject": "고배율 현미수정 (IMSI)",
+      "subject_id": "TX_imsi",
+      "relation": "치료_방법",
+      "object": "남성 요인 난임",
+      "object_id": "C_male"
+    },
+    {
+      "subject": "압전 ICSI (Piezo ICSI)",
+      "subject_id": "TX_piezo_icsi",
+      "relation": "하위_유형",
+      "object": "체외수정-미세수정 (IVF-ICSI)",
+      "object_id": "TX_IVF_ICSI"
+    },
+    {
+      "subject": "헤일로 정자테스트 (Halo Sperm Test)",
+      "subject_id": "T_halo_sperm",
+      "relation": "관련_검사",
+      "object": "정자 DNA 분절화 검사",
+      "object_id": "T_sperm_dna_frag"
+    },
+    {
+      "subject": "남성 요인 난임",
+      "subject_id": "C_male",
+      "relation": "관련_검사",
+      "object": "헤일로 정자테스트 (Halo Sperm Test)",
+      "object_id": "T_halo_sperm"
+    },
+    {
+      "subject": "반복착상실패 (RIF)",
+      "subject_id": "C_rif",
+      "relation": "관련_검사",
+      "object": "자궁내막 착상능 검사 (ERA)",
+      "object_id": "T_era"
+    },
+    {
+      "subject": "반복착상실패 (RIF)",
+      "subject_id": "C_rif",
+      "relation": "관련_검사",
+      "object": "자궁 마이크로바이옴 검사 (EMMA)",
+      "object_id": "T_emma"
+    },
+    {
+      "subject": "반복착상실패 (RIF)",
+      "subject_id": "C_rif",
+      "relation": "관련_검사",
+      "object": "자궁내막 만성염증 검사 (ALICE)",
+      "object_id": "T_alice"
+    },
+    {
+      "subject": "반복유산 (RPL)",
+      "subject_id": "C_rpl",
+      "relation": "관련_검사",
+      "object": "자궁내막 착상능 검사 (ERA)",
+      "object_id": "T_era"
+    },
+    {
+      "subject": "반복유산 (RPL)",
+      "subject_id": "C_rpl",
+      "relation": "관련_검사",
+      "object": "자궁 마이크로바이옴 검사 (EMMA)",
+      "object_id": "T_emma"
+    },
+    {
+      "subject": "반복유산 (RPL)",
+      "subject_id": "C_rpl",
+      "relation": "관련_검사",
+      "object": "자궁내막 만성염증 검사 (ALICE)",
+      "object_id": "T_alice"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "관련_질환",
+      "object": "난소 비틀림 (Ovarian Torsion)",
+      "object_id": "C_ovarian_torsion"
+    },
+    {
+      "subject": "체외수정 (IVF-ET)",
+      "subject_id": "S06_IVF",
+      "relation": "관련_질환",
+      "object": "정맥 혈전색전증 (VTE)",
+      "object_id": "C_vte"
+    },
+    {
+      "subject": "과배란유도 (COH)",
+      "subject_id": "TX_COH",
+      "relation": "위험_인자",
+      "object": "난소 비틀림 (Ovarian Torsion)",
+      "object_id": "C_ovarian_torsion"
+    },
+    {
+      "subject": "과배란유도 (COH)",
+      "subject_id": "TX_COH",
+      "relation": "위험_인자",
+      "object": "정맥 혈전색전증 (VTE)",
+      "object_id": "C_vte"
+    },
+    {
+      "subject": "난소과자극증후군 (OHSS)",
+      "subject_id": "C_ohss",
+      "relation": "관련_약물",
+      "object": "카베르골린 (카바살)",
+      "object_id": "M_cabergoline"
+    },
+    {
+      "subject": "카베르골린 (카바살)",
+      "subject_id": "M_cabergoline",
+      "relation": "예방_방법",
+      "object": "난소과자극증후군 (OHSS)",
+      "object_id": "C_ohss"
+    },
+    {
+      "subject": "배아이식 (ET)",
+      "subject_id": "TX_ET",
+      "relation": "관련_약물",
+      "object": "아토시반 (Atosiban)",
+      "object_id": "M_atosiban"
+    }
+  ]
+}

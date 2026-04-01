@@ -1,0 +1,1761 @@
+{
+  "meta": {
+    "version": "1.3.1",
+    "created": "2026-02-18",
+    "updated": "2026-03-06",
+    "description": "난임 치료 단계별 타임라인 확장 - 알림 시스템용 (검증 완료)",
+    "sources": [
+      "건강보험심사평가원 - 난임 바로 알기 Ⅰ (난임 원인 및 검사)",
+      "건강보험심사평가원 - 난임 바로 알기 Ⅱ (난임 시술 및 시술 후 관리)",
+      "건강보험심사평가원 - 건강한 임신을 위한 가이드 (임신 전 건강관리)",
+      "보건복지부·건강보험심사평가원 - 난임시술 및 상담·교육 가이드 (2020)",
+      "엠에스여성의원 (obdocmin.com) - IVF, ICSI, PGD/PGS, 보조부화술, 가임력보존, 남성난임, 반복유산",
+      "ASRM Practice Committee 2023: Prevention of Moderate and Severe OHSS — a Guideline",
+      "ASRM Practice Committee 2024: Fertility Drugs and Cancer — a Guideline",
+      "ESHRE Ovarian Stimulation for IVF/ICSI Guideline 2020 (PMC7203749) + 2025 Update",
+      "ESHRE 2024: Number of Embryos to Transfer during IVF/ICSI Guideline",
+      "대한생식의학회지 2010;37(4) — 난소과자극증후군의 예측과 예방",
+      "Gardner & Schoolcraft 1999 — Blastocyst Grading System"
+    ],
+    "purpose": "Knowledge Graph와 연동하여 사용자 맞춤 알림 제공",
+    "linked_kg_version": "2.5.0",
+    "changes_from_v1": [
+      "난임 정의: PDF 원문 기준 35세 이상 6개월 유지",
+      "S04 배란기 성관계/약물 치료 추가",
+      "S05 수술적 치료 추가",
+      "S06_FET 동결배아이식 추가",
+      "면역학적 검사(T_immune) 추가",
+      "남성 초음파검사 추가",
+      "IUI 시술 후 주의사항 상세화",
+      "v1.1.1: KG v2.4.0 연동 — S03 남성추가검사(정관조영술/정자DNA분절화), S05 남성수술(정관복원술/부고환정관문합술/TESE) 반영",
+      "v1.2.0: insurance_coverage 삭제(→ policy_tables), PDF 교차검증 완료, 공식 기관 가이드라인 기반 수치 보강(난포 17~18mm/ESHRE 2020+차병원, 내막 7~12mm/ESHRE RIF 2023+서울아산병원, IUI 안정/서울아산병원·차병원, reassurance/ASRM 2024 Practice Committee), IUI 통목욕 주의사항 반영",
+      "v1.3.0: 웹 레퍼런스(obdocmin.com, CCRM, Cleveland Clinic) 기반 보강 — 길항제프로토콜/OHSS위험인자·예방/채취합병률/IVF적응증확장/다태임신·자궁외임신/FET호르몬스케줄/배아등급기준/이식전약물/난소비틀림·혈전",
+      "v1.3.1: 출처 검증 및 교차참조 추가 — ASRM 2023 OHSS 가이드라인/ESHRE 2020+2025/대한생식의학회지 2010/ESHRE 2024 배아이식수 가이드라인/Gardner 1999/PMC 논문 ID 검증. 합병증 수치 국제 기준으로 보정, linked_kg_version 2.5.0 반영"
+    ]
+  },
+  "stage_timelines": {
+    "S01_pregnancy_prep": {
+      "stage_id": "S01",
+      "stage_name": "임신 준비 (계획 임신)",
+      "total_duration": "3~6개월",
+      "recommended_start": "임신 6개월 전",
+      "minimum_start": "임신 3개월 전",
+      "phases": [
+        {
+          "phase_id": "S01_P1",
+          "name": "초기 준비기",
+          "timing": "임신 6개월 전",
+          "duration": "1개월",
+          "tasks": {
+            "female": [
+              {
+                "task": "산전검사 예약 및 실시",
+                "details": "빈혈, 간 수치, 풍진항체, 감염병 검사",
+                "where": "산부인과 또는 보건소 (무료검사 가능)"
+              },
+              {
+                "task": "예방접종 시작",
+                "details": "MMR, 수두, A/B형 간염 등 (생백신은 임신 최소 1개월 전 완료)",
+                "vaccines": [
+                  "Tdap",
+                  "MMR",
+                  "HPV",
+                  "수두",
+                  "A/B형 간염",
+                  "인플루엔자",
+                  "수막구균(고위험군)"
+                ]
+              },
+              {
+                "task": "엽산 복용 시작",
+                "details": "1일 400μg~1mg (고위험군은 의사 상담)",
+                "high_risk_note": "신경관결손증 기형아 임신 경험, 당뇨병, 간질약 복용 시 용량 증가 가능",
+                "where": "보건소에서 임신 확인 시부터 3개월 분량 무료 수령 가능"
+              }
+            ],
+            "male": [
+              {
+                "task": "금연 시작",
+                "details": "정자 성숙에 약 100일(90일) 소요, 최소 3개월 전부터 필수"
+              },
+              {
+                "task": "금주 시작",
+                "details": "과음은 성기능 감퇴 유발"
+              },
+              {
+                "task": "기본 건강검사",
+                "details": "문진, 혈액검사로 전반적 건강상태 확인"
+              },
+              {
+                "task": "예방접종",
+                "vaccines": [
+                  "MMR",
+                  "수두",
+                  "Tdap",
+                  "A/B형 간염",
+                  "인플루엔자"
+                ]
+              }
+            ],
+            "couple": [
+              {
+                "task": "보건소 무료 임신 전 검사 활용",
+                "details": "빈혈, 혈액, 소변, AIDS, 매독, 풍진, 공복혈당, B형간염 등",
+                "note": "보건소에 따라 난소기능검사(여성), 갑상선기능검사(여성), 정액검사(남성) 가능"
+              }
+            ]
+          },
+          "recommendations": [
+            "균형 잡힌 식습관 시작 (야채, 과일, 저지방 유제품, 단백질)",
+            "규칙적인 운동 시작 (과하지 않게)",
+            "적정 체중 유지 (비만은 임신 가능성 저하)"
+          ],
+          "warnings": [
+            "이소트레티노인(여드름 치료제) 복용 중이면 즉시 중단, 최소 1개월 후 임신 시도",
+            "발프로산(뇌전증/편두통 치료제) 복용 중이면 즉시 상담",
+            "만성질환 보유 시 복용 약물을 보다 안전한 약물로 교체 상담"
+          ],
+          "partner_tips": [
+            "함께 검사받으러 가기",
+            "생활습관 개선을 함께 시작하면 효과적"
+          ]
+        },
+        {
+          "phase_id": "S01_P2",
+          "name": "집중 준비기",
+          "timing": "임신 3개월 전",
+          "duration": "2개월",
+          "tasks": {
+            "female": [
+              {
+                "task": "배란주기 확인",
+                "details": "기초체온 측정 시작"
+              },
+              {
+                "task": "엽산 복용 지속",
+                "details": "임신 후 3개월까지 지속"
+              },
+              {
+                "task": "체중조절",
+                "details": "비만은 임신 가능성 낮춤"
+              },
+              {
+                "task": "여성질환 관리",
+                "details": "자궁근종, 자궁내막증 등 있으면 치료 계획 수립",
+                "note": "자궁근종 크기와 위치는 임신에 영향, 자궁내막증은 난임 원인"
+              }
+            ],
+            "male": [
+              {
+                "task": "금연/금주 지속",
+                "details": "정자 품질 개선 중"
+              },
+              {
+                "task": "고환 온도 관리",
+                "details": "사우나, 타이트한 속옷, 장시간 자전거 자제"
+              },
+              {
+                "task": "탈모약/스테로이드 점검",
+                "details": "장기 복용 시 정자 운동성 저하 가능"
+              }
+            ]
+          },
+          "recommendations": [
+            "카페인 섭취 제한",
+            "스트레스 관리"
+          ],
+          "partner_tips": [
+            "서로의 건강관리 노력 격려하기",
+            "함께 산책 등 가벼운 운동"
+          ]
+        },
+        {
+          "phase_id": "S01_P3",
+          "name": "임신 시도 준비",
+          "timing": "임신 1개월 전",
+          "duration": "1개월",
+          "tasks": {
+            "couple": [
+              {
+                "task": "피임 → 수태 계획 전환",
+                "details": "피임 중단"
+              },
+              {
+                "task": "배란일 파악",
+                "details": "가임기는 배란 3~5일 전 ~ 배란 후 2~3일 (건강보험공단 기준)"
+              }
+            ]
+          }
+        }
+      ],
+      "age_specific_notes": {
+        "35세_이상_여성": {
+          "recommendation": "35세 이후 임신능력 급격히 감소, 빠른 검사 권장",
+          "additional_concerns": [
+            "난소에 남아있는 난자의 수 감소",
+            "난자의 질 약화로 유산율 증가",
+            "자연유산, 태아 염색체이상, 선천성기형 발생 빈도 증가",
+            "임신성 당뇨, 임신성 중독증, 조산, 사산 위험 증가"
+          ]
+        },
+        "40세_이상_남성": {
+          "recommendation": "정관에 성숙 정자 포함 확률 50%로 감소 (20~30대는 90%)",
+          "additional_concerns": [
+            "정액검사 권장",
+            "술/담배/스트레스 멀리하기"
+          ]
+        }
+      },
+      "special_cases": {
+        "만성질환_보유": {
+          "conditions": [
+            "당뇨",
+            "고혈압",
+            "동맥경화증"
+          ],
+          "recommendation": "질환이 임신에 미치는 영향, 임신이 질환에 미치는 영향 전문의 상담 후 계획"
+        },
+        "여성질환_보유": {
+          "conditions": [
+            "자궁근종",
+            "자궁내막증"
+          ],
+          "recommendation": "자궁근종 크기/위치는 임신에 영향, 자궁내막증은 난임 원인 → 임신 전 정확한 진단 필수"
+        },
+        "가임력_보존": {
+          "situation": "임신/출산을 상당히 미뤄야 하는 경우",
+          "recommendation": "가임력 보존 상담 권장 (난자/정자 동결 등)"
+        },
+        "추가검사_필요": {
+          "situations": [
+            "오랜 기간 피임",
+            "기형아 출산 이력",
+            "가족 중 유전질환자",
+            "남성 직업상 위험요인 노출 (방사능, 화학약품, 고온)"
+          ]
+        }
+      }
+    },
+    "S02_infertility_suspicion": {
+      "stage_id": "S02",
+      "stage_name": "난임 의심",
+      "definition": {
+        "under_35": "35세 미만 여성이 피임 없이 1년 이상 정상 성생활 후 임신 안 됨",
+        "35_and_over": "35세 이상 여성이 피임 없이 6개월간 정상 성생활 후 임신 안 됨"
+      },
+      "natural_pregnancy_rate": "자연 임신의 약 85~90%가 1년 내 이루어짐",
+      "cause_distribution": {
+        "female": "40~55%",
+        "male": "20~30%",
+        "both": "10~40%",
+        "unexplained": "10~20%"
+      },
+      "action": "산부인과 또는 난임 병·의원 방문하여 상담",
+      "key_tip": "정확한 난임진단을 위해 부부가 함께 검사와 진단을 받는 것이 필요"
+    },
+    "S03_infertility_test": {
+      "stage_id": "S03",
+      "stage_name": "난임 검사",
+      "total_duration": "1~2개월",
+      "first_visit_timing": "생리 2~3일째 (여성 호르몬 검사 최적 시기)",
+      "test_schedule": {
+        "female_basic": [
+          {
+            "test_id": "T_prepregnancy_female",
+            "name": "여성 산전(임신 전) 검사",
+            "timing": "첫 방문",
+            "what_it_checks": [
+              "빈혈",
+              "간 수치",
+              "풍진항체",
+              "여러 감염병 유무",
+              "자궁/난소 초음파",
+              "자궁경부암 검진"
+            ]
+          },
+          {
+            "test_id": "T_hormone",
+            "name": "호르몬 검사 (혈액검사)",
+            "timing": "생리 2~3일째",
+            "what_it_checks": [
+              "난포자극호르몬 (FSH)",
+              "황체형성호르몬 (LH)",
+              "난포호르몬 (E2)",
+              "갑상샘자극호르몬 (TSH)",
+              "유즙분비호르몬 (Prolactin)",
+              "항뮬러관호르몬 (AMH) - 난소기능 평가"
+            ],
+            "preparation": "특별한 준비 없음",
+            "expected_symptoms": [],
+            "partner_tips": [
+              "검사 당일 함께 병원 방문 권장"
+            ]
+          },
+          {
+            "test_id": "T_hsg",
+            "name": "자궁난관조영술 (HSG)",
+            "timing": "월경이 완전히 끝난 후 2일부터 배란 3~4일 전",
+            "what_it_checks": [
+              "자궁기형",
+              "자궁내막 용종",
+              "자궁내막 협착 (유착)",
+              "난관 폐쇄 유무"
+            ],
+            "method": "자궁경부에 조영제 투여 후 X-ray 촬영",
+            "preparation": "검사 전 성관계 피할 것",
+            "expected_symptoms": [
+              "검사 중 가벼운 복통 가능",
+              "검사 후 소량의 질 출혈 가능"
+            ],
+            "duration": "약 15~30분",
+            "partner_tips": [
+              "검사 후 불편할 수 있으니 귀가 동행",
+              "당일 무리한 활동 피하도록 배려"
+            ]
+          },
+          {
+            "test_id": "T_ovulation_us",
+            "name": "배란 초음파 (질 초음파)",
+            "timing": "생리 후 11~12일째 ~ 배란 전",
+            "what_it_checks": [
+              "난포 성장 상태",
+              "성숙 난포 개수",
+              "배란 유무"
+            ],
+            "expected_symptoms": [
+              "약간의 불편감 가능"
+            ],
+            "partner_tips": [
+              "검사 일정 함께 기억하기"
+            ]
+          }
+        ],
+        "female_additional": [
+          {
+            "test_id": "T_hysteroscopy",
+            "name": "자궁경 검사 (자궁내시경)",
+            "when": "자궁내 유착, 점막하 근종, 용종, 자궁기형 의심 시",
+            "method": "자궁내시경을 삽입하여 자궁강 관찰",
+            "what_it_checks": [
+              "자궁강내 질환",
+              "자궁내막질환"
+            ],
+            "advantage": "진단과 치료를 동시에 할 수 있음"
+          },
+          {
+            "test_id": "T_laparoscopy",
+            "name": "복강경 검사",
+            "when": "자궁난관조영술 이상, 원인불명 난임, 자궁내막증 의심 시",
+            "method": "내시경을 통해 자궁, 난소, 난관, 복막 육안 관찰",
+            "what_it_checks": [
+              "자궁, 난소, 난관, 복막 상태"
+            ],
+            "advantage": "진단과 치료를 동시에 할 수 있음"
+          },
+          {
+            "test_id": "T_immune",
+            "name": "면역학적 검사",
+            "when": "반복 착상 실패, 반복 유산 시",
+            "what_it_checks": [
+              "항정자 항체",
+              "자가면역 항체",
+              "면역 이상"
+            ]
+          }
+        ],
+        "male_basic": [
+          {
+            "test_id": "T_prepregnancy_male",
+            "name": "남성 산전(임신 전) 검사",
+            "timing": "첫 방문",
+            "what_it_checks": [
+              "혈액검사로 전반적 건강상태 확인",
+              "정액검사",
+              "전립선염 검사 (필요시)"
+            ]
+          },
+          {
+            "test_id": "T_semen",
+            "name": "정액검사",
+            "timing": "생리주기 무관, 2~3일 금욕 후",
+            "what_it_checks": [
+              "정액의 양",
+              "정자의 수",
+              "정자의 모양",
+              "정자의 운동성"
+            ],
+            "preparation": "2~3일 금욕 필수",
+            "partner_tips": [
+              "심리적 지지 중요, 결과에 대해 함께 대화"
+            ]
+          }
+        ],
+        "male_additional": [
+          {
+            "test_id": "T_scrotal_us",
+            "name": "음낭초음파 검사",
+            "when": "기본 정액검사 이상 시",
+            "what_it_checks": [
+              "정계정맥류",
+              "고환 이상",
+              "사정관폐쇄",
+              "전립선 낭종"
+            ]
+          },
+          {
+            "test_id": "T_male_hormone",
+            "name": "남성 호르몬 검사",
+            "when": "기본 정액검사 이상 시"
+          },
+          {
+            "test_id": "T_testicular_biopsy",
+            "name": "고환조직 검사",
+            "when": "기본 정액검사 이상 시"
+          },
+          {
+            "test_id": "T_genetic",
+            "name": "유전자 및 염색체 검사",
+            "when": "기본 정액검사 이상 시"
+          },
+          {
+            "test": "정관조영술",
+            "details": "폐쇄성 무정자증 의심 시 정관 개통 상태 확인",
+            "test_id": "T_vasography"
+          },
+          {
+            "test": "정자 DNA 분절화 검사",
+            "details": "반복착상실패/원인불명 난임 시 정자 DNA 손상도 평가",
+            "test_id": "T_sperm_dna_frag"
+          }
+        ]
+      },
+      "decision_tree": {
+        "배란요인": "S04 배란기 성관계/약물 치료",
+        "난관요인": "S05 수술적 치료 또는 S06_IVF",
+        "자궁요인": "S05 수술 → S04 또는 S06",
+        "남성요인_경증": "S04 또는 S06_IUI",
+        "남성요인_중증": "S06_IVF/ICSI",
+        "원인불명": "S04 → S06_IUI → S06_IVF",
+        "골반요인": "S05 → S06"
+      },
+      "resources": {
+        "난임시술기관_찾기": [
+          "건강보험심사평가원 홈페이지: 병원·약국 → 세부 조건별 찾기 → 특수수술/난임시술",
+          "보건복지부 홈페이지: 정보공개 → 사전정보공표 → 인구정책 → '지정기관' 검색"
+        ],
+        "난임시술기관_평가정보": "건강보험심사평가원 홈페이지: 병원·약국 → 병원평가정보"
+      }
+    },
+    "S04_timed_intercourse_medication": {
+      "stage_id": "S04",
+      "stage_name": "배란기 성관계 / 약물 치료",
+      "description": "특별한 원인 미발견 시 배란기 예측 후 성관계, 또는 배란장애 시 약물로 배란 유도",
+      "indications": [
+        "난임검사 결과 남녀 모두 특별한 원인이 발견되지 않은 경우",
+        "배란이 안 되거나 불규칙한 경우"
+      ],
+      "methods": {
+        "timed_intercourse": {
+          "name": "배란일 맞추기",
+          "description": "배란일을 예측하고 배란일 전후로 성관계",
+          "prediction_methods": [
+            "기초체온측정법",
+            "배란 유도제 사용",
+            "배란 초음파",
+            "소변 LH 측정 (배란테스트기)"
+          ],
+          "fertile_window": "배란 3~5일 전 ~ 배란 후 2~3일",
+          "fertile_window_source": "건강보험공단 자료: 배란기 시작일 = 다음 생리예정일 - 14일 - 5일, 배란기 마지막 날 = 다음 생리예정일 - 14일 + 2~3일"
+        },
+        "ovulation_induction": {
+          "name": "약물 배란 유도",
+          "medications": [
+            {
+              "name": "클로미펜 (Clomiphene)",
+              "kg_id": "M_clomiphene",
+              "type": "경구",
+              "timing": "생리 3~5일째부터 5일간 복용",
+              "effect": "6~10일 후 배란",
+              "tip": "정확한 시간에 규칙적 복용이 효과적"
+            },
+            {
+              "name": "페마라/레트로졸 (Letrozole)",
+              "kg_id": "M_letrozole",
+              "type": "경구",
+              "timing": "생리 3~5일째부터 복용"
+            },
+            {
+              "name": "과배란 유도 주사",
+              "kg_id": [
+                "M_FSH",
+                "M_hMG"
+              ],
+              "type": "주사",
+              "note": "먹는 배란 유도제와 함께 사용하기도 함"
+            }
+          ]
+        }
+      },
+      "cycle_timeline": [
+        {
+          "day_range": "생리 3~5일째",
+          "phase": "배란 유도제 복용 시작",
+          "tasks": [
+            {
+              "action": "경구 배란유도제 복용",
+              "details": "생리 시작 3~5일째부터 5일간 하루 50~150mg 복용",
+              "medications": [
+                "클로미펜",
+                "페마라"
+              ],
+              "medication_kg_ids": [
+                "M_clomiphene",
+                "M_letrozole"
+              ],
+              "duration": "5일간"
+            }
+          ],
+          "expected_symptoms": [
+            "경미한 복부 불편감",
+            "두통",
+            "근육통",
+            "기분 변화"
+          ],
+          "expected_symptoms_source": "가이드북 1282~1285행, 1315행",
+          "partner_tips": [
+            "약 복용 시간 함께 체크",
+            "정확한 시간에 규칙적 복용이 효과적"
+          ],
+          "partner_tips_source": "가이드북 1285행"
+        },
+        {
+          "day_range": "생리 9~12일째",
+          "phase": "난포 성장 확인 (중간 모니터링)",
+          "tasks": [
+            {
+              "action": "초음파 검사로 난포 성장 확인",
+              "details": "배란유도제 복용 후 6~10일 후 난포가 정상적으로 자라고 있는지 확인"
+            },
+            {
+              "action": "필요 시 주사 병행 여부 결정",
+              "details": "먹는 배란유도제만으로 부족한 경우 FSH 주사를 병행할 수 있음"
+            }
+          ],
+          "expected_symptoms": [
+            "난소 부위 가벼운 팽만감"
+          ],
+          "notes": [
+            "난포가 직경 18~20mm까지 커지면 배란 유도 가능"
+          ],
+          "notes_source": "가이드북 1283~1284행 (복용 후 6~10일 후 난포 성장 확인), 1291행 (난포 18~20mm)"
+        },
+        {
+          "day_range": "생리 12~14일째",
+          "phase": "배란 확인 및 성관계",
+          "tasks": [
+            {
+              "action": "초음파 또는 배란테스트기로 배란 확인",
+              "details": "약물복용 끝난 후 배란이 확실히 일어나는지 초음파 검사로 확인"
+            },
+            {
+              "action": "난포 18~20mm 도달 시 hCG 주사로 배란 유도 가능",
+              "details": "hCG 주사 후 약 36시간 내 배란 발생"
+            },
+            {
+              "action": "배란일 전후 성관계",
+              "details": "가임기는 배란 3~5일 전 ~ 배란 후 2~3일. 생리 시작 9~10일부터 2~3일 간격 권장"
+            }
+          ],
+          "tasks_source": "가이드북 1284~1285행 (초음파 확인), 1289~1291행 (hCG 주사), 2455~2460행 (가임기/성관계 간격)",
+          "partner_tips": [
+            "스트레스 받지 않도록 자연스럽게",
+            "배란일에 너무 집착하지 않기",
+            "배란일 2~3일 전부터 금욕하면 정자 농도에 도움"
+          ],
+          "warning_signs": [
+            "심한 복부 팽만감이나 급격한 체중 증가 시 난소 과자극 증후군 의심 → 병원 연락"
+          ],
+          "warning_signs_source": "가이드북 1316~1317행"
+        },
+        {
+          "day_range": "배란 후 약 14일",
+          "phase": "임신 확인",
+          "tasks": [
+            {
+              "action": "임신 테스트",
+              "details": "배란 후 약 14일 뒤 소변 임신테스트 또는 혈액 hCG 검사로 확인"
+            }
+          ],
+          "recommendations": [
+            "생리 예정일이 지나도 생리가 없으면 임신 테스트 시행",
+            "양성이면 산부인과 방문하여 초음파로 확인"
+          ],
+          "partner_tips": [
+            "결과에 상관없이 서로 지지하기",
+            "음성이어도 여러 주기 시도 가능"
+          ]
+        }
+      ],
+      "next_step": "여러 주기 시도 후 실패 시 S06_IUI 인공수정 고려"
+    },
+    "S05_surgical_treatment": {
+      "stage_id": "S05",
+      "stage_name": "수술적 치료",
+      "description": "난관, 자궁, 골반 이상 또는 남성 요인에 대한 수술적 치료",
+      "indications": {
+        "female": [
+          "난관 손상/폐쇄",
+          "자궁근종",
+          "자궁내막 유착",
+          "자궁내막증",
+          "다낭난소증후군",
+          "뇌하수체 종양"
+        ],
+        "male": [
+          "정계정맥류",
+          "사정관 폐쇄",
+          "정관절제 후 복원 필요",
+          "무정자증 (TESE 적응)"
+        ]
+      },
+      "treatments": {
+        "female": [
+          {
+            "name": "난관수술",
+            "method": "복강경 또는 개복",
+            "hospital_stay": "3~7일 입원"
+          },
+          {
+            "name": "자궁근종 제거",
+            "method": "내시경/복강경/개복"
+          },
+          {
+            "name": "자궁내막유착 박리",
+            "method": "자궁내시경"
+          },
+          {
+            "name": "복강경 난소천공술",
+            "indication": "다낭난소증후군"
+          },
+          {
+            "name": "신경외과 수술",
+            "indication": "뇌하수체 종양"
+          }
+        ],
+        "male": [
+          {
+            "name": "정계정맥류 수술"
+          },
+          {
+            "name": "경요도 내시경 절제술",
+            "indication": "사정관 폐쇄"
+          },
+          {
+            "name": "호르몬 치료",
+            "indication": "호르몬 이상"
+          },
+          {
+            "name": "정관복원술",
+            "method": "미세수술",
+            "details": "개통률 80~90%, 임신율 50~60%. 정관절제술 후 소요 기간이 성공률에 가장 큰 영향"
+          },
+          {
+            "name": "부고환정관문합술",
+            "method": "미세단일관 수술",
+            "details": "고도의 미세술기 필요. 최근 개통률 향상"
+          },
+          {
+            "name": "고환정자채취술 (TESE)",
+            "method": "수술현미경 (microsurgical)",
+            "details": "무정자증 시 고환에서 직접 정자 채취. 고환 손상 최소화"
+          }
+        ]
+      },
+      "next_step": "수술 후 자연임신 시도 또는 보조생식술 (S06_IUI, S06_IVF)"
+    },
+    "S06_IUI": {
+      "stage_id": "S06_IUI",
+      "stage_name": "인공수정 (IUI)",
+      "total_duration": "1주기 약 2~3주",
+      "description": "여성의 배란기에 맞추어 남성의 정자를 자궁 안으로 주입해 임신을 유도하는 방법",
+      "prerequisite": "최소 한쪽 난관이 정상인 경우 사용",
+      "nature": "자연임신의 일종",
+      "indications": [
+        "정자의 운동성이 감소한 경우",
+        "자궁경부의 점액이 부족한 경우",
+        "항정자 항체가 양성인 경우",
+        "배란기에 부부관계를 시도해도 임신에 실패하는 경우",
+        "원인불명의 난임"
+      ],
+      "cycle_timeline": [
+        {
+          "day_range": "생리 2~3일째~",
+          "phase": "과배란 유도",
+          "tasks": [
+            {
+              "action": "배란 유도제 사용",
+              "medications": [
+                "클로미펜 (경구)",
+                "페마라 (경구)",
+                "과배란 유도 주사"
+              ],
+              "medication_kg_ids": [
+                "M_clomiphene",
+                "M_letrozole",
+                "M_FSH"
+              ],
+              "details": "배란이 안 되거나 불규칙한 경우 사용. 먹는 배란 유도제와 주사를 함께 사용하기도 함"
+            }
+          ],
+          "expected_symptoms": [
+            "경미한 복부 불편감",
+            "두통"
+          ],
+          "partner_tips": [
+            "약 복용 시간 함께 체크",
+            "정해진 시간에 규칙적 복용 권유"
+          ]
+        },
+        {
+          "day_range": "생리 7~8일째",
+          "phase": "배란 모니터링",
+          "tasks": [
+            {
+              "action": "배란 초음파",
+              "details": "난포 성장 확인",
+              "source": "서울의료원 가임센터 인공수정 안내 (생리 7~8일째 배란 초음파 검사)"
+            }
+          ],
+          "expected_symptoms": [],
+          "partner_tips": [
+            "병원 동행 권장"
+          ]
+        },
+        {
+          "day_range": "생리 11~12일째",
+          "phase": "배란 모니터링 (2차)",
+          "tasks": [
+            {
+              "action": "배란 초음파",
+              "details": "난포 크기 최종 확인, 배란 시점 예측",
+              "source": "서울의료원 가임센터 인공수정 안내 (생리 11~12일째 배란 초음파 + 마지막 배란 주사)"
+            }
+          ],
+          "expected_symptoms": [
+            "복부 팽만감 (난포 성장으로 인해)"
+          ],
+          "partner_tips": [
+            "시술 일정 확정되면 금욕 시작 (2~3일)"
+          ]
+        },
+        {
+          "day_range": "시술 당일",
+          "phase": "인공수정 시술",
+          "tasks": [
+            {
+              "action": "정자 채취 및 처리",
+              "details": "자위로 정액 채취 후 정액 처리 과정을 거쳐 운동성이 좋은 건강한 정자만 분리",
+              "preparation": "시술 2~3일 전부터 금욕"
+            },
+            {
+              "action": "자궁내 정자 주입",
+              "details": "미리 선별된 운동성이 높은 정자를 가느다란 주입관을 통해 여성의 자궁 안으로 주입",
+              "post_rest": "시술 후 약 10~15분 안정 후 귀가 (국내 병원 공통 안내사항)",
+              "source": "서울아산병원 인공수정 안내(10~15분), 차 여성의학연구소(20분). 공식 학회 권고는 없으며 병원별 관행"
+            }
+          ],
+          "expected_symptoms": [
+            "일시적 소량 출혈 가능",
+            "가벼운 복통 가능"
+          ],
+          "notes": [
+            "마취 없이 진행",
+            "통증 거의 없음",
+            "시술 당일 일상생활 가능"
+          ],
+          "partner_tips": [
+            "시술 동행 필수 (정액 채취 필요)",
+            "귀가 시 운전 대신해주기",
+            "심리적 지지 중요"
+          ]
+        },
+        {
+          "day_range": "시술 후 1~14일",
+          "phase": "착상 대기기",
+          "expected_symptoms": [
+            "증상이 지속될 경우 병원 방문 필요"
+          ],
+          "recommendations": [
+            "시술 당일 강도 높은 운동/힘든 일 피하기",
+            "일상생활 바로 복귀 가능",
+            "성관계 가능",
+            "가벼운 샤워는 가능하지만 통목욕 또는 사우나는 피하는 것이 좋음",
+            "착상 보조를 위해 황체호르몬 처방될 수 있음"
+          ],
+          "warning_signs": [
+            "출혈이나 복통이 지속될 경우 병원 방문"
+          ],
+          "partner_tips": [
+            "불안감 공유하고 대화하기",
+            "함께 가벼운 산책"
+          ]
+        },
+        {
+          "day_range": "시술 후 약 14일",
+          "phase": "임신 확인",
+          "tasks": [
+            {
+              "action": "임신테스트 또는 혈액검사",
+              "details": "병원에서 정확한 확인"
+            }
+          ],
+          "partner_tips": [
+            "결과에 상관없이 함께 받아들이기",
+            "실패해도 서로 탓하지 않기"
+          ]
+        }
+      ],
+      "related_medication_kg_ids": [
+        "M_clomiphene",
+        "M_letrozole",
+        "M_progesterone"
+      ],
+      "side_effects": {
+        "note": "인공수정 자체는 감염 이외의 큰 부작용은 없고, 감염도 미리 치료하면 거의 관찰되지 않음"
+      },
+      "success_info": {
+        "retry_recommendation": "3회 이상 실패 시 체외수정(IVF) 고려"
+      },
+      "resources": {
+        "안내영상": "대한산부인과학회 홈페이지 → 일반인공간 → 일반인을 위한 산부인과 애니메이션 → '인공수정' 검색"
+      }
+    },
+    "S06_IVF": {
+      "stage_id": "S06_IVF",
+      "stage_name": "체외수정 (IVF-ET)",
+      "alias": "시험관아기",
+      "total_duration": "1주기 약 4~6주",
+      "description": "수정 과정을 인체 밖에서 인위적으로 이뤄지게 하여 임신을 유도하는 방법",
+      "indications": [
+        "여성의 난관이 모두 막힌 경우",
+        "절제수술로 양측 난관이 없는 경우",
+        "난관성형수술을 받았으나 임신에 실패한 경우",
+        "정자 수가 부족하거나 운동성이 부족하여 정상 임신이 되지 않은 경우",
+        "원인불명 난임인 경우",
+        "인공수정에도 계속 임신에 실패한 경우",
+        "중등도 이상의 자궁내막증",
+        "면역학적 인자 (항정자 항체)",
+        "배란장애(PCOS) 배란유도 또는 인공수정 반응 실패"
+      ],
+      "related_medication_kg_ids": [
+        "M_FSH",
+        "M_LH",
+        "M_hMG",
+        "M_GnRH_antagonist",
+        "M_GnRH_agonist",
+        "M_hCG",
+        "M_progesterone",
+        "M_clomiphene",
+        "M_letrozole"
+      ],
+      "protocols": {
+        "long_protocol": {
+          "name": "장기요법 (Long Protocol)",
+          "description": "안정성이 높지만 오랫동안 주사를 맞아야 함",
+          "timeline": "보통 생리 시작 7~10일 전부터 조기배란 억제 주사 시작, 생리 2~3일째부터 과배란유도 주사와 병행하여 난자 채취시까지"
+        },
+        "short_protocol": {
+          "name": "단기요법 (Short Protocol)",
+          "description": "생리 2~3일째부터 GnRH 작용제 주사 시작, 3일째부터 FSH/hMG 과배란유도 병행",
+          "timeline": "생리 2~3일째부터 과배란 유도 주사(GnRH agonist)를 먼저 사용, 난포 크기가 어느 정도 커지면 조기배란 억제 주사 추가하여 난자 채취시까지"
+        },
+        "mild_protocol": {
+          "name": "저자극 요법 (Mild IVF)",
+          "description": "부담 적음, 주사 용량 감소",
+          "timeline": "과배란 유도 시 배란유도제(클로미펜 또는 페마라)를 함께 복용하며 과배란 유도 주사 용량을 줄여서 사용. 또는 배란유도제 없이 주사만 소량 사용"
+        },
+        "antagonist_protocol": {
+          "name": "길항제 프로토콜 (GnRH Antagonist Protocol)",
+          "description": "생리 3일째부터 FSH/hMG 주사 시작, 난포 14mm 도달 시 hCG 트리거까지 길항제 투여. 주로 난소 기능 저하 고령 여성(37세+)에 사용, 높은 성공률",
+          "timeline": "생리 3일째부터 FSH/hMG 주사, 난포 14mm 시 길항제 추가, 트리거까지 지속"
+        }
+      },
+      "cycle_timeline": [
+        {
+          "day_range": "생리 2~3일째",
+          "phase": "과배란 유도 시작",
+          "tasks": [
+            {
+              "action": "과배란 유도 주사 시작",
+              "details": "배란 유도제를 투여하여 여러 개의 난포를 키움",
+              "medication_kg_ids": [
+                "M_FSH",
+                "M_LH",
+                "M_hMG"
+              ],
+              "note": "배란 방법은 환자의 연령, 난소기능, 이전 배란 유도 결과 등을 참고하여 선택"
+            }
+          ],
+          "expected_symptoms": [
+            "주사 부위 통증",
+            "경미한 복부 불편감"
+          ],
+          "self_injection_info": {
+            "note": "일반인도 간단한 교육 이후 주사를 맞을 수 있음. 병원 내원 주사도 가능",
+            "reference": "의약품안전나라 → 안전사용정보 → 자가투여주사제안전사용정보 → '자가투여 주사제 올바르게 사용하기'"
+          },
+          "partner_tips": [
+            "자가주사 시 도와주기",
+            "주사 시간 함께 체크",
+            "냉장 보관 약품 관리 함께하기"
+          ]
+        },
+        {
+          "day_range": "생리 7~8일째",
+          "phase": "모니터링 시작 + 조기배란 억제",
+          "tasks": [
+            {
+              "action": "초음파로 난포 수와 크기 모니터링"
+            },
+            {
+              "action": "조기배란 억제 주사 시작",
+              "medication_kg_ids": [
+                "M_GnRH_antagonist",
+                "M_GnRH_agonist"
+              ],
+              "details": "배란 주사 투여 전까지 지속"
+            }
+          ],
+          "expected_symptoms": [
+            "주사 부위 발적",
+            "두통"
+          ],
+          "partner_tips": [
+            "편한 옷 준비해주기",
+            "무거운 물건 들지 않도록 배려"
+          ]
+        },
+        {
+          "day_range": "생리 11~12일째 (모니터링 지속)",
+          "phase": "집중 모니터링",
+          "tasks": [
+            {
+              "action": "초음파 모니터링",
+              "details": "주도 난포 2~3개가 17~18mm 이상 도달하면 다음 단계(hCG 투여)",
+              "source": "ESHRE Ovarian Stimulation Guideline 2020 (16~22mm 범위 권고, 사례별 판단); 국내 임상기준 18~20mm (차 여성의학연구소)"
+            }
+          ],
+          "expected_symptoms": [
+            "복부 팽만감",
+            "경미한 복통",
+            "기분 변화 (호르몬 영향)"
+          ],
+          "partner_tips": [
+            "감정 변화 이해하기",
+            "함께 산책 등 기분전환",
+            "충분한 수분 섭취 권유"
+          ]
+        },
+        {
+          "day_range": "주도 난포 2~3개 ≥17~18mm 시점",
+          "phase": "배란 주사 (트리거)",
+          "tasks": [
+            {
+              "action": "hCG 주사 (배란 주사) 투여",
+              "medication_kg_ids": [
+                "M_hCG"
+              ],
+              "details": "난자채취 36시간 전 투여",
+              "timing_critical": true
+            }
+          ],
+          "expected_symptoms": [
+            "복부 팽만감 최고조"
+          ],
+          "critical_note": "주사 시간 정확히 지켜야 함!",
+          "partner_tips": [
+            "주사 시간 알람 함께 설정",
+            "다음날 일정 비워두기 (난자 채취)"
+          ]
+        },
+        {
+          "day_range": "생리 13~16일째 (트리거 36시간 후)",
+          "phase": "난자와 정자 채취",
+          "tasks": [
+            {
+              "action": "난자 채취",
+              "details": "마취하에서 질 초음파로 난소를 관찰하면서 난자 채취",
+              "duration": "20~30분",
+              "anesthesia": "수면마취"
+            },
+            {
+              "action": "정자 채취",
+              "details": "자위로 정액 채취",
+              "preparation": "시술 2~3일 전부터 금욕"
+            }
+          ],
+          "expected_symptoms": [
+            "마취 후 졸림",
+            "복부 불편감",
+            "소량 질 출혈 가능"
+          ],
+          "post_procedure": [
+            "당일 무리한 활동 금지",
+            "충분한 휴식"
+          ],
+          "partner_tips": [
+            "반드시 동행 (정자 채취 + 귀가 지원)",
+            "당일 모든 집안일 대신하기",
+            "따뜻한 음식 준비"
+          ]
+        },
+        {
+          "day_range": "난자 채취 후 0~5일",
+          "phase": "시험관내 수정 및 배양",
+          "tasks": [
+            {
+              "action": "체외 수정",
+              "details": "채취한 난자와 처리된 정자를 체외에서 수정",
+              "options": [
+                "일반 수정",
+                "세포질내정자주입술 (ICSI) - 난자/정자 상태에 따라"
+              ]
+            },
+            {
+              "action": "배아 배양",
+              "duration": "2~5일",
+              "note": "수정된 배아는 2~5일간 배양"
+            }
+          ],
+          "expected_symptoms": [
+            "복부 팽만감 서서히 감소",
+            "배아 상태 기다리는 불안감"
+          ],
+          "partner_tips": [
+            "병원 연락 기다리며 함께 시간 보내기",
+            "너무 검색하지 않도록 다른 활동 제안"
+          ]
+        },
+        {
+          "day_range": "난자 채취 후 3~5일",
+          "phase": "배아 이식",
+          "tasks": [
+            {
+              "action": "배아 이식",
+              "details": "배양한 배아를 자궁 안으로 이식",
+              "anesthesia": "마취 없이 진행",
+              "post_procedure": "이식 후 3~6시간 안정",
+              "count_note": "배아 이식 개수는 보건복지부 체외수정 시술 가이드라인을 따르며 주치의와 상담 후 최종 결정"
+            },
+            {
+              "action": "황체호르몬제 투여 시작",
+              "medication_kg_ids": [
+                "M_progesterone"
+              ],
+              "details": "배아의 착상을 돕기 위해 다양한 형태(질정, 주사제 등)의 황체호르몬제 투여",
+              "duration": "임신 확인 후에도 안정적 임신을 위해 임신 10주 정도까지 지속"
+            }
+          ],
+          "expected_symptoms": [
+            "경미한 복부 불편감"
+          ],
+          "note_if_no_transfer": "배아이식을 하지 않을 경우 냉동 보관",
+          "partner_tips": [
+            "동행 필수",
+            "안정 시간 동안 함께 있기",
+            "귀가 후 충분한 휴식 지원"
+          ]
+        },
+        {
+          "day_range": "이식 후 1~12일",
+          "phase": "착상 대기기 (TWW)",
+          "expected_symptoms": {
+            "possible": [
+              "착상혈 (15~25%) - 월경예정일보다 일찍 분홍색으로 나와 갈색으로 변하고 1~2일 만에 없어짐",
+              "피곤함",
+              "유방 동통",
+              "하복부 불편감",
+              "두통"
+            ],
+            "important_note": "착상에 따른 증상은 개인차가 많으며 증상이 뚜렷하게 나타나지 않을 수 있음"
+          },
+          "recommendations": [
+            "일상생활 가능",
+            "무리한 신체활동 피하기",
+            "황체호르몬제 정해진 시간에 복용/투여"
+          ],
+          "warning_signs": [
+            "심한 복통",
+            "호흡곤란",
+            "급격한 체중 증가",
+            "배가 많이 빵빵해짐",
+            "구역질, 소화불량 심해짐"
+          ],
+          "warning_condition": {
+            "name": "난소과자극증후군 (OHSS) 의심",
+            "action": "증상 심할 경우 즉시 병원 방문"
+          },
+          "partner_tips": [
+            "불안한 마음 공감하고 경청하기",
+            "임테기 너무 빨리 하지 않도록 함께 참기",
+            "함께 가벼운 산책",
+            "영양가 있는 식사 챙기기"
+          ]
+        },
+        {
+          "day_range": "배아 이식 후 약 10~15일",
+          "phase": "임신 확인 및 임신 유지",
+          "note": "리플렛 원문은 '난자 채취 후 약 12일'로 표기되어 있으나, 임상 표준은 배아 이식일 기준 10~15일 (CCRM: 9~14일, obdocmin: 이식 14일 후). 병원 프로토콜에 따라 차이 있음.",
+          "tasks": [
+            {
+              "action": "혈액검사 (hCG)",
+              "details": "임신 여부 확인"
+            }
+          ],
+          "if_positive": {
+            "next_step": "임신 5주에 초음파로 아기집(임신낭) 확인",
+            "continue": "황체호르몬 임신 10주까지 지속"
+          },
+          "partner_tips": [
+            "결과 함께 듣기",
+            "어떤 결과든 서로 지지하기"
+          ]
+        }
+      ],
+      "post_procedure_care": {
+        "recommendations": [
+          "일상생활 가능",
+          "무리한 신체활동 피하기"
+        ],
+        "warning": "난소과자극증후군의 증상이 심할 경우 병원 방문"
+      },
+      "side_effects": {
+        "ohss": {
+          "name": "난소과자극증후군 (OHSS)",
+          "description": "난소가 과배란 유도 주사제에 대한 과도한 반응을 보이는 경우",
+          "incidence": "시술 여성의 약 5%",
+          "severe_incidence": "약 1% (매우 심한 상태가 되어 입원 치료 필요)",
+          "symptoms": [
+            "피로감",
+            "두통",
+            "구역질",
+            "소화불량",
+            "복부 팽만감",
+            "숨참"
+          ],
+          "prognosis": "대부분 수일 후 호전",
+          "action": "증상 심할 경우 즉시 병원 방문"
+        },
+        "multiple_pregnancy": {
+          "name": "다태임신",
+          "cause": "과배란 유도로 인해 가능성 있음"
+        },
+        "reassurance": [
+          "체외수정은 시술 여성에게 심각한 건강위험을 초래하지 않음",
+          "과배란유도제가 난소기능을 저하시키지 않음 (자연적으로 소멸될 난포를 구제하는 원리)",
+          "배란유도제 사용이 주요 여성암(유방암·자궁암 등) 위험을 증가시킨다는 근거 부족"
+        ],
+        "reassurance_sources": [
+          "ASRM Practice Committee 2024: Fertility Drugs and Cancer — a Guideline (Fertility and Sterility, 2024)",
+          "ASRM Committee Opinion 2020: Repetitive Oocyte Donation (과배란유도 = 소멸 예정 난포 구제, 난소기능 저하 아님)",
+          "ESHRE Ovarian Stimulation for IVF/ICSI Guideline 2020/2025"
+        ]
+      },
+      "after_failure": {
+        "rest_period": "정확히 얼마의 휴식기를 가져야 한다는 기준은 없으나, 최소 1개월의 휴식기 권장",
+        "note": "휴식기의 결정은 시술 여성의 난소기능 상태와 주치의의 진찰 소견에 따라 달라짐"
+      },
+      "resources": {
+        "안내영상": "대한산부인과학회 홈페이지 → 일반인공간 → 일반인을 위한 산부인과 애니메이션 → '체외수정' 검색"
+      },
+      "ohss_risk_factors": {
+        "sources": [
+          "obdocmin.com (code=270)",
+          "ASRM Practice Committee 2023: Prevention of Moderate and Severe OHSS — a Guideline (Fertility and Sterility, 2024; 121(2):230-246)",
+          "ESHRE Ovarian Stimulation for IVF/ICSI Guideline 2020 (PMC7203749)",
+          "대한생식의학회지 2010;37(4) — 김혜옥, 강인수: 난소과자극증후군의 예측과 예방"
+        ],
+        "factors": [
+          "다낭성난소증후군 (PCOS)",
+          "AMH >3.4 ng/mL (ASRM 2023 기준; obdocmin ≥4.0)",
+          "동난포수(AFC) >24 (ASRM 2023)",
+          "난포 ≥20개 / 채취 난자 ≥15개 (ASRM: ≥15, obdocmin: ≥20)",
+          "에스트라디올(E2) ≥3,500 pg/mL (ASRM 2023; obdocmin ≥3,000)",
+          "이전 OHSS 병력",
+          "젊은 연령",
+          "낮은 체중"
+        ],
+        "prevention": [
+          "GnRH 작용제로 hCG 트리거 대체 (ASRM 강력 권고: 고위험군에서 OHSS 31%→0%)",
+          "전체 배아 동결보존 (freeze-all) — OHSS 2.0%→0.6% (ASRM 2023)",
+          "카베르골린(카바살) 0.5mg/일 × 8일 투여 — VEGF 억제, 중등도 OHSS 43.8%→20% (ASRM 2023)",
+          "GnRH 길항제 프로토콜 사용 — 작용제 대비 OHSS 15.6%→10.2% (ASRM 2023)",
+          "저용량 성선자극호르몬 시작 (ESHRE 2020, 대한생식의학회 2010)",
+          "코스팅 — 단독 사용 비권장, 카베르골린+동결보존과 병행 시 고려 (ASRM 2023)"
+        ]
+      },
+      "complications_detail": {
+        "sources": [
+          "obdocmin.com (code=270)",
+          "ASRM ReproductiveFacts: IVF — What Are the Risks? (reproductivefacts.org)",
+          "Scientific Reports 2022: Ectopic pregnancy risk factors in IVF (Nature, doi:10.1038/s41598-022-24649-w)",
+          "PMC 5266274 (2017): Reduced Ectopic Pregnancy Rate on Day 5 ET — Meta-Analysis",
+          "ESHRE 2024: Number of Embryos to Transfer during IVF/ICSI Guideline (Human Reproduction 39(4):647)"
+        ],
+        "egg_retrieval_complications": {
+          "severe_bleeding": "1/3,000 채취 (ASRM)",
+          "vaginal_bleeding": "0.07% (ASRM 대규모 연구)",
+          "infection": "0.5% (ASRM); 수술 필요 감염 <0.1%",
+          "note": "obdocmin 0.3%는 출혈+감염 합산 추정치로 대체로 합리적 범위"
+        },
+        "ectopic_pregnancy": {
+          "rate": "IVF 임신의 1.6~2.0% (미국 CDC/SART 2001-2011 데이터)",
+          "range_in_literature": "1.6~8.6% (연구에 따라 차이, obdocmin 1-3%는 합리적 범위)",
+          "risk_reduction": "Day5 배반포 이식이 Day3 대비 자궁외임신 위험 감소 (PMC 5266274 메타분석)",
+          "risk_factors": "얇은 내막, 자궁외임신 병력, 난관 인자, 복수 배아 이식"
+        },
+        "ovarian_torsion": "배란유도로 비대해진 난소 비틀림 가능 — 과도한 운동/요가 피할 것 (obdocmin)",
+        "venous_thromboembolism": "배란유도로 정맥 혈전 위험 증가, D-dimer 검사로 확인 (obdocmin)",
+        "multiple_pregnancy": {
+          "principle": "단일 배아 이식(eSET) 원칙 (ESHRE 2024 강력 권고: 모든 경우 eSET)",
+          "DET_twin_rate": "15~18% (독일 2019-2021 EIM 데이터, DET 기준)",
+          "SET_vs_DET": "eSET 시 다태임신 위험 현저히 감소 (ESHRE 2024)",
+          "identical_twins_risk": "1% 이하 (obdocmin)",
+          "neurodevelopment_per_1000": {
+            "singleton": 1.6,
+            "twins": 7.4,
+            "triplets": 27,
+            "source": "obdocmin.com — 교차검증 필요"
+          }
+        }
+      },
+      "embryo_grading": {
+        "sources": [
+          "obdocmin.com (code=270)",
+          "Gardner DK & Schoolcraft WB (1999): In Vitro Blastocyst Culture and Transfer — 배반포 등급 체계 원저",
+          "LifeWhisperer (lifewhisperer.com): Gardner Grading Guide — ICM/TE ABC 등급 참조표"
+        ],
+        "day2_3": {
+          "day2_optimal": "4세포",
+          "day3_optimal": "8세포",
+          "fragmentation": "심한 단편화 → 착상 실패",
+          "multinucleation": "착상 실패 유발"
+        },
+        "day5_blastocyst": {
+          "stages": ["상실배", "초기배반포", "확장배반포", "부화배반포", "부화중배반포", "부화완료배반포"],
+          "ICM_grade": {
+            "A": "세포가 많고 밀집",
+            "B": "세포가 적고 느슨",
+            "C": "세포가 희박"
+          },
+          "TE_grade": {
+            "A": "세포가 많고 연결된 상피 형성",
+            "B": "세포가 적고 느슨하게 연결",
+            "C": "세포가 희박"
+          }
+        }
+      },
+      "pre_transfer_medications": {
+        "sources": [
+          "obdocmin.com (code=270)",
+          "주의: 바리움 조영제 이식 전 투여는 해당 병원 고유 프로토콜로, 범용 표준은 아님"
+        ],
+        "barium_contrast": "이식 약 10분 전 바리움 조영제 투여 (obdocmin 고유 프로토콜)",
+        "atosiban": "이식 약 10분 전 아토시반(자궁 수축 억제제) 주사 (일부 기관에서 사용)"
+      }
+    },
+    "S06_FET": {
+      "stage_id": "S06_FET",
+      "stage_name": "동결배아이식 (FET)",
+      "description": "이전 IVF 주기에서 동결 보관한 배아를 해동하여 이식",
+      "when_used": [
+        "이전 신선배아 이식 후 실패 시",
+        "남은 동결배아 활용",
+        "OHSS 위험으로 신선배아 이식 연기 시",
+        "내막 두께 부족으로 신선이식 연기 시",
+        "PGT(착상전유전검사) 시행을 위해 배아 동결 후 정상 배아만 선별 이식",
+        "과배란 후 호르몬 과다로 자궁내막 환경이 착상에 부적합한 경우",
+        "난소 자극 후 신체 회복시간 확보가 필요한 경우"
+      ],
+      "when_used_sources": [
+        "난임 가이드북 1612~1617행 (동결보존 후 다음 주기 이식)",
+        "Human Reproduction 2017 (Frozen embryo transfer: optimal endometrial preparation and timing)",
+        "ESHRE 2025 Annual Meeting: Advances in Endometrial Preparation Strategies for FET (EMJ Reviews, emjreviews.com) — 검증완료"
+      ],
+      "advantages": [
+        "과배란 유도 없이 진행 가능",
+        "신체적 부담 감소 / 회복 시간 확보",
+        "과배란 유도·난자채취 과정 생략으로 시술비 부담 감소",
+        "자궁내막이 최적 상태에서 이식 → 임신율 향상",
+        "PGT 시행 가능 → 정상 염색체 배아 선별 이식",
+        "이식 시기를 유연하게 조절 가능"
+      ],
+      "advantages_sources": [
+        "난임 가이드북 1612~1617행",
+        "Human Reproduction 2017 (Ghobara et al. - Frozen embryo transfer review)",
+        "Frontiers in Endocrinology 2023 (Finding optimal preparation and timing for FET)"
+      ],
+      "cycle_timeline": [
+        {
+          "day_range": "생리 2~3일째",
+          "phase": "자궁내막 준비 시작",
+          "tasks": [
+            {
+              "action": "에스트로겐 제제 복용/투여 시작",
+              "details": "자궁내막 두께를 키우기 위한 호르몬 투여",
+              "source": "난임 가이드북 2706행 (에스트로겐으로 자궁내막을 두텁게); PMC 리뷰 2023 (생리 1~3일째 에스트라디올 시작); Frontiers in Endocrinology 2021 Systematic Review (HRT-FET: E2 투여는 생리 1~3일째 시작)"
+            }
+          ],
+          "expected_symptoms": [
+            "경미한 복부 불편감",
+            "유방 팽만감"
+          ],
+          "partner_tips": [
+            "약 복용 시간 함께 체크"
+          ]
+        },
+        {
+          "day_range": "에스트로겐 투여 7~14일 후 (생리 약 10~17일째)",
+          "phase": "자궁내막 모니터링",
+          "tasks": [
+            {
+              "action": "초음파로 자궁내막 두께 확인",
+              "details": "적정 두께(7mm 이상, 8~12mm가 최적) 도달 여부 확인. 부족 시 에스트로겐 용량 조절 후 재확인",
+              "source": "PMC 체계적 문헌고찰(2021): E2 투여 12~14일 후 초음파; NOW-fertility: E2 투여 7~10일 후 초음파. 내막 두께 기준: ESHRE RIF 2023(<7mm = thin), 서울아산병원(7~11mm), 가이드북(8~10mm 최적)"
+            }
+          ],
+          "expected_symptoms": [],
+          "partner_tips": [
+            "병원 동행 권장"
+          ]
+        },
+        {
+          "day_range": "자궁내막 ≥7mm + 에스트로겐 최소 9일 투여 후",
+          "phase": "황체호르몬 전환 + 배아 해동",
+          "transition_conditions": {
+            "endometrial_thickness": "≥7mm (최적 8~12mm)",
+            "min_estrogen_days": 9,
+            "note": "내막 두께가 충분해도 에스트로겐 노출 9일 미만이면 임신율 저하"
+          },
+          "transition_sources": [
+            "Fertility and Sterility 2017 (Fewer than 9 days of estrogen → lower pregnancy rates)",
+            "ESHRE RIF 2023 (<7mm = thin endometrium)",
+            "난임 가이드북 2697~2700행 (8mm 이상 좋은 내막, 8~10mm 최적)"
+          ],
+          "tasks": [
+            {
+              "action": "황체호르몬제(프로게스테론) 투여 시작",
+              "medication_kg_ids": [
+                "M_progesterone"
+              ],
+              "details": "질정, 주사제 등 다양한 형태로 투여"
+            },
+            {
+              "action": "동결배아 해동",
+              "details": "이식 당일 또는 전일 해동"
+            }
+          ],
+          "expected_symptoms": [
+            "경미한 복부 불편감"
+          ],
+          "partner_tips": [
+            "황체호르몬 투여 시간 함께 관리"
+          ]
+        },
+        {
+          "day_range": "황체호르몬 투여 후 5일 (Day 5 배반포 기준)",
+          "phase": "배아 이식",
+          "transfer_timing_rule": {
+            "principle": "배아 발달 일수 = 프로게스테론 투여 일수 (자궁내막-배아 동기화)",
+            "day5_blastocyst": "프로게스테론 투여 후 5일째 이식",
+            "day3_embryo": "프로게스테론 투여 후 3일째 이식",
+            "warning": "프로게스테론 6일 초과 시 임신율 저하 및 초기 유산 위험 증가"
+          },
+          "transfer_timing_sources": [
+            "Frontiers in Endocrinology 2023 (PMC10415160): Association between duration of progesterone supplementation and clinical outcomes in artificial FET cycles — 검증완료",
+            "PMC 2021: Live Birth Rate after 6 or 7 days of progesterone in HRT-FET",
+            "PMC 2024: Optimal duration of progesterone before cryopreserved embryo transfer"
+          ],
+          "tasks": [
+            {
+              "action": "해동 배아를 자궁 안으로 이식",
+              "details": "마취 없이 진행, 이식 후 안정",
+              "duration": "이식 후 3~6시간 안정"
+            }
+          ],
+          "expected_symptoms": [
+            "경미한 복부 불편감"
+          ],
+          "partner_tips": [
+            "동행 필수",
+            "안정 시간 동안 함께 있기",
+            "귀가 후 충분한 휴식 지원"
+          ]
+        },
+        {
+          "day_range": "이식 후 1~12일",
+          "phase": "착상 대기기 (TWW)",
+          "expected_symptoms": {
+            "possible": [
+              "착상혈 (15~25%)",
+              "피곤함",
+              "유방 동통",
+              "하복부 불편감"
+            ],
+            "important_note": "증상이 뚜렷하게 나타나지 않을 수 있음"
+          },
+          "recommendations": [
+            "일상생활 가능",
+            "무리한 신체활동 피하기",
+            "황체호르몬제 정해진 시간에 복용/투여"
+          ],
+          "warning_signs": [
+            "심한 복통",
+            "과도한 출혈"
+          ],
+          "partner_tips": [
+            "불안한 마음 공감하고 경청하기",
+            "함께 가벼운 산책",
+            "영양가 있는 식사 챙기기"
+          ]
+        },
+        {
+          "day_range": "배아 이식 후 약 10~15일",
+          "phase": "임신 확인",
+          "tasks": [
+            {
+              "action": "혈액검사 (hCG)",
+              "details": "임신 여부 확인"
+            }
+          ],
+          "if_positive": {
+            "next_step": "임신 5주에 초음파로 아기집(임신낭) 확인",
+            "continue": "황체호르몬 임신 10주까지 지속"
+          },
+          "partner_tips": [
+            "결과 함께 듣기",
+            "어떤 결과든 서로 지지하기"
+          ]
+        }
+      ],
+      "hormone_supplement_protocol": {
+        "source": "obdocmin.com (code=270)",
+        "gnrha": "1-14일째 매일 GnRH(a) 0.2cc 주사",
+        "estrogen": {
+          "day1_7": "프로기노바 2mg x 3회 = 6mg/일",
+          "day8_14": "프로기노바 2mg x 4회 = 8mg/일",
+          "after_transfer": "프로기노바 2mg x 3회 = 6mg/일 지속"
+        },
+        "progesterone_options": [
+          "수게스트 100mg/일",
+          "프롤루텍스 100mg 매일",
+          "크리논 젤 1일 1개",
+          "유트로게스탄 1일 3정",
+          "사이클로게스트 1일 2정"
+        ],
+        "transfer_timing_by_embryo_day": {
+          "2일배양": "Day 17",
+          "3일배양": "Day 18",
+          "5일배양": "Day 20"
+        }
+      },
+      "post_care": "신선배아이식과 동일 (황체호르몬 투여, 생활 주의사항)"
+    },
+    "S07_pregnancy_confirmed": {
+      "stage_id": "S07_confirm",
+      "stage_name": "임신 확인 및 유지",
+      "description": "난임 시술 후 임신 확인부터 임신 10주까지 초기 유지 관리",
+      "duration": "임신 확인 ~ 임신 10주",
+      "timeline": [
+        {
+          "timing": "임신 확인 직후 (hCG 양성)",
+          "tasks": [
+            "황체호르몬제 투여 지속",
+            "금연/금주/카페인 제한 시작"
+          ],
+          "partner_tips": [
+            "결과 함께 듣기",
+            "기쁨을 나누되 아직 조심스러운 시기임을 인지"
+          ]
+        },
+        {
+          "timing": "임신 4~5주",
+          "tasks": [
+            "질식초음파로 임신낭(아기집) 확인",
+            "임신낭 형태, 착상 위치, 임신낭 수 진단"
+          ],
+          "partner_tips": [
+            "초음파 동행"
+          ]
+        },
+        {
+          "timing": "임신 6주",
+          "tasks": [
+            "태아 심박동 확인 → 임신 확진"
+          ],
+          "partner_tips": [
+            "심박동 함께 확인하기"
+          ]
+        },
+        {
+          "timing": "임신 8주",
+          "tasks": [
+            "배아 크기로 정확한 임신주수/출산예정일 파악"
+          ]
+        },
+        {
+          "timing": "임신 10주까지",
+          "tasks": [
+            "황체호르몬제 투여 종료 (주치의 판단에 따라)"
+          ],
+          "note": "임신 8~10주까지 투여 후 점진적 중단"
+        }
+      ],
+      "착상후_증상": {
+        "possible": [
+          "착상혈 (15~25%) - 월경예정일보다 일찍 분홍색→갈색, 1~2일 소실",
+          "피곤함",
+          "유방 동통",
+          "하복부 불편감",
+          "두통",
+          "입덧 (hCG 상승에 따라, 개인차 큼)"
+        ],
+        "important_note": "착상에 따른 증상은 개인차가 많으며 뚜렷하게 나타나지 않을 수 있음"
+      },
+      "warning_signs": [
+        {
+          "symptom": "임신초기 질 출혈",
+          "possible_cause": "자연유산이나 자궁외임신의 증상일 수 있음",
+          "action": "즉시 진료"
+        },
+        {
+          "symptom": "하복부 통증",
+          "possible_cause": "자궁외임신 가능성",
+          "action": "즉시 진료"
+        }
+      ],
+      "medication_kg_ids": [
+        "M_progesterone"
+      ],
+      "next_stage": "S07_prenatal"
+    },
+    "S07_prenatal": {
+      "stage_id": "S07_prenatal",
+      "stage_name": "임신 중 관리",
+      "description": "난임 시술 후 임신 10주 이후부터 출산까지의 산전 관리",
+      "duration": "임신 10주 ~ 출산",
+      "key_monitoring": {
+        "다태아": {
+          "when": "배아 2개 이상 이식한 경우",
+          "risk": "조기진통, 조산 위험 증가",
+          "note": "세쌍둥이 이상은 선택적 감수술 고려 가능"
+        }
+      },
+      "recommendations": [
+        "금연 필수",
+        "음주 삼가",
+        "과도한 카페인 섭취 삼가",
+        "최소 400μg 엽산 섭취 지속",
+        "야채, 과일, 저지방 유제품 등 균형 잡힌 식사를 규칙적으로",
+        "적절한 체중 관리",
+        "주기적인 산전 검사를 통해 아이와 산모의 건강 상태 확인"
+      ],
+      "산전검사_일정": [
+        {
+          "timing": "임신 11~13주",
+          "tasks": [
+            "1차 기형아 검사 (목덜미 투명대 초음파 + 혈액검사)"
+          ]
+        },
+        {
+          "timing": "임신 16~18주",
+          "tasks": [
+            "2차 기형아 검사 (쿼드 검사)"
+          ]
+        },
+        {
+          "timing": "임신 20~24주",
+          "tasks": [
+            "정밀 초음파 (태아 구조 확인)"
+          ]
+        },
+        {
+          "timing": "임신 24~28주",
+          "tasks": [
+            "임신성 당뇨 선별검사"
+          ]
+        }
+      ],
+      "warning_signs": [
+        {
+          "symptom": "질 출혈",
+          "action": "즉시 진료"
+        },
+        {
+          "symptom": "하복부 통증 / 규칙적 수축",
+          "possible_cause": "조기진통 가능성",
+          "action": "즉시 진료"
+        },
+        {
+          "symptom": "양수 흐름 느낌",
+          "possible_cause": "조기양막파수 가능성",
+          "action": "즉시 진료"
+        }
+      ],
+      "partner_tips": [
+        "산전 검사 함께 동행",
+        "집안일 분담",
+        "정서적 지지 지속",
+        "출산 준비 함께하기",
+        "산후조리 계획 상의"
+      ]
+    },
+    "S06_PGT": {
+      "stage_id": "S06_PGT",
+      "stage_name": "착상 전 유전자 검사 (PGT)",
+      "description": "수정된 배아의 유전질환/염색체 이상을 검사하여 건강한 배아를 선별하여 이식",
+      "indications": [
+        "염색체 이상/유전질환 위험 가계",
+        "반복유산",
+        "반복착상 실패",
+        "고령 (35세 이상)"
+      ],
+      "process": [
+        {
+          "phase": "배아 배양",
+          "description": "IVF로 수정된 배아를 배반포(5일) 단계까지 배양"
+        },
+        {
+          "phase": "세포 생검",
+          "description": "배반포에서 소량의 세포를 채취하여 유전자/염색체 분석"
+        },
+        {
+          "phase": "배아 동결",
+          "description": "검사 결과 나오기까지 배아 동결 보관"
+        },
+        {
+          "phase": "결과 확인 후 이식",
+          "description": "정상 배아 선별 후 FET로 이식"
+        }
+      ],
+      "types": {
+        "PGT-A": "염색체 수 이상 검사 (이수성)",
+        "PGT-M": "단일유전자 질환 검사",
+        "PGT-SR": "염색체 구조 이상 검사"
+      },
+      "expected_symptoms": [
+        "IVF 과정과 동일 (과배란 유도 ~ 난자 채취)"
+      ],
+      "partner_tips": [
+        "검사 결과 기다리는 동안 불안감 공유",
+        "결과에 따른 선택을 함께 논의"
+      ],
+      "next_step": "정상 배아 확인 시 S06_FET로 이식"
+    },
+    "S08_retry": {
+      "stage_id": "S08_retry",
+      "stage_name": "다음 시술 준비",
+      "description": "시술 실패 후 다음 시도를 위한 휴식 및 준비",
+      "rest_period": {
+        "minimum": "최소 1개월 휴식기 (난소 회복)",
+        "after_miscarriage": "유산 후 약 3개월 간격 권장",
+        "note": "휴식기는 난소기능/주치의 소견에 따라 결정"
+      },
+      "expected_symptoms": [
+        "과배란 직후 생리주기 변화 (배란 불량, 조기/지연 배란 흔함)",
+        "심리적 좌절감, 우울감"
+      ],
+      "recommendations": [
+        "충분한 휴식과 몸 회복",
+        "심리상담 고려 (중앙난임·우울증상담센터 활용)",
+        "다음 시술 방향 주치의와 상의",
+        "생활습관 재점검 (영양, 운동, 수면)"
+      ],
+      "decision_points": {
+        "IUI_실패": "S06_IVF 체외수정 고려",
+        "IVF_실패_동결배아_있음": "S06_FET 동결배아이식",
+        "IVF_실패_동결배아_없음": "S06_IVF 재시도 또는 S09_end 치료 종결 논의",
+        "반복_실패": "S06_PGT 착상 전 유전자 검사 고려"
+      },
+      "partner_tips": [
+        "실패를 서로 탓하지 않기",
+        "충분한 대화와 감정 공유",
+        "함께 상담받기 고려",
+        "다음 계획은 서두르지 말고 충분히 쉰 후 결정"
+      ],
+      "next_stages": [
+        "S06_IUI",
+        "S06_IVF",
+        "S06_FET",
+        "S06_PGT",
+        "S09_end"
+      ]
+    },
+    "S09_end": {
+      "stage_id": "S09_end",
+      "stage_name": "치료 종결 결정",
+      "description": "치료 지속/종결에 대한 배우자 간 충분한 논의",
+      "key_considerations": [
+        "치료 종결은 부부 공동 결정 (외부 압력이 아닌)",
+        "심리상담 전문가 도움 권장",
+        "입양, 자녀 없는 삶 등 이후 계획도 논의",
+        "치료 종결한 분들과의 대화도 도움"
+      ],
+      "recommendations": [
+        "전문 심리상담사와 상담",
+        "부부 함께 충분한 시간을 두고 결정",
+        "주변 압력에 휘둘리지 않기",
+        "결정 후에도 언제든 다시 시작할 수 있음을 인지"
+      ],
+      "support_resources": {
+        "중앙난임우울증상담센터": "1566-0112",
+        "권역별_상담센터": "건강보험심사평가원 홈페이지 참고"
+      },
+      "partner_tips": [
+        "서로의 감정을 존중하기",
+        "결정을 서두르지 않기",
+        "전문가 상담을 함께 받기",
+        "어떤 결정이든 서로 지지하기"
+      ]
+    }
+  },
+  "notification_templates": {
+    "daily_reminder": {
+      "medication": "{name}님, 오늘 {medication_name} 복용/투여 시간입니다. ({time})",
+      "injection": "{name}님, 오늘 {injection_name} 주사 시간입니다. 정확한 시간 지켜주세요!"
+    },
+    "phase_progress": {
+      "patient": "오늘은 {treatment_name} {day}일째입니다. {expected_symptoms}이 있을 수 있어요.",
+      "partner": "오늘은 아내의 {treatment_name} {day}일째입니다. {partner_tip}"
+    },
+    "appointment_reminder": {
+      "patient": "내일 {appointment_type} 예정입니다. {preparation}",
+      "partner": "내일 아내의 {appointment_type}이 있습니다. 동행해주세요."
+    },
+    "warning": {
+      "patient": "⚠️ {warning_symptoms} 증상이 있으면 병원에 연락하세요.",
+      "partner": "⚠️ 아내에게 {warning_symptoms} 증상이 보이면 즉시 병원으로!"
+    },
+    "emotional_support": {
+      "partner": "오늘은 {phase}입니다. {emotional_tip}"
+    }
+  },
+  "severity_levels": {
+    "mild": {
+      "description": "경미한 증상",
+      "action": "일상생활 가능, 모니터링"
+    },
+    "mild_to_moderate": {
+      "description": "경미~중간 증상",
+      "action": "무리한 활동 피하기"
+    },
+    "moderate": {
+      "description": "중간 정도 증상",
+      "action": "휴식 권장, 증상 지속 시 병원 문의"
+    },
+    "severe": {
+      "description": "심한 증상",
+      "action": "즉시 병원 방문"
+    }
+  }
+}

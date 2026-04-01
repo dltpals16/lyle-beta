@@ -1,0 +1,24 @@
+# Dependencies
+frontend/node_modules/
+frontend/dist/
+
+# Python
+__pycache__/
+*.pyc
+backend/.env
+backend/nohup.out
+
+# Firebase credentials
+backend/firebase-*
+backend/lyle-beta-*
+
+# Vectorstore (Qdrant Cloud 사용)
+backend/data/vectorstore/
+
+# Build artifacts
+*.pth
+*.pt
+*.ckpt
+
+# OS
+.DS_Store
