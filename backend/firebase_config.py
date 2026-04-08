@@ -18,21 +18,6 @@ _firebase_json = os.environ.get("FIREBASE_CREDENTIALS_JSON")
 
 if _firebase_b64:
     cred_dict = json.loads(base64.b64decode(_firebase_b64).decode())
-    # cryptography 버전별 호환성 디버그
-    import cryptography
-    print(f"[Firebase DEBUG] cryptography version: {cryptography.__version__}")
-    # PEM을 DER로 직접 변환 후 로딩 시도
-    from cryptography.hazmat.primitives.serialization import load_der_private_key
-    import base64 as b64mod
-    pk_pem = cred_dict["private_key"]
-    pk_lines = pk_pem.strip().split("\n")
-    pk_b64 = "".join(pk_lines[1:-1])
-    pk_der = b64mod.b64decode(pk_b64)
-    try:
-        test_key = load_der_private_key(pk_der, password=None)
-        print(f"[Firebase DEBUG] DER load OK, key_size={test_key.key_size}")
-    except Exception as e:
-        print(f"[Firebase DEBUG] DER load FAILED: {e}")
     cred = credentials.Certificate(cred_dict)
     print("[Firebase] Initialized from Base64 env")
 elif _firebase_json:
