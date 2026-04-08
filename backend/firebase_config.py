@@ -4,45 +4,17 @@ Firestore를 통한 사용자 프로필, 채팅 히스토리 영구 저장
 """
 import os
 import json
-import base64
 from typing import Optional
 
 import firebase_admin
 from firebase_admin import credentials, firestore
 from config import FIREBASE_CREDENTIAL_PATH
 
-# Render 환경에서 cryptography의 RSA 키 로딩 실패 우회: 순수 Python RSA 백엔드 강제 사용
-try:
-    from google.auth.crypt import _python_rsa
-    import google.auth.crypt as _crypt_pkg
-    import google.auth.crypt.rsa as _crypt_rsa
-    # 모든 참조 지점에서 RSASigner를 순수 Python 구현으로 교체
-    _crypt_pkg.RSASigner = _python_rsa.RSASigner
-    _crypt_rsa.RSASigner = _python_rsa.RSASigner
-    # _cryptography_rsa 모듈도 직접 패치
-    try:
-        from google.auth.crypt import _cryptography_rsa
-        _cryptography_rsa.RSASigner = _python_rsa.RSASigner
-    except ImportError:
-        pass
-    print("[Firebase] Forced pure-Python RSA backend (all refs patched)")
-except Exception as e:
-    print(f"[Firebase] RSA backend patch skipped: {e}")
 
-# Firebase 초기화 — 환경변수 우선 사용 (Base64 > JSON > 로컬 파일)
-_firebase_b64 = os.environ.get("FIREBASE_CREDENTIALS_BASE64")
+# Firebase 초기화 — 환경변수 FIREBASE_CREDENTIALS_JSON이 있으면 우선 사용
 _firebase_json = os.environ.get("FIREBASE_CREDENTIALS_JSON")
-
-if _firebase_b64:
-    cred_dict = json.loads(base64.b64decode(_firebase_b64).decode())
-    cred = credentials.Certificate(cred_dict)
-    print("[Firebase] Initialized from Base64 env")
-elif _firebase_json:
-    cred_dict = json.loads(_firebase_json)
-    if "private_key" in cred_dict:
-        cred_dict["private_key"] = cred_dict["private_key"].replace("\\n", "\n")
-    cred = credentials.Certificate(cred_dict)
-    print("[Firebase] Initialized from JSON env")
+if _firebase_json:
+    cred = credentials.Certificate(json.loads(_firebase_json))
 else:
     cred = credentials.Certificate(FIREBASE_CREDENTIAL_PATH)
 
