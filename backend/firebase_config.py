@@ -18,6 +18,10 @@ _firebase_json = os.environ.get("FIREBASE_CREDENTIALS_JSON")
 
 if _firebase_b64:
     cred_dict = json.loads(base64.b64decode(_firebase_b64).decode())
+    pk = cred_dict.get("private_key", "")
+    print(f"[Firebase DEBUG] Base64 path, key_id={cred_dict.get('private_key_id','?')[:10]}...")
+    print(f"[Firebase DEBUG] private_key length={len(pk)}, starts={pk[:30]!r}, ends={pk[-30:]!r}")
+    print(f"[Firebase DEBUG] newline count={pk.count(chr(10))}, literal_backslash_n={pk.count(chr(92)+'n')}")
     cred = credentials.Certificate(cred_dict)
 elif _firebase_json:
     cred_dict = json.loads(_firebase_json)
