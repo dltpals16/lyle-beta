@@ -14,7 +14,11 @@ from config import FIREBASE_CREDENTIAL_PATH
 # Firebase 초기화 — 환경변수 FIREBASE_CREDENTIALS_JSON이 있으면 우선 사용
 _firebase_json = os.environ.get("FIREBASE_CREDENTIALS_JSON")
 if _firebase_json:
-    cred = credentials.Certificate(json.loads(_firebase_json))
+    cred_dict = json.loads(_firebase_json)
+    # Render 환경변수에서 \n이 리터럴 문자열로 들어오므로 실제 줄바꿈으로 변환
+    if "private_key" in cred_dict:
+        cred_dict["private_key"] = cred_dict["private_key"].replace("\\n", "\n")
+    cred = credentials.Certificate(cred_dict)
 else:
     cred = credentials.Certificate(FIREBASE_CREDENTIAL_PATH)
 
