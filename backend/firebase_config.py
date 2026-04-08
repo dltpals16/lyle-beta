@@ -11,6 +11,14 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 from config import FIREBASE_CREDENTIAL_PATH
 
+# Render 환경에서 cryptography의 RSA 키 로딩 실패 우회: 순수 Python RSA 백엔드 사용
+try:
+    import google.auth.crypt.rsa as _gauth_rsa
+    from google.auth.crypt import _python_rsa
+    _gauth_rsa.RSASigner = _python_rsa.RSASigner
+    print("[Firebase] Forced pure-Python RSA backend")
+except Exception as e:
+    print(f"[Firebase] RSA backend patch skipped: {e}")
 
 # Firebase 초기화 — 환경변수 우선 사용 (Base64 > JSON > 로컬 파일)
 _firebase_b64 = os.environ.get("FIREBASE_CREDENTIALS_BASE64")
