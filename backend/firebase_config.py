@@ -17,17 +17,22 @@ _firebase_b64 = os.environ.get("FIREBASE_CREDENTIALS_BASE64")
 _firebase_json = os.environ.get("FIREBASE_CREDENTIALS_JSON")
 
 if _firebase_b64:
-    cred_dict = json.loads(base64.b64decode(_firebase_b64).decode())
-    pk = cred_dict.get("private_key", "")
-    print(f"[Firebase DEBUG] Base64 path, key_id={cred_dict.get('private_key_id','?')[:10]}...")
-    print(f"[Firebase DEBUG] private_key length={len(pk)}, starts={pk[:30]!r}, ends={pk[-30:]!r}")
-    print(f"[Firebase DEBUG] newline count={pk.count(chr(10))}, literal_backslash_n={pk.count(chr(92)+'n')}")
-    cred = credentials.Certificate(cred_dict)
+    import tempfile
+    cred_json = base64.b64decode(_firebase_b64).decode()
+    tmp = tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False)
+    tmp.write(cred_json)
+    tmp.close()
+    cred = credentials.Certificate(tmp.name)
+    os.unlink(tmp.name)
+    print("[Firebase] Initialized from Base64 env (temp file)")
 elif _firebase_json:
-    cred_dict = json.loads(_firebase_json)
-    if "private_key" in cred_dict:
-        cred_dict["private_key"] = cred_dict["private_key"].replace("\\n", "\n")
-    cred = credentials.Certificate(cred_dict)
+    import tempfile
+    tmp = tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False)
+    tmp.write(_firebase_json)
+    tmp.close()
+    cred = credentials.Certificate(tmp.name)
+    os.unlink(tmp.name)
+    print("[Firebase] Initialized from JSON env (temp file)")
 else:
     cred = credentials.Certificate(FIREBASE_CREDENTIAL_PATH)
 
