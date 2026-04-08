@@ -4,6 +4,7 @@ Firestore를 통한 사용자 프로필, 채팅 히스토리 영구 저장
 """
 import os
 import json
+import base64
 from typing import Optional
 
 import firebase_admin
@@ -11,11 +12,15 @@ from firebase_admin import credentials, firestore
 from config import FIREBASE_CREDENTIAL_PATH
 
 
-# Firebase 초기화 — 환경변수 FIREBASE_CREDENTIALS_JSON이 있으면 우선 사용
+# Firebase 초기화 — 환경변수 우선 사용 (Base64 > JSON > 로컬 파일)
+_firebase_b64 = os.environ.get("FIREBASE_CREDENTIALS_BASE64")
 _firebase_json = os.environ.get("FIREBASE_CREDENTIALS_JSON")
-if _firebase_json:
+
+if _firebase_b64:
+    cred_dict = json.loads(base64.b64decode(_firebase_b64).decode())
+    cred = credentials.Certificate(cred_dict)
+elif _firebase_json:
     cred_dict = json.loads(_firebase_json)
-    # Render 환경변수에서 \n이 리터럴 문자열로 들어오므로 실제 줄바꿈으로 변환
     if "private_key" in cred_dict:
         cred_dict["private_key"] = cred_dict["private_key"].replace("\\n", "\n")
     cred = credentials.Certificate(cred_dict)
