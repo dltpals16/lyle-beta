@@ -23,6 +23,7 @@ from core.intent_classifier import IntentClassifier
 from core.safety_filter import SafetyFilter
 from core.care_agent import CareAgent
 from core.policy_agent import PolicyAgent
+from core.recommend_agent import RecommendAgent
 
 from prompts.templates import PROMPT_OUT_OF_SCOPE, SYSTEM_BASE
 from prompts import get_templates
@@ -55,6 +56,7 @@ class Supervisor:
         safety_filter: SafetyFilter,
         care_agent: CareAgent,
         policy_agent: PolicyAgent,
+        recommend_agent: RecommendAgent = None,
     ):
         self.llm = llm
         self.term_preprocessor = term_preprocessor
@@ -62,6 +64,7 @@ class Supervisor:
         self.safety_filter = safety_filter
         self.care_agent = care_agent
         self.policy_agent = policy_agent
+        self.recommend_agent = recommend_agent
 
         self.states: dict[str, ConversationState] = {}
         print("[Supervisor] 초기화 완료")
@@ -161,8 +164,15 @@ class Supervisor:
                 session=session,
                 weight=weight_str,
             )
+        elif intent == Intent.RECOMMENDATION and self.recommend_agent is not None:
+            print(f"[Supervisor] → RecommendAgent")
+            agent_result = self.recommend_agent.run(
+                preprocessed=preprocessed,
+                profile=profile,
+                session=session,
+            )
         else:
-            # MEDICAL, EMOTION → CareAgent
+            # MEDICAL, EMOTION (또는 RECOMMENDATION인데 에이전트 없을 때 fallback)
             print(f"[Supervisor] → CareAgent ({intent.value}, {weight_str})")
             agent_result = self.care_agent.run(
                 preprocessed=preprocessed,

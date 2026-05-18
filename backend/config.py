@@ -104,10 +104,11 @@ CRISIS_KEYWORDS = [
 # 의도 & 경중 Enum
 # ──────────────────────────────────────────
 class Intent(str, Enum):
-    MEDICAL = "medical"           # 증상, 시술 과정, 일정, 약물, 수치, 부작용
-    EMOTION = "emotion"           # 감정 지지, 관계 고민, 스트레스
-    POLICY = "policy"             # 지원금, 보험, 비용, 혜택
-    OUT_OF_SCOPE = "out_of_scope" # 난임과 무관한 질문
+    MEDICAL = "medical"               # 증상, 시술 과정, 일정, 약물, 수치, 부작용
+    EMOTION = "emotion"               # 감정 지지, 관계 고민, 스트레스
+    POLICY = "policy"                 # 지원금, 보험, 비용, 혜택
+    RECOMMENDATION = "recommendation" # 영양제/진단기기/운동도구/이완용품 등 헬스케어 제품 추천
+    OUT_OF_SCOPE = "out_of_scope"     # 난임과 무관한 질문
 
 
 class Weight(str, Enum):

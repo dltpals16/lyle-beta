@@ -23,10 +23,12 @@ from core.safety_filter import SafetyFilter
 from core.info_gap_detector import InfoGapDetector
 from core.care_agent import CareAgent
 from core.policy_agent import PolicyAgent
+from core.recommend_agent import RecommendAgent
 from core.supervisor import Supervisor
 from core.tools.tool_router import ToolRouter
 from core.tools.drug_search import DrugSearchTool
 from core.tools.hospital_search import HospitalSearchTool
+from core.tools.shopping_search import ShoppingSearchTool
 
 
 class LyleChatbot:
@@ -55,6 +57,7 @@ class LyleChatbot:
         tool_router = ToolRouter(llm)
         drug_search = DrugSearchTool()
         hospital_search = HospitalSearchTool()
+        shopping_search = ShoppingSearchTool()
 
         # 에이전트 초기화
         care_agent = CareAgent(
@@ -79,6 +82,10 @@ class LyleChatbot:
             info_gap_detector=info_gap_detector,
             llm_client=llm,
         )
+        recommend_agent = RecommendAgent(
+            shopping_search=shopping_search,
+            drug_search=drug_search,
+        )
 
         # Supervisor 초기화
         self.supervisor = Supervisor(
@@ -88,6 +95,7 @@ class LyleChatbot:
             safety_filter=safety_filter,
             care_agent=care_agent,
             policy_agent=policy_agent,
+            recommend_agent=recommend_agent,
         )
 
         # 세션/프로필 저장소 (메모리, 실제 운영 시 DB로 교체)
