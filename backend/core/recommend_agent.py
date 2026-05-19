@@ -324,14 +324,17 @@ class RecommendAgent:
         )
         text = self.llm_main.invoke(prompt).content.strip()
 
-        # 링크 정리 (Supervisor가 직렬화)
+        # 링크 정리 (Supervisor가 직렬화) — frontend는 source_type으로 분기
         links = [
             {
+                "source_type": "product",
                 "title": p["title"],
                 "url": p["link"],
                 "price": p["price_display"],
                 "mall": p["mall_name"],
                 "image": p.get("image"),
+                "category": p.get("category", ""),
+                "brand": p.get("brand", ""),
             }
             for p in state.get("shopping_results", [])
         ]
